@@ -1,0 +1,5 @@
+.DS_Store
+**/.DS_Store
+src/prefs.plist
+src/dcli/dcli
+**/__pycache__
