@@ -8,7 +8,7 @@ curl -LJO -H 'Accept: application/octet-stream' \
 && mv dcli-macos dcli \
 && chmod +x dcli
 
-dirpath=$(dirname $(find /Users/benjaminoddou/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows -name '.com.benjamino.dashlane' -type f))
+dirpath=$(dirname $(find /Users/benjaminoddou/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows -name 'com.benjamino.dashlane' -type f))
 dirname=$(basename "$dirpath")
 
 if [ -z "$dirpath" ]; then
