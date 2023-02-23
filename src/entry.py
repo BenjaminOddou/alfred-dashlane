@@ -135,7 +135,7 @@ reset = {
 
 try:
     # Try to detect if Dashlane account is sync
-    process = pexpect.spawn('dcli/dcli password -o json')
+    process = pexpect.spawn(f'"{data_folder}"/dcli/dcli password -o json')
     try:
         index = process.expect(['Please enter your email address:', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
         output = process.before.decode().strip()

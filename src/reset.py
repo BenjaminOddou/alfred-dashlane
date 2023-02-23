@@ -11,7 +11,7 @@ confirm_value = sys.argv[1]
 if confirm_value.lower() != 'yes':
     display_notification('⚠️ Warning !', 'Action canceled by the user.')
 else:
-    process = pexpect.spawn('dcli/dcli reset')
+    process = pexpect.spawn(f'"{data_folder}"/dcli/dcli reset')
     try:
         index = process.expect(['Do you really want to delete all local data from this app?', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
         if index == 0:

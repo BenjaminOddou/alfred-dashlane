@@ -8,18 +8,14 @@ curl -LJO -H 'Accept: application/octet-stream' \
 && mv dcli-macos dcli \
 && chmod +x dcli
 
-dirpath=$(dirname $(find /Users/benjaminoddou/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows -name 'com.benjamino.dashlane' -type f))
-dirname=$(basename "$dirpath")
+workflow_data_folder=~/Library/Application\ Support/Alfred/Workflow\ Data/com.benjamino.dashlane
 
-if [ -z "$dirpath" ]; then
-    destination="$HOME/Downloads"
-    mv dcli "$destination"
+if [ -z "$workflow_data_folder" ]; then
+    mv dcli "$HOME/Downloads"
     echo "🚨 Error ! Dashlane workflow not found, dcli was moved to Downloads folder"
 else
-    destination="/Users/benjaminoddou/Library/Application Support/Alfred/Alfred.alfredpreferences/workflows/$dirname"
-    mkdir -p "$destination/dcli"
-    mv dcli "$destination/dcli"
-    sudo xattr -r -d com.apple.quarantine "$destination/alfred_dashlane_notification.app"
+    mkdir -p "$workflow_data_folder/dcli"
+    mv dcli "$workflow_data_folder/dcli"
+    sudo xattr -r -d com.apple.quarantine "$(dirname "$(find ~/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows -name 'com.benjamino.dashlane' -type f)")/alfred_dashlane_notification.app"
     echo "✅ Success ! Dashlane CLI is installed correctly"
 fi
-

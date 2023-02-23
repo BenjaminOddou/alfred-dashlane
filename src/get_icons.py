@@ -24,7 +24,7 @@ def download_favicon(url):
         f.write(response.content)
     return True
 
-process = pexpect.spawn('dcli/dcli password -o json')
+process = pexpect.spawn(f'"{data_folder}"/dcli/dcli password -o json')
 process.expect(pexpect.EOF)
 output = process.before.decode().strip()
 display_notification('⏳ Please wait !', 'Downloading favicons...')

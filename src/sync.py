@@ -4,7 +4,7 @@ import os
 import re
 import sys
 import pexpect
-from utils import user_mail, display_notification
+from utils import data_folder, user_mail, display_notification
 
 # Get the otp code from the user
 otp_code = sys.argv[1]
@@ -13,7 +13,7 @@ otp_code = sys.argv[1]
 request = os.environ['req2']
 
 # start CLI process
-cli = pexpect.spawn('dcli/dcli sync')
+cli = pexpect.spawn(f'"{data_folder}"/dcli/dcli sync')
 if request == 'refresh':
     try:
         cli.expect(pexpect.EOF, timeout=5)

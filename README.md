@@ -54,9 +54,14 @@ curl -sSL https://raw.githubusercontent.com/BenjaminOddou/alfred-dashlane/main/i
 
 2. Manual installation
 
-- Download the Dashlane CLI (dcli-macos) via from the GitHub repo (https://github.com/Dashlane/dashlane-cli/releases/tag/v1.0.0).
-- Modify its name to `dcli`.
-- Move it to the `dcli` folder under the Dashlane workflow folder (`~/Library/Application Support/Alfred/Alfred.alfredpreferences/workflows/<workflow folder>/dcli`).
+* Download the Dashlane CLI (dcli-macos) via from the GitHub repo (https://github.com/Dashlane/dashlane-cli/releases/tag/v1.0.0).
+* Modify its name to `dcli`.
+* Move it to the `dcli` folder under the workflow data folder (`~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane`).
+* Run the following command to remove notification module from quarantine :
+
+```shell
+sudo xattr -r -d com.apple.quarantine "$(dirname "$(find ~/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows -name 'com.benjamino.dashlane' -type f)")/alfred_dashlane_notification.app"
+```
 
 ### ⚒️ Setup variables
 
