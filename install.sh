@@ -16,9 +16,10 @@ if [ -z "$dirpath" ]; then
     mv dcli "$destination"
     echo "🚨 Error ! Dashlane workflow not found, dcli was moved to Downloads folder"
 else
-    destination="/Users/benjaminoddou/Library/Application Support/Alfred/Alfred.alfredpreferences/workflows/$dirname/dcli"
-    mkdir -p "$destination"
-    mv dcli "$destination"
+    destination="/Users/benjaminoddou/Library/Application Support/Alfred/Alfred.alfredpreferences/workflows/$dirname"
+    mkdir -p "$destination/dcli"
+    mv dcli "$destination/dcli"
+    sudo xattr -r -d com.apple.quarantine "$destination/alfred_dashlane_notification.app"
     echo "✅ Success ! Dashlane CLI is installed correctly"
 fi
 
