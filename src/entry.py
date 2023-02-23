@@ -217,8 +217,8 @@ except Exception as e:
             {
                 'title': 'Dashlane CLI is not detected',
                 'subtitle': 'Press ⏎ to check the documentation on GitHub',
-                'arg': '_url\thttps://github.com/BenjaminOddou/alfred-dashlane#-setup-the-workflow',
-                'quicklookurl': 'https://github.com/BenjaminOddou/alfred-dashlane#-setup-the-workflow',
+                'arg': '_url\thttps://github.com/BenjaminOddou/alfred-dashlane',
+                'quicklookurl': 'https://github.com/BenjaminOddou/alfred-dashlane',
                 'icon': {
                     'path': 'icons/info-ics.webp'
                 },
