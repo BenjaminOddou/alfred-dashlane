@@ -882,7 +882,7 @@
 * 🍎 MacOS.
 * 🎩 Alfred 5. Note that the [Alfred Powerpack](https://www.alfredapp.com/powerpack/) is required to use workflows.
 * 🔐 A [Dashlane](https://www.dashlane.com/fr) account.
-* ‼️ Requires **python 3** or above.
+* ❗ Requires **python 3** or above.
 
 ## 🧙‍♂️ Invoke the Workflow
 
@@ -893,7 +893,7 @@ There is 2 flows in this workflow :
 
 You can change these values by changing the `🕹️ Trigger 1` or `🕹️ Trigger 2` variables in workflow configuration panel [optionnal]. Please avoid putting the same trigger for the two flows.
 
-## ⚠️ Disclaimer
+## 📯 Disclaimer
 
 This workflow is provided "as is" without warranty of any kind, either expressed or implied. By using it, you have agreed to use the workflow "at your own risk" and you have ensured to have read this documentation.
 
@@ -902,6 +902,10 @@ This workflow uses the [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) 
 This workflow doesn't hold or register any private data. However, by design it exposes all the Dashlane data to the Alfred app which allows to manipulate it. It's a different approach compare to the offical [1Password integration](https://www.alfredapp.com/help/features/1password/) from Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/crypto/README.md).
 
 This workflow doesn't allow to update or upload items to the Dashlane vault. You can't connect multiple accounts neither. This is a limitation of the Dashlane CLI for now.
+
+## 🖥️ About Apple Sillicon
+
+Currently, the Dashlane CLI binary is not compatible natively with apple sillicon chips - see more detais [here](https://www.npmjs.com/package/pkg). Note that you can use Rosetta 2 to make it work as a workaround.
 
 ## 🧰 Setup the workflow
 
@@ -921,7 +925,7 @@ This workflow doesn't allow to update or upload items to the Dashlane vault. You
 
 * Download the Dashlane CLI (dcli-macos) via from the GitHub repo (https://github.com/Dashlane/dashlane-cli/releases/tag/v1.0.0).
 * Modify its name to `dcli`.
-* Move it to the `dcli` folder under the workflow data folder (`~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane`).
+* Move it under the `alfred_workflow_data` folder (`~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane`).
 * Run the following command to remove notification module from quarantine `sudo xattr -r -d com.apple.quarantine "$(dirname "$(find ~/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows -name 'com.benjamino.dashlane' -type f)")/alfred_dashlane_notification.app"` 
 
 ### ⚒️ Setup variables
@@ -950,7 +954,7 @@ In order to connect to your Dashlane account, you'll need an OTP. If you haven't
 
 ### 🔄 Sync your Dashlane account
 
-‼️ You need an internet connexion to complete this action.
+❗ You need an internet connexion to complete this action.
 
 Hit enter, input your master password and finally the OTP (provided via mail or by your 2FA app). If you are already connected you can press enter to refresh the data.
 
@@ -968,21 +972,17 @@ After login you may be asked to approve the `dcli` binary with a message like th
 
 ![keychain](./images/keychain.webp)
 
-Enter the password of your mac and press `always allow`. If this is not working, try to open the workflow in a terminal session like so :
+Enter the password of your mac and press `always allow`. If this is not working, try the following command :
 
-![terminal](./images/terminal.webp)
+`~/Library/Application\ Support/Alfred/Workflow\ Data/com.benjamino.dashlane/dcli sync`
 
-Now copy the code below and press ⏎. It should trigger the same popup window asking to approve the binary.
-
-`./dcli/dcli sync`
+It should triggers the same popup window asking to approve the binary.
 
 ### ⬇️ Download favicons
 
-‼️ You need an internet connexion to complete this action.
+❗ You need an internet connexion to complete this action.
 
-Hit enter to download all favicons link to your accounts. Wait few seconds / minutes to receive the below notification. You can see icons here :
-
-`~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane`
+Hit enter to download all favicons link to your accounts. Wait few seconds / minutes to receive the below notification. You can see icons under the `alfred_workflow_cache` folder (`~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane`).
 
 ![notif_icons](./images/notif_icons.webp)
 
@@ -1030,7 +1030,7 @@ In some edge cases when the title and the login are the same for multiple elemen
 
 ### 💬 About notifications
 
-This workflow is using its own `notification module` independant from Alfred post notification. This allows more flexibility but you may need to allow some access to this `alfred_dashlane_notification`.
+This workflow is using its own `notification module` independant from Alfred post notification. This allows more flexibility but you may need to allow some access to this `alfred_dashlane_notification.app`.
 
 ![notif_settings](./images/notif_settings.webp)
 
@@ -1381,7 +1381,7 @@ By default, all items that fall in the clipboard (passwords, logins and otps) ar
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.3</string>
+	<string>1.0.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenjaminOddou/alfred-dashlane</string>
 </dict>

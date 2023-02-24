@@ -2,14 +2,14 @@
 
 import os
 import re
-import pexpect
+from lib import pexpect
 from utils import data_folder, display_notification
 
 # Get the request from the user choice
 request = os.environ['req2']
 
 # Ask to grab the OTP
-process = pexpect.spawn(f'"{data_folder}"/dcli/dcli otp {request}')
+process = pexpect.spawn(f'"{data_folder}"/dcli otp {request}')
 
 try:
     index = process.expect(['There are multiple results for your query, pick one:', pexpect.EOF])

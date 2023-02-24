@@ -1,30 +1,11 @@
 #!/usr/bin/env python3
 
-'''
-ALFRED DASHLANE LICENSE
-
-    This license is approved by the OSI and FSF as GPL-compatible.
-        http://opensource.org/licenses/isc-license.txt
-
-    Copyright (c) 2023, Benjamin Oddou <benjaminoddou@hotmail.fr>
-    PERMISSION TO USE, COPY, MODIFY, AND/OR DISTRIBUTE THIS SOFTWARE FOR ANY
-    PURPOSE WITH OR WITHOUT FEE IS HEREBY GRANTED, PROVIDED THAT THE ABOVE
-    COPYRIGHT NOTICE AND THIS PERMISSION NOTICE APPEAR IN ALL COPIES.
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-    WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-    MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-    ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-'''
-
 import os
 import sys
 import json
-import pexpect
-import tldextract
-from utils import data_folder, incognito_mode
+from lib import pexpect
+from lib import tldextract
+from utils import cache_folder, data_folder, incognito_mode
 
 # Get the query from the command line arguments
 query = sys.argv[1]
@@ -45,8 +26,8 @@ def build_json(item):
     title = item.get('title') or v_url.split('/')[2] if v_url else 'No title'
     password = item.get('password', '')
     domain = tldextract.extract(v_url).registered_domain if v_url else 'No URL'
-    if domain != 'No URL' and os.path.exists(os.path.join(f'{data_folder}', f'{domain}.png')):
-        iconPath = f'{data_folder}/{domain}.png'
+    if domain != 'No URL' and os.path.exists(os.path.join(f'{cache_folder}', f'{domain}.png')):
+        iconPath = f'{cache_folder}/{domain}.png'
     else:
         iconPath = f'icons/letter-{title[:1].lower()}.webp'
     if request == 'otp':
@@ -135,7 +116,7 @@ reset = {
 
 try:
     # Try to detect if Dashlane account is sync
-    process = pexpect.spawn(f'"{data_folder}"/dcli/dcli password -o json')
+    process = pexpect.spawn(f'"{data_folder}"/dcli password -o json')
     try:
         index = process.expect(['Please enter your email address:', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
         output = process.before.decode().strip()

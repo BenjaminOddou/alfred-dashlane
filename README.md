@@ -23,6 +23,10 @@ This workflow doesn't hold or register any private data. However, by design it e
 
 This workflow doesn't allow to update or upload items to the Dashlane vault. You can't connect multiple accounts neither. This is a limitation of the Dashlane CLI for now.
 
+## 🖥️ About Apple Sillicon
+
+Currently, the Dashlane CLI binary is not compatible natively with apple sillicon chips - see more detais [here](https://www.npmjs.com/package/pkg). Note that you can use Rosetta 2 to make it work as a workaround.
+
 ## ⬇️ Installation
 
 1. [Download the workflow](https://github.com/BenjaminOddou/alfred-dashlane/releases/latest)
@@ -32,7 +36,12 @@ This workflow doesn't allow to update or upload items to the Dashlane vault. You
 
 ## 🧙‍♂️ Invoke the Workflow
 
-You can invoke the workflow by writing `webp` onto the Alfred search box. You can change this value by changing the `🕹️ Trigger` variable in workflow configuration panel [optionnal].
+There is 2 flows in this workflow :
+
+1. The first one allows you to display all the credentials in your dashlane vault. It can be triggered by writing `pdash` keyword.
+2. The second one allows you to display your OTPs from you dashlane vault. It can be triggered by writing `odash` keyword.
+
+You can change these values by changing the `🕹️ Trigger 1` or `🕹️ Trigger 2` variables in workflow configuration panel [optionnal]. Please avoid putting the same trigger for the two flows.
 
 ## 🧰 Setup the workflow
 
@@ -56,7 +65,7 @@ curl -sSL https://raw.githubusercontent.com/BenjaminOddou/alfred-dashlane/main/i
 
 * Download the Dashlane CLI (dcli-macos) via from the GitHub repo (https://github.com/Dashlane/dashlane-cli/releases/tag/v1.0.0).
 * Modify its name to `dcli`.
-* Move it to the `dcli` folder under the workflow data folder (`~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane`).
+* Move it under the `alfred_workflow_data` folder (`~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane`).
 * Run the following command to remove notification module from quarantine :
 
 ```shell
@@ -89,7 +98,7 @@ In order to connect to your Dashlane account, you'll need an OTP. If you haven't
 
 ### 🔄 Sync your Dashlane account
 
-‼️ You need an internet connexion to complete this action.
+❗ You need an internet connexion to complete this action.
 
 Hit enter, input your master password and finally the OTP (provided via mail or by your 2FA app). If you are already connected you can press enter to refresh the data.
 
@@ -107,25 +116,19 @@ After login you may be asked to approve the `dcli` binary with a message like th
 
 ![keychain](src/images/keychain.webp)
 
-Enter the password of your mac and press `always allow`. If this is not working, try to open the workflow in a terminal session like so :
-
-![terminal](src/images/terminal.webp)
-
-Now copy the code below and press ⏎. It should trigger the same popup window asking to approve the binary.
+Enter the password of your mac and press `always allow`. If this is not working, try the following command :
 
 ```shell
-./dcli/dcli sync
+~/Library/Application\ Support/Alfred/Workflow\ Data/com.benjamino.dashlane/dcli sync
 ```
+
+It should triggers the same popup window asking to approve the binary.
 
 ### ⬇️ Download favicons
 
-‼️ You need an internet connexion to complete this action.
+❗ You need an internet connexion to complete this action.
 
-Hit enter to download all favicons link to your accounts. Wait few seconds / minutes to receive the below notification. You can see icons here :
-
-```shell
-~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane
-```
+Hit enter to download all favicons link to your accounts. Wait few seconds / minutes to receive the below notification. You can see icons under the `alfred_workflow_cache` folder (`~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane`).
 
 ![notif_icons](src/images/notif_icons.webp)
 
@@ -173,7 +176,7 @@ In some edge cases when the title and the login are the same for multiple elemen
 
 ### 💬 About notifications
 
-This workflow is using its own `notification module` independant from Alfred post notification. This allows more flexibility but you may need to allow some access to this `alfred_dashlane_notification`.
+This workflow is using its own `notification module` independant from Alfred post notification. This allows more flexibility but you may need to allow some access to this `alfred_dashlane_notification.app`.
 
 ![notif_settings](src/images/notif_settings.webp)
 

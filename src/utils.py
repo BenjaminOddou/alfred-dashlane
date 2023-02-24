@@ -10,6 +10,7 @@ sound = os.environ['sound']
 
 # Alfred const
 data_folder = os.environ['alfred_workflow_data'] # ~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane
+cache_folder = os.environ['alfred_workflow_cache'] #  ~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane
 
 # Notification builder
 notif_app = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'alfred_dashlane_notification.app')

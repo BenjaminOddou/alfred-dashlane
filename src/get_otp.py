@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import pexpect
+from lib import pexpect
 from utils import data_folder, user_mail, display_notification
 
 # Run the dcli sync command, wait for the email prompt and enter the email address
-process = pexpect.spawn(f'"{data_folder}"/dcli/dcli sync')
+process = pexpect.spawn(f'"{data_folder}"/dcli sync')
 process.expect('Please enter your email address:')
 process.sendline(user_mail)
 

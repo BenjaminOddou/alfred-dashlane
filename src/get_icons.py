@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
+import os
 import json
-import pexpect
-import requests
-import tldextract
-from utils import data_folder, display_notification
+from lib import pexpect
+from lib import requests
+from lib import tldextract
+from utils import cache_folder, data_folder, display_notification
 
 def download_favicon(url):
     '''
     Downloads the favicon of size 128 from the given domain (extracted with tldextract) using the Google icon API.
     Returns True if the download was successful, False otherwise.
-    Icons are located in this folder : ~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane
+    Icons are located in the cache folder :  ~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane
     '''
     domain = tldextract.extract(url).registered_domain
     api_url = f'https://www.google.com/s2/favicons?domain={domain}&sz=128'
@@ -20,15 +21,17 @@ def download_favicon(url):
         return False
 
     filename = f'{domain}.png'
-    with open(f'{data_folder}/{filename}', 'wb') as f:
+    with open(f'{cache_folder}/{filename}', 'wb') as f:
         f.write(response.content)
     return True
 
-process = pexpect.spawn(f'"{data_folder}"/dcli/dcli password -o json')
+process = pexpect.spawn(f'"{data_folder}"/dcli password -o json')
 process.expect(pexpect.EOF)
 output = process.before.decode().strip()
 display_notification('⏳ Please wait !', 'Downloading favicons...')
+if not os.path.exists(f'{cache_folder}'):
+    os.mkdir(f'{cache_folder}')
 for item in json.loads(output):
     if item.get('url'):
         download_favicon(item.get('url'))
-display_notification('👀 Finished !', 'All icons are located in the workflow data folder.')
+display_notification('👀 Finished !', 'All icons are located in the workflow cache folder.')
