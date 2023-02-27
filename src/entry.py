@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import re
 import os
 import sys
 import json
@@ -15,21 +16,23 @@ request = sys.argv[2]
 
 # Function that build json items displayed in alfred search bar
 def build_json(item):
+    v_title = item.get('title')
     v_url = item.get('url')
     v_email = item.get('email')
     v_login = item.get('login')
-    c_login = login = v_email or v_login or 'No login'
+    c_login = v_email or v_login or 'No login'
+    domain = tldextract.extract(v_url).registered_domain if v_url else 'No URL'
     if incognito_mode:
         login = v_email[:2] + '•'*4 + v_email[v_email.index('@')-1:] if v_email else v_login[:2] + '•'*4 + v_login[-1] if v_login else 'No login'
     else:
         login = c_login
-    title = item.get('title') or v_url.split('/')[2] if v_url else 'No title'
+    title = v_title if v_title else tldextract.extract(v_url).registered_domain if v_url else 'No title'
     password = item.get('password', '')
-    domain = tldextract.extract(v_url).registered_domain if v_url else 'No URL'
     if domain != 'No URL' and os.path.exists(os.path.join(f'{cache_folder}', f'{domain}.png')):
         iconPath = f'{cache_folder}/{domain}.png'
     else:
-        iconPath = f'icons/letter-{title[:1].lower()}.webp'
+        letter = re.search(r"[^\W\d_]", title.lower())
+        iconPath = f'icons/letter-{letter.group(0)}.webp' if letter else f'icons/question-ics.webp'
     if request == 'otp':
          json_obj = {
             'title': title,
@@ -120,8 +123,7 @@ try:
     try:
         index = process.expect(['Please enter your email address:', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
         output = process.before.decode().strip()
-        #########
-        if output == '?':
+        if index == 0:
             items[0]['arg'] = '_sync\tlogin'
             items.append(reset)
             items.append(
@@ -216,4 +218,4 @@ except Exception as e:
 
 # Print the JSON object
 print(json.dumps(output))
-process.close()
+process.terminate()

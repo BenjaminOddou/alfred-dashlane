@@ -13,17 +13,14 @@ otp_code = sys.argv[1]
 request = os.environ['req2']
 
 # start CLI process
-cli = pexpect.spawn(f'"{data_folder}"/dcli sync')
+process = pexpect.spawn(f'"{data_folder}"/dcli sync')
 if request == 'refresh':
-    try:
-        cli.expect(pexpect.EOF, timeout=5)
-        if cli.before:
-            e = cli.before.decode().split('RequestError: ')[1].split('\n')[0]
-            display_notification('🚨 Error !', f'{e}')
-        elif os.environ['req2'] == 'refresh':
-            display_notification('✅ Sucess !', f'Local data has been refreshed for your account {user_mail}.')
-    except Exception as e:
+    process.expect(pexpect.EOF, timeout=5)
+    if process.before:
+        e = process.before.decode().split('RequestError: ')[1].split('\n')[0]
         display_notification('🚨 Error !', f'{e}')
+    else:
+        display_notification('✅ Sucess !', f'Local data has been refreshed for your account {user_mail}.')
 
 elif request == 'login':
     # Get the user password from the user
@@ -42,24 +39,24 @@ elif request == 'login':
     display_notification('⏳ Please wait !', f'Trying to connect to Dashlane account : {user_mail}...')
     for prompt in expect_prompts:
         try:
-            cli.expect(prompt)
+            process.expect(prompt)
         except pexpect.EOF:
-            e = cli.before.decode().split('DashlaneApiError: ')[1].split('\n')[0]
+            e = process.before.decode().split('DashlaneApiError: ')[1].split('\n')[0]
             display_notification('🚨 Error !', f'{e}')
             break
 
         # enter the appropriate input for each prompt
         if prompt == 'Please enter your email address:':
-            cli.sendline(user_mail)
+            process.sendline(user_mail)
         elif prompt == ['Please enter the code you received by email:', 'Please enter your OTP code:']:
-            cli.sendline(otp_code)
+            process.sendline(otp_code)
         elif prompt == 'Please enter your master password:':
-            cli.sendline(user_password)
+            process.sendline(user_password)
             try:
-                cli.expect('The master password you provided is incorrect, would you like to retry?')
-                cli.sendline('No')
+                process.expect('The master password you provided is incorrect, would you like to retry?')
+                process.sendline('No')
                 display_notification('⚠️ Warning !', 'The master password you provided is incorrect.')
             except:
                 display_notification('✅ Sucess !', f'You\'re connected as {user_mail}.')
 
-cli.close()
+process.terminate()

@@ -21,4 +21,4 @@ except pexpect.EOF:
 except pexpect.TIMEOUT:
     display_notification('⌛ Timeout !', 'The command didn\'t finished properly.')
 
-process.close()
+process.terminate()

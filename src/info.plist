@@ -1380,8 +1380,10 @@ By default, all items that fall in the clipboard (passwords, logins and otps) ar
 			<string>sound</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.0.4</string>
+	<string>1.0.5</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenjaminOddou/alfred-dashlane</string>
 </dict>

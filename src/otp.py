@@ -26,4 +26,4 @@ try:
 except Exception as e:
     display_notification('🚨 Error !', f'{e}')
 
-process.close()
+process.terminate()
