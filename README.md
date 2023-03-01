@@ -174,18 +174,6 @@ In some edge cases when the title and the login are the same for multiple elemen
 
 ![duplicate](src/images/duplicate.webp)
 
-### 💬 About notifications
-
-This workflow is using its own `notification module` independant from Alfred post notification. This allows more flexibility but you may need to allow some access to this `alfred_dashlane_notification.app`.
-
-![notif_settings](src/images/notif_settings.webp)
-
-You'll find all the notifications in the notification center.
-
-![notif_center](src/images/notif_center.webp)
-
-> 💡 Note that you may encounter some `ghost notifications` the first time you are using the workflow (notification immediatly disappears). If it persists, try to restart your computer. You'll also see a slight popup in the dock when a notification appears.
-
 ### 📋 About clipboard
 
 By default, all items that fall in the clipboard (passwords, logins and otps) are transient, meaning they will not fall in the Alfred clipboard history. This is actually wanted as these are sensitive data, but you can change this behavior by unticking the box `Mark item as transient in clipboard` in the `Copy to Clipboard` element in the workflow.
