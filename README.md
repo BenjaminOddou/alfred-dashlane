@@ -3,6 +3,7 @@
 
 [![made with heart by Benjamin Oddou](https://img.shields.io/badge/made%20with%20%E2%99%A5%20by-benjamin%20oddou-2C697A.svg?style=flat)](https://github.com/BenjaminOddou)
 [![saythanks](https://img.shields.io/badge/say-thanks-1D4E5E.svg?style=flat)](https://saythanks.io/to/BenjaminOddou)
+[![Python 3+](https://img.shields.io/badge/python-3+-00191e.svg)](https://www.python.org/downloads/macos/)
 
 Welcome to the Alfred Dashlane repository: **An Alfred Workflow** ✨
 
