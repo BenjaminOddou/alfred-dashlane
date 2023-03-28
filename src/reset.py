@@ -1,9 +1,8 @@
-#!/usr/bin/env python3
-
 import os
 import sys
+sys.path.insert(0, './lib')
 from lib import pexpect
-from utils import cache_folder, data_folder, display_notification
+from utils import cache_folder, display_notification
 
 # Get the confirmation value from user input, yes to confirm
 confirm_value = sys.argv[1]
@@ -11,13 +10,13 @@ confirm_value = sys.argv[1]
 if confirm_value.lower() != 'yes':
     display_notification('⚠️ Warning !', 'Action canceled by the user.')
 else:
-    process = pexpect.spawn(f'"{data_folder}"/dcli reset')
+    process = pexpect.spawn('dcli reset')
     try:
-        index = process.expect(['Do you really want to delete all local data from this app?', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
+        index = process.expect(['Do you really want to delete all local data from this app?', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
         if index == 0:
             # Send 'Yes' if a prompt is detected
             process.sendline('Yes')
-            process.expect(pexpect.EOF, timeout=5)
+            process.expect(pexpect.EOF, timeout=10)
             for filename in os.listdir(cache_folder):
                 file_path = os.path.join(cache_folder, filename)
                 try:

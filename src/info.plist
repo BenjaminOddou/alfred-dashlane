@@ -172,7 +172,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F8E5EFBA-5A46-4CE6-A7DC-1257EDBA6EDA</string>
+				<string>EC6B97E8-A1DB-4705-97E5-34D715640BAB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -271,19 +271,6 @@
 		</array>
 		<key>EC6B97E8-A1DB-4705-97E5-34D715640BAB</key>
 		<array/>
-		<key>F8E5EFBA-5A46-4CE6-A7DC-1257EDBA6EDA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EC6B97E8-A1DB-4705-97E5-34D715640BAB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Benjamin Oddou</string>
@@ -322,7 +309,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -370,29 +357,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>python3 reset.py "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B66F84E0-C203-43CE-A959-A8A0A992E7CD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
@@ -415,6 +379,29 @@
 			<string>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>python3 reset.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B66F84E0-C203-43CE-A959-A8A0A992E7CD</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -479,31 +466,8 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python3 get_otp.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -551,38 +515,12 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Input your 6 digits OTP code from your 2FA app or your mail</string>
-				<key>text</key>
-				<string>OTP Code</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>{query}</string>
-				<key>usecustominputarg</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7E73F4D6-419C-4149-B504-613946D57A23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>python3 sync.py "$1"</string>
+				<string>python3 get_otp.py</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -593,7 +531,7 @@
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
+			<string>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -626,8 +564,50 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python3 sync.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Input your 6 digits OTP code from your 2FA app or your mail</string>
+				<key>text</key>
+				<string>OTP Code</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7E73F4D6-419C-4149-B504-613946D57A23</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
-				<string>{query}</string>
+				<string></string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -715,6 +695,49 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>F783814E-D8C0-49CF-966F-B3A42F629853</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python3 otp.py</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>req2</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>85E9A820-7273-4802-8262-56FE40F0BA5D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -818,382 +841,199 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python3 otp.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>req2</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>85E9A820-7273-4802-8262-56FE40F0BA5D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>F8E5EFBA-5A46-4CE6-A7DC-1257EDBA6EDA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string># 🎩 Alfred Dashlane
 
 ✨ *Manage your Dashlane vault* ✨
 
-![workflow](./images/workflow.webp)
+## ✅ Prerequisites
 
-## ✅ Prerequisite
+* MacOS.
+* Alfred 5. Note that the [Alfred Powerpack](https://www.alfredapp.com/powerpack/) is required to use workflows.
+* A [Dashlane](https://www.dashlane.com/fr) account.
+* Requires **python 3** or above.
 
-* 🍎 MacOS.
-* 🎩 Alfred 5. Note that the [Alfred Powerpack](https://www.alfredapp.com/powerpack/) is required to use workflows.
-* 🔐 A [Dashlane](https://www.dashlane.com/fr) account.
-* ❗ Requires **python 3** or above.
+## 🏎️ Dashlane CLI
 
-## 🧙‍♂️ Invoke the Workflow
+This workflow uses the [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) provided by the [Dashlane team](https://github.com/Dashlane). However, note that the **Dashlane, Inc. does not provide customer support on this project**.
+
+This workflow doesn't hold or register any private data. However, by design it exposes Dashlane data to the Alfred app which allows to manipulate it. It's a different approach compare to the offical [1Password integration](https://www.alfredapp.com/help/features/1password/) from Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/crypto/README.md).
+
+This workflow doesn't allow to update or upload items to the Dashlane vault. You can't connect multiple accounts neither. This is a limitation of the Dashlane CLI for now.
+
+## 🧰 Setup the workflow
+
+Install Python 3 or above. Check your version with :
+
+`python --version`
+
+Install the Dashlane CLI binary using one of the two methods below.
+
+1. Using the following command in your Terminal :
+
+`curl -sSL https://raw.githubusercontent.com/BenjaminOddou/alfred-dashlane/main/install.sh | bash`
+
+2. Manual installation are available [here](https://github.com/Dashlane/dashlane-cli#how-to-install-manually)
+
+## 🧙‍♂️ Invoke the workflow
 
 There is 2 flows in this workflow :
 
 1. The first one allows you to display all the credentials in your dashlane vault. It can be triggered by writing `pdash` keyword.
 2. The second one allows you to display your OTPs from you dashlane vault. It can be triggered by writing `odash` keyword.
 
-You can change these values by changing the `🕹️ Trigger 1` or `🕹️ Trigger 2` variables in workflow configuration panel [optionnal]. Please avoid putting the same trigger for the two flows.
-
-## 📯 Disclaimer
-
-This workflow is provided "as is" without warranty of any kind, either expressed or implied. By using it, you have agreed to use the workflow "at your own risk" and you have ensured to have read this documentation.
-
-This workflow uses the [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) provided by the [Dashlane team](https://github.com/Dashlane). However, note that the **Dashlane, Inc. does not provide customer support on this project**.
-
-This workflow doesn't hold or register any private data. However, by design it exposes all the Dashlane data to the Alfred app which allows to manipulate it. It's a different approach compare to the offical [1Password integration](https://www.alfredapp.com/help/features/1password/) from Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/crypto/README.md).
-
-This workflow doesn't allow to update or upload items to the Dashlane vault. You can't connect multiple accounts neither. This is a limitation of the Dashlane CLI for now.
-
-## 🖥️ About Apple Sillicon
-
-Currently, the Dashlane CLI binary is not compatible natively with apple sillicon chips - see more detais [here](https://www.npmjs.com/package/pkg). Note that you can use Rosetta 2 to make it work as a workaround.
-
-## 🧰 Setup the workflow
-
-### 👨‍💻 Install dependencies
-
-☑️ Install Python 3 or above. Check your version with :
-
-`python --version`
-
-☑️ Install the Dashlane CLI binary using one of the two methods below.
-
-1. Using the following command in your Terminal :
-
-`curl -sSL https://raw.githubusercontent.com/BenjaminOddou/alfred-dashlane/main/install.sh | bash`
-
-2. Manual installation
-
-* Download the Dashlane CLI (dcli-macos) via from the GitHub repo (https://github.com/Dashlane/dashlane-cli/releases/tag/v1.0.0).
-* Modify its name to `dcli`.
-* Move it under the `alfred_workflow_data` folder (`~/Library/Application Support/Alfred/Workflow Data/com.benjamino.dashlane`).
-* Run the following command to remove notification module from quarantine `sudo xattr -r -d com.apple.quarantine "$(dirname "$(find ~/Library/Application\ Support/Alfred/Alfred.alfredpreferences/workflows -name 'com.benjamino.dashlane' -type f)")/alfred_dashlane_notification.app"` 
-
-### ⚒️ Setup variables
-
-1. `👤 Login` correspond to your address mail link to your Dashlane account. **It is required to start the workflow**.
-
-2. `🫥 Icognito mode` allows you to hide partially your login (mail address / user name). If `Yes 👍` is selected (by default) :
-
-![incognito_yes](./images/incognito_yes.webp)
-
-if `No 👎` is selected :
-
-![incognito_no](./images/incognito_no.webp)
-
-3. `🎷 Notification sound` allows you to personalize the sound of the workflow notification (not affecting other programs). Select a sound you like or mute it with `Mute 🔕`. To know more about notifications, see the `💬 About notifications` section below
+You can edit these triggers (flagged with a `🕹️` symbol) in the user configuration panel.
 
 ## 🤖 Usage of the workflow
 
-### 🔢 Get your one-time password (OTP) code by mail
-
-💡 Note that if you have enabled the two steps authetication for your Dashlane account, you can skip this section.
-
-In order to connect to your Dashlane account, you'll need an OTP. If you haven't configure the two steps authentication on your Dashlane account, just hit enter to receive the 6 digits code by mail.
-
-![otp_mail](./images/otp_mail.webp)
-
-### 🔄 Sync your Dashlane account
-
-❗ You need an internet connexion to complete this action.
-
-Hit enter, input your master password and finally the OTP (provided via mail or by your 2FA app). If you are already connected you can press enter to refresh the data.
-
-💡 Note that a sync is already done once per hour by default - see [Dashlane CLI docs](https://github.com/Dashlane/dashlane-cli).
-
-You should have received a `✅ Success !` notification and a mail saying that the connection was successfull.
-
-![success_sync_notif](./images/success_sync_notif.webp)
-
-💡 Note that you will receive a mail even if the master password is incorrect. This is because the OTP code allows to register a device and make connections to the API when the master password is only here to decrypt the local vault that has been dowloaded during the sync event - see this [thread](https://github.com/Dashlane/dashlane-cli/issues/54)
-
-![success_sync](./images/success_sync.webp)
-
-After login you may be asked to approve the `dcli` binary with a message like this one :
-
-![keychain](./images/keychain.webp)
-
-Enter the password of your mac and press `always allow`. If this is not working, try the following command :
-
-`~/Library/Application\ Support/Alfred/Workflow\ Data/com.benjamino.dashlane/dcli sync`
-
-It should triggers the same popup window asking to approve the binary.
-
-### ⬇️ Download favicons
-
-❗ You need an internet connexion to complete this action.
-
-Hit enter to download all favicons link to your accounts. Wait few seconds / minutes to receive the below notification. You can see icons under the `alfred_workflow_cache` folder (`~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane`).
-
-![notif_icons](./images/notif_icons.webp)
-
-### 🚮 Reset local data
-
-If you want to log out and / or remove all local data holds by the Dashlane CLI, hit enter. Confirm your action by inputing 'yes' to the alfred search bar.
-
-![confirm_delete](./images/confirm_delete.webp)
-
-### 🔓 Manage passwords and OTPs
-
-#### Password flow
-
-💡 Use `pdash` keyword to launch this flow.
-
-Search a password by typing its title (custom name or website link to the credentials). Don't forget to include a space between `pdash` and your `{query}`.
-
-![incognito_yes](./images/incognito_yes.webp)
-
-1. Press ⏎ to copy the password.
-2. Press ⌘⏎ to copy the login (No Login means that you only register a password for this element).
-3. Press ⌥⏎ to open the url (No URL means that no website is link to this credentials). Alternatively press ⌘Y to preview the url.
-
-**Using Alfred Universal Actions**
-
-Select the element you want to display and run `Universal Actions` with →. It shows `Title`, `Login`, `Password` and `Url` link to the element.
-
-![universal_action](./images/universal_action.webp)
-
-If you want to know more on how to use Alfred Universal Actions, follow this [link](https://www.alfredapp.com/help/features/universal-actions/).
-
-#### OTP flow
-
-💡 Use `odash` keyword to launch this flow.
-
-Search an OTP by typing its title (custom name or website link to the credentials). Don't forget to include a space between `odash` and your `{query}`.
-
-Press ⏎ to copy the OTP. You should see the below notification popping.
-
-![copy_otp_notif](./images/copy_otp_notif.webp)
-
-In some edge cases when the title and the login are the same for multiple elements, you'll receive the below warning. Ensure that combination of title and login are unique between elements.
-
-![duplicate](./images/duplicate.webp)
-
-💡 Note that you may encounter some `ghost notifications` the first time you are using the workflow (notification immediatly disappears). If it persists, try to restart your computer. You'll also see a slight popup in the dock when a notification appears.
-
-### 📋 About clipboard
-
-By default, all items that fall in the clipboard (passwords, logins and otps) are transient, meaning they will not fall in the Alfred clipboard history. This is actually wanted as these are sensitive data, but you can change this behavior by unticking the box `Mark item as transient in clipboard` in the `Copy to Clipboard` element in the workflow.
-
-![clipboard1](./images/clipboard1.webp)
-
-![clipboard2](./images/clipboard2.webp)
+Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-dashlane) page to check the documentation
 
 © Benjamin Oddou</string>
 	<key>uidata</key>
 	<dict>
 		<key>1DB8C0D2-6DFF-4D17-AEFB-8EDC6BB6DBF6</key>
 		<dict>
-			<key>note</key>
-			<string>Please submit issues and feature requests at https://github.com/BenjaminOddou/alfred-dashlane</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>75</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>245</real>
 		</dict>
 		<key>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</key>
 		<dict>
 			<key>xpos</key>
-			<real>830</real>
+			<real>930</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>450</real>
 		</dict>
 		<key>448025A5-DD1E-4138-AC92-051F92FAB526</key>
 		<dict>
 			<key>xpos</key>
-			<real>665</real>
+			<real>775</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>420</real>
 		</dict>
 		<key>625E1A1F-0491-49FD-844B-D2B068BF20A2</key>
 		<dict>
 			<key>xpos</key>
-			<real>570</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>580</real>
 		</dict>
 		<key>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</key>
 		<dict>
-			<key>note</key>
-			<string>Please submit issues and feature requests at https://github.com/BenjaminOddou/alfred-dashlane</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>75</real>
 			<key>ypos</key>
-			<real>50</real>
+			<real>120</real>
 		</dict>
 		<key>686D5E87-317D-429B-9D65-532AEAFD3816</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>910</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>795</real>
 		</dict>
 		<key>7E73F4D6-419C-4149-B504-613946D57A23</key>
 		<dict>
 			<key>xpos</key>
-			<real>910</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>420</real>
 		</dict>
 		<key>85E9A820-7273-4802-8262-56FE40F0BA5D</key>
 		<dict>
 			<key>xpos</key>
-			<real>1065</real>
+			<real>1165</real>
 			<key>ypos</key>
-			<real>795</real>
+			<real>825</real>
 		</dict>
 		<key>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1150</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>290</real>
 		</dict>
 		<key>942C75AA-75A5-487E-99BF-CA1280B7F8DE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1150</real>
+			<real>1250</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>420</real>
 		</dict>
 		<key>A4DC7595-08A1-4983-97C5-2FAA33AFD9B7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1150</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>45</real>
 		</dict>
 		<key>B66F84E0-C203-43CE-A959-A8A0A992E7CD</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1150</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>170</real>
 		</dict>
 		<key>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</key>
 		<dict>
 			<key>xpos</key>
-			<real>470</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>850</real>
 		</dict>
 		<key>B7A08AA9-96A0-4448-BA9C-0718F5885C65</key>
 		<dict>
 			<key>xpos</key>
-			<real>290</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>175</real>
 		</dict>
 		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
 		<dict>
 			<key>xpos</key>
-			<real>910</real>
+			<real>775</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>170</real>
 		</dict>
 		<key>E9A9FAF7-7C12-4ABF-8DCE-4612FB3EC3CB</key>
 		<dict>
 			<key>xpos</key>
-			<real>830</real>
+			<real>930</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>605</real>
 		</dict>
 		<key>EA9D3618-6654-4C2F-A482-BBDD3D3B45F1</key>
 		<dict>
 			<key>xpos</key>
-			<real>405</real>
+			<real>450</real>
 			<key>ypos</key>
-			<real>690</real>
+			<real>890</real>
 		</dict>
 		<key>EC6B97E8-A1DB-4705-97E5-34D715640BAB</key>
 		<dict>
 			<key>xpos</key>
-			<real>1150</real>
+			<real>1250</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>900</real>
 		</dict>
 		<key>F783814E-D8C0-49CF-966F-B3A42F629853</key>
 		<dict>
 			<key>xpos</key>
-			<real>910</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>645</real>
-		</dict>
-		<key>F8E5EFBA-5A46-4CE6-A7DC-1257EDBA6EDA</key>
-		<dict>
-			<key>xpos</key>
-			<real>1065</real>
-			<key>ypos</key>
-			<real>900</real>
+			<real>675</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1373,7 +1213,7 @@ By default, all items that fall in the clipboard (passwords, logins and otps) ar
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0.6</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenjaminOddou/alfred-dashlane</string>
 </dict>

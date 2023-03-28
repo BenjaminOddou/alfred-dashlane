@@ -1,12 +1,10 @@
-#!/usr/bin/env python3
-
 import re
 import os
 import sys
+sys.path.insert(0, './lib')
 import json
 from lib import pexpect
-from lib import tldextract
-from utils import cache_folder, data_folder, incognito_mode
+from utils import cache_folder, incognito_mode, extract_domain
 
 # Get the query from the command line arguments
 query = sys.argv[1]
@@ -16,19 +14,20 @@ request = sys.argv[2]
 
 # Function that build json items displayed in alfred search bar
 def build_json(item):
-    v_title = item.get('title')
-    v_url = item.get('url')
-    v_email = item.get('email')
-    v_login = item.get('login')
-    c_login = v_email or v_login or 'No login'
-    domain = tldextract.extract(v_url).registered_domain if v_url else 'No URL'
+    v_title, v_url, v_email, v_login = item.get('title'), item.get('url'), item.get('email'), item.get('login')
+    c_login = v_email if v_email else (v_login if v_login else 'No login')
     if incognito_mode:
-        login = v_email[:2] + '•'*4 + v_email[v_email.index('@')-1:] if v_email else v_login[:2] + '•'*4 + v_login[-1] if v_login else 'No login'
+        login = v_email[:2] + '•'*4 + v_email[v_email.index('@')-1:] if v_email else (v_login[:2] + '•'*4 + v_login[-1] if v_login else 'No login')
     else:
         login = c_login
-    title = v_title if v_title else tldextract.extract(v_url).registered_domain if v_url else 'No title'
+    if v_url:
+        domain = extract_domain(v_url)
+        title = v_title if v_title else domain
+    else:
+        domain = 'No URL'
+        title = 'No title'
     password = item.get('password', '')
-    if domain != 'No URL' and os.path.exists(os.path.join(f'{cache_folder}', f'{domain}.png')):
+    if domain != 'No URL' and os.path.isfile(os.path.join(cache_folder, f'{domain}.png')):
         iconPath = f'{cache_folder}/{domain}.png'
     else:
         letter = re.search(r"[^\W\d_]", title.lower())
@@ -45,13 +44,6 @@ def build_json(item):
                 'text': f'Title: {title}\nLogin: {c_login}',
             },
             'otpSecret': item.get('otpSecret'),
-            'mods': {
-                mod: {
-                    'valid': False, 
-                    'subtitle': f'{login} ǀ Press ⏎ to copy otp',
-                } 
-                for mod in ['cmd', 'alt', 'ctrl']
-            }
          }
     else:
         path = v_url if v_url else ''
@@ -75,10 +67,6 @@ def build_json(item):
                     'subtitle': f'{domain} ǀ Press ⏎ to open url',
                     'arg': f'_url\t{path}',
                 },
-                'ctrl': {
-                    'valid': False,
-                    'subtitle': f'{login} ǀ Press ⏎ to copy password',
-                },
             }
         }
     return json_obj
@@ -92,13 +80,6 @@ items = [
         'icon': {
             'path': 'icons/sync-ics.webp'
         },
-        'mods': {
-            mod: {
-                'valid': False, 
-                'subtitle': 'Manually sync your account',
-            } 
-            for mod in ['cmd', 'alt', 'ctrl']
-        }
     },
 ]
 reset = {
@@ -108,20 +89,13 @@ reset = {
     'icon': {
         'path': 'icons/trash-ics.webp'
     },
-    'mods': {
-        mod: {
-            'valid': False, 
-            'subtitle': 'Erase all local stored data',
-        } 
-        for mod in ['cmd', 'alt', 'ctrl']
-    }
 }
 
 try:
     # Try to detect if Dashlane account is sync
-    process = pexpect.spawn(f'"{data_folder}"/dcli password -o json')
+    process = pexpect.spawn('dcli password -o json')
     try:
-        index = process.expect(['Please enter your email address:', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
+        index = process.expect(['Please enter your email address:', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
         output = process.before.decode().strip()
         if index == 0:
             items[0]['arg'] = '_sync\tlogin'
@@ -133,14 +107,7 @@ try:
                     'arg': 'get_otp',
                     'icon': {
                         'path': 'icons/otp-ics.webp'
-                    },
-                    'mods': {
-                        mod: {
-                            'valid': False, 
-                            'subtitle': 'Receive your 6 digits OTP code by mail (only if you don\'t use a 2FA app)',
-                        } 
-                        for mod in ['cmd', 'alt', 'ctrl']
-                    }           
+                    },          
                 }
             )
         else:
@@ -154,24 +121,15 @@ try:
                     'icon': {
                         'path': 'icons/download-ics.webp'
                     },
-                    'mods': {
-                        mod: {
-                            'valid': False, 
-                            'subtitle': 'For each password element, download correponding favicon if available',
-                        } 
-                        for mod in ['cmd', 'alt', 'ctrl']
-                    } 
                 }
             )
             items.extend([build_json(vault_credential) for vault_credential in json.loads(output) if not (request == 'otp' and not vault_credential.get('otpSecret'))])
 
-        # Filter the items based on the query
-        filtered_items = [item for item in items if query.lower() in item['title'].lower() or query.lower() in item['subtitle'].lower()]
-
         # Create the JSON object with the 'items' property
         output = {
-            'items': filtered_items
+            'items': items
         }
+        
     except Exception as e:
         output = {
             'items': [
@@ -183,13 +141,6 @@ try:
                     'icon': {
                         'path': 'icons/error-ics.webp'
                     },
-                    'mods': {
-                        mod: {
-                            'valid': False, 
-                            'subtitle': f'{e} ǀ Press ⏎ to create an issue in GitHub',
-                        } 
-                        for mod in ['cmd', 'alt', 'ctrl']
-                    }
                 },
                 reset
             ]
@@ -205,13 +156,6 @@ except Exception as e:
                 'icon': {
                     'path': 'icons/info-ics.webp'
                 },
-                'mods': {
-                    mod: {
-                        'valid': False, 
-                        'subtitle': 'Press ⏎ to check the documentation on GitHub',
-                    } 
-                    for mod in ['cmd', 'alt', 'ctrl']
-                }
             }
         ]
     }

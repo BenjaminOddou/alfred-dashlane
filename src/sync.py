@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
-
 import os
 import re
 import sys
+sys.path.insert(0, './lib')
 from lib import pexpect
-from utils import data_folder, user_mail, display_notification
+from utils import user_mail, display_notification
 
 # Get the otp code from the user
 otp_code = sys.argv[1]
@@ -13,9 +12,9 @@ otp_code = sys.argv[1]
 request = os.environ['req2']
 
 # start CLI process
-process = pexpect.spawn(f'"{data_folder}"/dcli sync')
+process = pexpect.spawn('dcli sync')
 if request == 'refresh':
-    process.expect(pexpect.EOF, timeout=5)
+    process.expect(pexpect.EOF, timeout=10)
     if process.before:
         e = process.before.decode().split('RequestError: ')[1].split('\n')[0]
         display_notification('🚨 Error !', f'{e}')
@@ -53,10 +52,11 @@ elif request == 'login':
         elif prompt == 'Please enter your master password:':
             process.sendline(user_password)
             try:
-                process.expect('The master password you provided is incorrect, would you like to retry?')
-                process.sendline('No')
-                display_notification('⚠️ Warning !', 'The master password you provided is incorrect.')
+                process.expect(pexpect.EOF, timeout=10)
+                display_notification('✅ Sucess !', f'You are connected as {user_mail}.')
+            except pexpect.exceptions.TIMEOUT:
+                display_notification('⌛ Timeout !', 'The connection was not established.')
             except:
-                display_notification('✅ Sucess !', f'You\'re connected as {user_mail}.')
+                display_notification('⚠️ Warning !', 'The master password you provided is incorrect.')
 
 process.terminate()
