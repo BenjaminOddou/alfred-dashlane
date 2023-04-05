@@ -14,7 +14,6 @@ else:
     try:
         index = process.expect(['Do you really want to delete all local data from this app?', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
         if index == 0:
-            # Send 'Yes' if a prompt is detected
             process.sendline('Yes')
             process.expect(pexpect.EOF, timeout=10)
             for filename in os.listdir(cache_folder):

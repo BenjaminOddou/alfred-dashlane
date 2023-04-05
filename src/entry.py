@@ -14,61 +14,41 @@ request = sys.argv[2]
 
 # Function that build json items displayed in alfred search bar
 def build_json(item):
-    v_title, v_url, v_email, v_login = item.get('title'), item.get('url'), item.get('email'), item.get('login')
+    v_title, v_url, v_email, v_login, v_password, v_id = item.get('title'), item.get('url', ''), item.get('email'), item.get('login'), item.get('password', ''), item.get('id')
     c_login = v_email if v_email else (v_login if v_login else 'No login')
     if incognito_mode:
-        login = v_email[:2] + '•'*4 + v_email[v_email.index('@')-1:] if v_email else (v_login[:2] + '•'*4 + v_login[-1] if v_login else 'No login')
+        login = v_email[:2] + '•' * 4 + v_email[v_email.index('@')-1:] if v_email else (v_login[:2] + '•' * 4 + v_login[-1] if v_login else 'No login')
     else:
         login = c_login
-    if v_url:
+    if v_url != '':
         domain = extract_domain(v_url)
         title = v_title if v_title else domain
     else:
         domain = 'No URL'
         title = 'No title'
-    password = item.get('password', '')
     if domain != 'No URL' and os.path.isfile(os.path.join(cache_folder, f'{domain}.png')):
         iconPath = f'{cache_folder}/{domain}.png'
     else:
         letter = re.search(r"[^\W\d_]", title.lower())
         iconPath = f'icons/letter-{letter.group(0)}.webp' if letter else f'icons/question-ics.webp'
-    if request == 'otp':
-         json_obj = {
-            'title': title,
-            'subtitle': f'{login} ǀ Press ⏎ to copy otp',
-            'arg': f'_otp\t{title} - {c_login}',
-            'icon': {
-                'path': iconPath,
+    json_obj = {
+        'title': title,
+        'subtitle': f'{login} ǀ Press ⏎ to copy {request}',
+        'arg': f'_{request}\t{v_id}',
+        'icon': {
+            'path': iconPath,
+        },
+        'mods': {
+            'cmd': {
+                'subtitle': f'{login} ǀ Press ⏎ to copy login',
+                'arg': f'_login\t{c_login}',
             },
-            'action': {
-                'text': f'Title: {title}\nLogin: {c_login}',
+            'alt': {
+                'subtitle': f'{domain} ǀ Press ⏎ to open url',
+                'arg': f'_url\t{v_url}',
             },
-            'otpSecret': item.get('otpSecret'),
-         }
-    else:
-        path = v_url if v_url else ''
-        json_obj = {
-            'title': title,
-            'subtitle': f'{login} ǀ Press ⏎ to copy password',
-            'arg': f'_pss\t{password}',
-            'icon': {
-                'path': iconPath,
-            },
-            'quicklookurl': f'{path}',
-            'action': {
-                'text': f'Title: {title}\nLogin: {c_login}\nPassword: {password}\nURL: {v_url}',
-            },
-            'mods': {
-                'cmd': {
-                    'subtitle': f'{login} ǀ Press ⏎ to copy login',
-                    'arg': f'_login\t{c_login}',
-                },
-                'alt': {
-                    'subtitle': f'{domain} ǀ Press ⏎ to open url',
-                    'arg': f'_url\t{path}',
-                },
-            }
         }
+    }
     return json_obj
 
 # Define common objects

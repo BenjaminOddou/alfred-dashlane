@@ -61,7 +61,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E9A9FAF7-7C12-4ABF-8DCE-4612FB3EC3CB</string>
+				<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -86,36 +86,12 @@
 			</dict>
 		</array>
 		<key>686D5E87-317D-429B-9D65-532AEAFD3816</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>85E9A820-7273-4802-8262-56FE40F0BA5D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>7E73F4D6-419C-4149-B504-613946D57A23</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>85E9A820-7273-4802-8262-56FE40F0BA5D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EC6B97E8-A1DB-4705-97E5-34D715640BAB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -172,7 +148,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>EC6B97E8-A1DB-4705-97E5-34D715640BAB</string>
+				<string>23520073-8543-4032-95CE-527849242695</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -243,19 +219,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E9A9FAF7-7C12-4ABF-8DCE-4612FB3EC3CB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>EA9D3618-6654-4C2F-A482-BBDD3D3B45F1</key>
 		<array>
 			<dict>
@@ -269,8 +232,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>EC6B97E8-A1DB-4705-97E5-34D715640BAB</key>
-		<array/>
 	</dict>
 	<key>createdby</key>
 	<string>Benjamin Oddou</string>
@@ -331,7 +292,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Loading passwords...</string>
+				<string>Connecting...</string>
 				<key>script</key>
 				<string>python3 entry.py "$1" "password"</string>
 				<key>scriptargtype</key>
@@ -353,6 +314,29 @@
 			<string>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>python3 reset.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B66F84E0-C203-43CE-A959-A8A0A992E7CD</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -379,29 +363,6 @@
 			<string>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>python3 reset.py "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B66F84E0-C203-43CE-A959-A8A0A992E7CD</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -489,7 +450,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Loading OTPs...</string>
+				<string>Connecting...</string>
 				<key>script</key>
 				<string>python3 entry.py "$1" "otp"</string>
 				<key>scriptargtype</key>
@@ -541,6 +502,25 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
+				<string>Input your 6 digits OTP code from your 2FA app or your mail</string>
+				<key>text</key>
+				<string>OTP Code</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7E73F4D6-419C-4149-B504-613946D57A23</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
 				<string>Input your Dashlane account master password</string>
 				<key>text</key>
 				<string>Master password</string>
@@ -558,6 +538,26 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>448025A5-DD1E-4138-AC92-051F92FAB526</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>user_password</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -583,45 +583,6 @@
 			<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Input your 6 digits OTP code from your 2FA app or your mail</string>
-				<key>text</key>
-				<string>OTP Code</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7E73F4D6-419C-4149-B504-613946D57A23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>user_password</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -670,14 +631,6 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>E9A9FAF7-7C12-4ABF-8DCE-4612FB3EC3CB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>browser</key>
@@ -695,49 +648,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>F783814E-D8C0-49CF-966F-B3A42F629853</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python3 otp.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>req2</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>85E9A820-7273-4802-8262-56FE40F0BA5D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -780,11 +690,11 @@
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>4</integer>
 						<key>matchstring</key>
-						<string>_otp</string>
+						<string>_otp|_password</string>
 						<key>outputlabel</key>
-						<string>otp</string>
+						<string>elem</string>
 						<key>uid</key>
 						<string>6BB27A50-582A-431F-AE53-471388B8064E</string>
 					</dict>
@@ -825,6 +735,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python3 elem.py</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -832,12 +765,12 @@
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>EC6B97E8-A1DB-4705-97E5-34D715640BAB</string>
+			<string>23520073-8543-4032-95CE-527849242695</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -899,26 +832,33 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
+		<key>23520073-8543-4032-95CE-527849242695</key>
+		<dict>
+			<key>xpos</key>
+			<real>770</real>
+			<key>ypos</key>
+			<real>775</real>
+		</dict>
 		<key>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</key>
 		<dict>
 			<key>xpos</key>
-			<real>930</real>
+			<real>950</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>440</real>
 		</dict>
 		<key>448025A5-DD1E-4138-AC92-051F92FAB526</key>
 		<dict>
 			<key>xpos</key>
-			<real>775</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>410</real>
 		</dict>
 		<key>625E1A1F-0491-49FD-844B-D2B068BF20A2</key>
 		<dict>
 			<key>xpos</key>
-			<real>645</real>
+			<real>650</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>490</real>
 		</dict>
 		<key>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</key>
 		<dict>
@@ -932,30 +872,23 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>795</real>
+			<real>665</real>
 		</dict>
 		<key>7E73F4D6-419C-4149-B504-613946D57A23</key>
 		<dict>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>1025</real>
 			<key>ypos</key>
-			<real>420</real>
-		</dict>
-		<key>85E9A820-7273-4802-8262-56FE40F0BA5D</key>
-		<dict>
-			<key>xpos</key>
-			<real>1165</real>
-			<key>ypos</key>
-			<real>825</real>
+			<real>410</real>
 		</dict>
 		<key>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>770</real>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
@@ -964,16 +897,16 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1250</real>
+			<real>1225</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>485</real>
 		</dict>
 		<key>A4DC7595-08A1-4983-97C5-2FAA33AFD9B7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>770</real>
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
@@ -982,7 +915,7 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>770</real>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
@@ -991,7 +924,7 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 			<key>xpos</key>
 			<real>515</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>560</real>
 		</dict>
 		<key>B7A08AA9-96A0-4448-BA9C-0718F5885C65</key>
 		<dict>
@@ -1003,37 +936,23 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
 		<dict>
 			<key>xpos</key>
-			<real>775</real>
+			<real>540</real>
 			<key>ypos</key>
 			<real>170</real>
-		</dict>
-		<key>E9A9FAF7-7C12-4ABF-8DCE-4612FB3EC3CB</key>
-		<dict>
-			<key>xpos</key>
-			<real>930</real>
-			<key>ypos</key>
-			<real>605</real>
 		</dict>
 		<key>EA9D3618-6654-4C2F-A482-BBDD3D3B45F1</key>
 		<dict>
 			<key>xpos</key>
 			<real>450</real>
 			<key>ypos</key>
-			<real>890</real>
-		</dict>
-		<key>EC6B97E8-A1DB-4705-97E5-34D715640BAB</key>
-		<dict>
-			<key>xpos</key>
-			<real>1250</real>
-			<key>ypos</key>
-			<real>900</real>
+			<real>600</real>
 		</dict>
 		<key>F783814E-D8C0-49CF-966F-B3A42F629853</key>
 		<dict>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>555</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1213,7 +1132,7 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.1.0</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenjaminOddou/alfred-dashlane</string>
 </dict>

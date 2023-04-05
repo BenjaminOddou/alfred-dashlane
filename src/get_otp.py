@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, './lib')
 from lib import pexpect
-from utils import user_mail, display_notification
+from utils import user_mail, display_notification, get_error
 
 # Run the dcli sync command, wait for the email prompt and enter the email address
 process = pexpect.spawn('dcli sync')
@@ -16,8 +16,7 @@ try:
     elif index == 1:
         display_notification('⚠️ Warning !', 'Your account is already linked to a 2FA app.')
 except pexpect.EOF:
-    e = process.before.decode('utf-8').split('DashlaneApiError: ')[1].split('\n')[0]
-    display_notification('🚨 Error !', f'{e}')
+    get_error(process.before.decode())
 except pexpect.TIMEOUT:
     display_notification('⌛ Timeout !', 'The command didn\'t finished properly.')
 

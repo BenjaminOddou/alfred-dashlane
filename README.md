@@ -16,9 +16,9 @@ Welcome to the Alfred Dashlane repository: **An Alfred Workflow** ✨
 
 ## 🏎️ Dashlane CLI
 
-This workflow uses the [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) provided by the [Dashlane team](https://github.com/Dashlane). However, note that the **Dashlane, Inc. does not provide customer support on this project**.
+This workflow uses the [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) provided by the [Dashlane team](https://github.com/Dashlane).
 
-This workflow doesn't hold or register any private data. However, by design it exposes all the Dashlane data to the Alfred app which allows to manipulate it. It's a different approach compare to the offical [1Password integration](https://www.alfredapp.com/help/features/1password/) from Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/crypto/README.md).
+This workflow doesn't hold or register any private data. No sensible data (password, OTP) are exposed directly to Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/crypto/README.md).
 
 This workflow doesn't allow to update or upload items to the Dashlane vault. You can't connect multiple accounts neither. This is a limitation of the Dashlane CLI for now.
 
@@ -118,15 +118,7 @@ Search a password by typing its title (custom name or website link to the creden
 
 1. Press ⏎ to copy the password.
 2. Press ⌘⏎ to copy the login (No Login means that you only register a password for this element).
-3. Press ⌥⏎ to open the url (No URL means that no website is link to this credentials). Alternatively press ⌘Y to preview the url.
-
-**Using Alfred Universal Actions**
-
-Select the element you want to display and run `Universal Actions` with →. It shows `Title`, `Login`, `Password` and `Url` link to the element.
-
-![universal_action](public/universal_action.webp)
-
-If you want to know more on how to use Alfred Universal Actions, follow this [link](https://www.alfredapp.com/help/features/universal-actions/).
+3. Press ⌥⏎ to open the url (No URL means that no website is link to this credentials).
 
 #### OTP flow
 
@@ -134,21 +126,11 @@ If you want to know more on how to use Alfred Universal Actions, follow this [li
 
 Search an OTP by typing its title (custom name or website link to the credentials). Don't forget to include a space between `odash` and your `{query}`.
 
-Press ⏎ to copy the OTP. You should see the below notification popping.
+1. Press ⏎ to copy the OTP. You should see the below notification popping.
+2. Press ⌘⏎ to copy the login (No Login means that you only register a password for this element).
+3. Press ⌥⏎ to open the url (No URL means that no website is link to this credentials).
 
 ![copy_otp_notif](public/copy_otp_notif.webp)
-
-In some edge cases when the title and the login are the same for multiple elements, you'll receive the below warning. Ensure that combination of title and login are unique between elements.
-
-![duplicate](public/duplicate.webp)
-
-### About clipboard
-
-By default, all items that fall in the clipboard (passwords, logins and otps) are transient, meaning they will not fall in the Alfred clipboard history. This is actually wanted as these are sensitive data, but you can change this behavior by unticking the box `Mark item as transient in clipboard` in the `Copy to Clipboard` element in the workflow.
-
-![clipboard1](public/clipboard1.webp)
-
-![clipboard2](public/clipboard2.webp)
 
 ## ⚖️ License
 

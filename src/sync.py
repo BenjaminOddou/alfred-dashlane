@@ -3,7 +3,7 @@ import re
 import sys
 sys.path.insert(0, './lib')
 from lib import pexpect
-from utils import user_mail, display_notification
+from utils import user_mail, display_notification, get_error
 
 # Get the otp code from the user
 otp_code = sys.argv[1]
@@ -15,11 +15,10 @@ request = os.environ['req2']
 process = pexpect.spawn('dcli sync')
 if request == 'refresh':
     process.expect(pexpect.EOF, timeout=10)
-    if process.before:
-        e = process.before.decode().split('RequestError: ')[1].split('\n')[0]
-        display_notification('🚨 Error !', f'{e}')
-    else:
+    if process.before.decode().strip() == 'Successfully synced':
         display_notification('✅ Sucess !', f'Local data has been refreshed for your account {user_mail}.')
+    else:
+        get_error(process.before.decode())
 
 elif request == 'login':
     # Get the user password from the user
@@ -40,8 +39,7 @@ elif request == 'login':
         try:
             process.expect(prompt)
         except pexpect.EOF:
-            e = process.before.decode().split('DashlaneApiError: ')[1].split('\n')[0]
-            display_notification('🚨 Error !', f'{e}')
+            get_error(process.before.decode())
             break
 
         # enter the appropriate input for each prompt
@@ -52,11 +50,15 @@ elif request == 'login':
         elif prompt == 'Please enter your master password:':
             process.sendline(user_password)
             try:
-                process.expect(pexpect.EOF, timeout=10)
-                display_notification('✅ Sucess !', f'You are connected as {user_mail}.')
+                process.expect(['The master password you provided is incorrect, would you like to retry?', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
+                process.sendline('No')
+                display_notification('⚠️ Warning !', 'The master password you provided is incorrect, please retry.')
+                new_process = pexpect.spawn('dcli reset')
+                index = new_process.expect('Do you really want to delete all local data from this app?')
+                new_process.sendline('Yes')
             except pexpect.exceptions.TIMEOUT:
                 display_notification('⌛ Timeout !', 'The connection was not established.')
-            except:
-                display_notification('⚠️ Warning !', 'The master password you provided is incorrect.')
+            except pexpect.exceptions.EOF:
+                display_notification('✅ Sucess !', f'Local data has been refreshed for your account {user_mail}.')
 
 process.terminate()
