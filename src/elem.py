@@ -9,7 +9,7 @@ from utils import display_notification
 request = os.environ['req1']
 elem = os.environ['req2']
 
-process = pexpect.spawn(f'dcli {request.split("_")[1]} id={elem} -o clipboard')
+process = pexpect.spawn(f'dcli {request.split("_")[1]} id={elem}')
 try:
     process.expect(pexpect.EOF, timeout=10)
     output = process.before.decode().strip()
