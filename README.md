@@ -49,8 +49,8 @@ curl -sSL https://raw.githubusercontent.com/BenjaminOddou/alfred-dashlane/main/i
 
 There is 2 flows in this workflow :
 
-1. The first one allows you to display all the credentials in your dashlane vault. It can be triggered by writing `pdash` keyword.
-2. The second one allows you to display your OTPs from you dashlane vault. It can be triggered by writing `odash` keyword.
+1. The first one allows you to display all the credentials in your Dashlane vault. It can be triggered by writing `pdash` keyword.
+2. The second one allows you to display your OTPs from you Dashlane vault. It can be triggered by writing `odash` keyword.
 
 You can edit these triggers (flagged with a `🕹️` symbol) in the user configuration panel.
 
@@ -68,7 +68,9 @@ if `No 👎` is selected :
 
 ![incognito_no](public/incognito_no.webp)
 
-1. `🎷 Notification sound` allows you to personalize the sound of the workflow notification.
+3. `🔥 Allow cache` enables the workflow to save a backbone (no confidentital data are stored) of you Dashlane vault as `JSON` files under the `alfred_workflow_cache` folder (`~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane`). This speeds up the response time.
+
+4. `🎷 Notification sound` allows you to personalize the sound of the workflow notification.
 
 ### Get your one-time password (OTP) code by mail
 
@@ -106,7 +108,7 @@ If you want to log out and / or remove all local data holds by the Dashlane CLI,
 
 ![confirm_delete](public/confirm_delete.webp)
 
-### Manage passwords and OTPs
+### Get passwords and OTPs
 
 #### Password flow
 
@@ -114,11 +116,11 @@ If you want to log out and / or remove all local data holds by the Dashlane CLI,
 
 Search a password by typing its title (custom name or website link to the credentials). Don't forget to include a space between `pdash` and your `{query}`.
 
-![incognito_yes](public/incognito_yes.webp)
-
-1. Press ⏎ to copy the password.
+1. Press ⏎ to copy the password. You should see the below notification popping.
 2. Press ⌘⏎ to copy the login (No Login means that you only register a password for this element).
 3. Press ⌥⏎ to open the url (No URL means that no website is link to this credentials).
+
+![copy_pss_notif](public/copy_pss_notif.webp)
 
 #### OTP flow
 

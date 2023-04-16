@@ -10,7 +10,7 @@ def download_favicon(url):
     '''
     Downloads the favicon of size 128 from the given domain using the Google icon API.
     Returns True if the download was successful, False otherwise.
-    Icons are located in the cache folder :  ~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane
+    Icons are located in the cache folder : ~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane
     '''
     domain = extract_domain(url)
     api_url = f'https://www.google.com/s2/favicons?domain={domain}&sz=128'
@@ -27,9 +27,14 @@ def download_favicon(url):
 process = pexpect.spawn('dcli password -o json')
 process.expect(pexpect.EOF)
 output = process.before.decode().strip()
+for filename in os.listdir(cache_folder):
+    file_path = os.path.join(cache_folder, filename)
+    try:
+        if os.path.isfile(file_path) and os.path.splitext(filename)[1] == '.json':
+            os.remove(file_path)
+    except Exception as e:
+        display_notification('🚨 Error !', f'{e}')
 display_notification('⏳ Please wait !', 'Downloading favicons...')
-if not os.path.exists(f'{cache_folder}'):
-    os.mkdir(f'{cache_folder}')
 for item in json.loads(output):
     if item.get('url'):
         download_favicon(item.get('url'))

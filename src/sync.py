@@ -3,7 +3,7 @@ import re
 import sys
 sys.path.insert(0, './lib')
 from lib import pexpect
-from utils import user_mail, display_notification, get_error
+from utils import user_mail, display_notification, get_error, cache_folder
 
 # Get the otp code from the user
 otp_code = sys.argv[1]
@@ -16,6 +16,13 @@ process = pexpect.spawn('dcli sync')
 if request == 'refresh':
     process.expect(pexpect.EOF, timeout=10)
     if process.before.decode().strip() == 'Successfully synced':
+        for filename in os.listdir(cache_folder):
+            file_path = os.path.join(cache_folder, filename)
+            try:
+                if os.path.isfile(file_path) and os.path.splitext(filename)[1] == '.json':
+                    os.remove(file_path)
+            except Exception as e:
+                display_notification('🚨 Error !', f'{e}')
         display_notification('✅ Sucess !', f'Local data has been refreshed for your account {user_mail}.')
     else:
         get_error(process.before.decode())
@@ -50,15 +57,14 @@ elif request == 'login':
         elif prompt == 'Please enter your master password:':
             process.sendline(user_password)
             try:
-                process.expect(['The master password you provided is incorrect, would you like to retry?', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
-                process.sendline('No')
-                display_notification('⚠️ Warning !', 'The master password you provided is incorrect, please retry.')
-                new_process = pexpect.spawn('dcli reset')
-                index = new_process.expect('Do you really want to delete all local data from this app?')
-                new_process.sendline('Yes')
+                index = process.expect(['The master password you provided is incorrect, would you like to retry?', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
+                if index == 0:
+                    process.sendline('No')
+                    display_notification('⚠️ Warning !', 'The master password you provided is incorrect, please retry.')
+                    new_process = pexpect.spawn('dcli reset')
+                    index = new_process.expect('Do you really want to delete all local data from this app?')
+                    new_process.sendline('Yes')
+                else:
+                    display_notification('✅ Sucess !', f'You\'re connected as {user_mail}.')
             except pexpect.exceptions.TIMEOUT:
                 display_notification('⌛ Timeout !', 'The connection was not established.')
-            except pexpect.exceptions.EOF:
-                display_notification('✅ Sucess !', f'Local data has been refreshed for your account {user_mail}.')
-
-process.terminate()

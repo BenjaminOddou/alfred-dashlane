@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 user_mail = os.environ['user_mail']
 incognito_mode = bool(os.environ['incognito_mode'])
 sound = os.environ['sound']
+cache_bool =  True if os.environ['cache_bool'] == '1' else False
 cache_folder = os.environ['alfred_workflow_cache'] #  ~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane
 
 # Notification builder

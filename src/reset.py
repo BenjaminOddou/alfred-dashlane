@@ -19,7 +19,7 @@ else:
             for filename in os.listdir(cache_folder):
                 file_path = os.path.join(cache_folder, filename)
                 try:
-                    if os.path.isfile(file_path):
+                    if os.path.isfile(file_path) and os.path.splitext(filename)[1] != '.app':
                         os.remove(file_path)
                 except Exception as e:
                     display_notification('🚨 Error !', f'{e}')
@@ -28,5 +28,3 @@ else:
             display_notification('🚨 Error !', 'Something went wrong.')
     except Exception as e:
         display_notification('🚨 Error !', f'{e}')
-
-process.terminate()
