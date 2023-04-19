@@ -13,10 +13,10 @@ process = pexpect.spawn(f'dcli {request.split("_")[1]} id={elem}')
 try:
     process.expect(pexpect.EOF, timeout=10)
     output = process.before.decode().strip()
+    f_output = re.sub(r'\x1b\[\d+m', '', output.replace('🔓 ', '').replace('🔢 ', '').strip())
     if request == '_otp':
-        f_output = re.sub(r'\x1b\[\d+m', '', output.replace('🔢', '').strip())
-        display_notification('📋 Copied !', f'{f_output}')
+        display_notification('📋 Copied !', f_output)
     elif request == '_password':
-        display_notification('📋 Copied !', output.replace('🔓 ', '').strip())
+        display_notification('📋 Copied !', f_output)
 except Exception as e:
     display_notification('🚨 Error !', f'{e}')
