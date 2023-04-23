@@ -60,11 +60,11 @@ You can edit these triggers (flagged with a `🕹️` symbol) in the user config
 
 1. `👤 Login` correspond to your address mail link to your Dashlane account. **It is required to start the workflow**.
 
-2. `🫥 Icognito mode` allows you to hide partially your login (mail address / user name). If `Yes 👍` is selected (by default) :
+2. `🫥 Icognito mode` allows you to hide partially your login (mail address / user name). If ticked :
 
 ![incognito_yes](public/incognito_yes.webp)
 
-if `No 👎` is selected :
+if unticked :
 
 ![incognito_no](public/incognito_no.webp)
 
