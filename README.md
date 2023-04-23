@@ -68,7 +68,7 @@ if `No 👎` is selected :
 
 ![incognito_no](public/incognito_no.webp)
 
-3. `🔥 Allow cache` enables the workflow to save a backbone (no confidentital data are stored) of you Dashlane vault as `JSON` files under the `alfred_workflow_cache` folder (`~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane`). This speeds up the response time.
+3. `🔥 Allow cache` enables the workflow to save a backbone (no confidentital data are stored) of your Dashlane vault as `JSON` files under the `alfred_workflow_cache` folder (`~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane`). This speeds up the response time.
 
 4. `🎷 Notification sound` allows you to personalize the sound of the workflow notification.
 

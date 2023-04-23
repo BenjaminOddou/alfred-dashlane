@@ -75,7 +75,7 @@ reset = {
     'subtitle': 'Erase all local stored data',
     'arg': 'reset',
     'icon': {
-        'path': 'icons/trash-ics.webp'
+        'path': 'icons/delete-ics.webp'
     },
 }
 get_otp = {
@@ -128,7 +128,7 @@ if output == '':
                         'arg': '_url\thttps://github.com/BenjaminOddou/alfred-dashlane/issues/new',
                         'quicklookurl': 'https://github.com/BenjaminOddou/alfred-dashlane/issues/new',
                         'icon': {
-                            'path': 'icons/error-ics.webp'
+                            'path': 'icons/info-ics.webp'
                         },
                     },
                     reset

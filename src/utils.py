@@ -4,8 +4,8 @@ from urllib.parse import urlparse
 
 # Env variables
 user_mail = os.environ['user_mail']
-incognito_mode = bool(os.environ['incognito_mode'])
 sound = os.environ['sound']
+incognito_mode =  True if os.environ['incognito_mode'] == '1' else False
 cache_bool =  True if os.environ['cache_bool'] == '1' else False
 cache_folder = os.environ['alfred_workflow_cache'] #  ~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane
 
