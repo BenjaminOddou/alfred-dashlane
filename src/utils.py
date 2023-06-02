@@ -1,6 +1,7 @@
 import os
 import json
 from urllib.parse import urlparse
+import ipaddress
 
 # Env variables
 user_mail = os.environ['user_mail']
@@ -13,11 +14,16 @@ cache_folder = os.environ['alfred_workflow_cache'] #  ~/Library/Caches/com.runni
 def display_notification(title, message):
     os.system(f'\'{os.getcwd()}/notificator\' --message \'{message}\' --title \'{title}\' --sound \'{sound}\'')
 
-# extract domain from url
+from urllib.parse import urlparse
+
 def extract_domain(url):
     parsed_url = urlparse(url)
-    domain = parsed_url.netloc.split('.')[-2] + '.' + parsed_url.netloc.split('.')[-1]
-    return domain
+    dot_count = parsed_url.netloc.count('.')
+    if 1 <= dot_count <= 2:
+        return '.'.join(parsed_url.netloc.split('.')[-2:])
+    else:
+        return parsed_url.netloc
+
 
 def get_error(ouput: str):
     e = ouput.split('ERROR: ')[1].strip()

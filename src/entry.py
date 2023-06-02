@@ -25,7 +25,7 @@ def build_json(item):
         title = v_title if v_title else domain
     else:
         domain = 'No URL'
-        title = 'No title'
+        title = v_title if v_title else 'No title'
     if domain != 'No URL' and os.path.isfile(os.path.join(cache_folder, f'{domain}.png')):
         iconPath = f'{cache_folder}/{domain}.png'
     else:
@@ -45,7 +45,7 @@ def build_json(item):
             },
             'alt': {
                 'subtitle': f'{domain} ǀ Press ⏎ to open url',
-                'arg': f'_url\t{v_url}',
+                'arg': f'_url\t{v_url}' if v_url != '' and domain != 'No URL' else '',
             },
         }
     }
