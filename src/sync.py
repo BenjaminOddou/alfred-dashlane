@@ -15,7 +15,7 @@ request = os.environ['req2']
 process = pexpect.spawn('dcli sync')
 if request == 'refresh':
     process.expect(pexpect.EOF, timeout=10)
-    if process.before.decode().strip() == 'Successfully synced':
+    if 'Successfully synced' in process.before.decode():
         for filename in os.listdir(cache_folder):
             file_path = os.path.join(cache_folder, filename)
             try:
@@ -61,10 +61,10 @@ elif request == 'login':
                 if index == 0:
                     process.sendline('No')
                     display_notification('⚠️ Warning !', 'The master password you provided is incorrect, please retry.')
-                    new_process = pexpect.spawn('dcli reset')
-                    index = new_process.expect('Do you really want to delete all local data from this app?')
+                    new_process = pexpect.spawn('dcli logout')
+                    index = new_process.expect('Do you really want to logout and delete all local data from this app?')
                     new_process.sendline('Yes')
-                else:
-                    display_notification('✅ Sucess !', f'You\'re connected as {user_mail}.')
+                elif index == 1:
+                    display_notification('✅ Sucess !', f'You are connected as {user_mail}.')
             except pexpect.exceptions.TIMEOUT:
                 display_notification('⌛ Timeout !', 'The connection was not established.')

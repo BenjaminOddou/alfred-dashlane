@@ -108,6 +108,12 @@ If you want to log out and / or remove all local data holds by the Dashlane CLI,
 
 ![confirm_delete](public/confirm_delete.webp)
 
+### Manage connected devices
+
+Remove access to devices connected to your vault. Press <kbd>⌘</kbd><kbd>↩︎</kbd> on a device to remove it. You have the possibility to remove all devices (including current device) and other devices (excluding current device).
+
+![devices](public/devices.webp)
+
 ### Get passwords and OTPs
 
 #### Password flow
@@ -116,9 +122,9 @@ If you want to log out and / or remove all local data holds by the Dashlane CLI,
 
 Search a password by typing its title (custom name or website link to the credentials). Don't forget to include a space between `pdash` and your `{query}`.
 
-1. Press ⏎ to copy the password. You should see the below notification popping.
-2. Press ⌘⏎ to copy the login (No Login means that you only register a password for this element).
-3. Press ⌥⏎ to open the url (No URL means that no website is link to this credentials).
+1. Press <kbd>↩︎</kbd> to copy the password. You should see the below notification popping.
+2. Press <kbd>⌘</kbd><kbd>↩︎</kbd> to copy the login (No Login means that you only register a password for this element).
+3. Press <kbd>⌥</kbd><kbd>↩︎</kbd> to open the url (No URL means that no website is link to this credentials).
 
 ![copy_pss_notif](public/copy_pss_notif.webp)
 
@@ -128,9 +134,9 @@ Search a password by typing its title (custom name or website link to the creden
 
 Search an OTP by typing its title (custom name or website link to the credentials). Don't forget to include a space between `odash` and your `{query}`.
 
-1. Press ⏎ to copy the OTP. You should see the below notification popping.
-2. Press ⌘⏎ to copy the login (No Login means that you only register a password for this element).
-3. Press ⌥⏎ to open the url (No URL means that no website is link to this credentials).
+1. Press <kbd>↩︎</kbd> to copy the OTP. You should see the below notification popping.
+2. Press <kbd>⌘</kbd><kbd>↩︎</kbd> to copy the login (No Login means that you only register a password for this element).
+3. Press <kbd>⌥</kbd><kbd>↩︎</kbd>  to open the url (No URL means that no website is link to this credentials).
 
 ![copy_otp_notif](public/copy_otp_notif.webp)
 

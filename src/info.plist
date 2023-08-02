@@ -19,6 +19,33 @@
 				<false/>
 			</dict>
 		</array>
+		<key>368005EB-8198-47F3-A531-14D7F2E21DD2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>1DB8C0D2-6DFF-4D17-AEFB-8EDC6BB6DBF6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F7B7A8C0-DEC7-41C9-9B62-20FE77BB761C</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</key>
 		<array>
 			<dict>
@@ -136,13 +163,25 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
+				<string>F799E284-9A65-4B3C-882F-5C7EF3A3B7F0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>6BB27A50-582A-431F-AE53-471388B8064E</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A0E91654-3C2C-4065-B98A-69F173E0A8CA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>275C22D2-5DD1-467E-A93A-802026B4DCA2</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -206,6 +245,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>368005EB-8198-47F3-A531-14D7F2E21DD2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
 		<array>
 			<dict>
@@ -224,6 +276,44 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F4AAC157-359E-4CCA-BA24-F21D8857A66C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F799E284-9A65-4B3C-882F-5C7EF3A3B7F0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F4AAC157-359E-4CCA-BA24-F21D8857A66C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -318,6 +408,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>python3 logout.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B66F84E0-C203-43CE-A959-A8A0A992E7CD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
@@ -344,34 +457,11 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>python3 reset.py "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B66F84E0-C203-43CE-A959-A8A0A992E7CD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{query}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -385,21 +475,21 @@
 					</dict>
 					<dict>
 						<key>inputstring</key>
-						<string>{query}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>reset</string>
+						<string>logout</string>
 						<key>outputlabel</key>
-						<string>reset</string>
+						<string>logout</string>
 						<key>uid</key>
 						<string>C12913A5-CC9B-4DC4-BB6B-BAB9262E5C3C</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
-						<string>{query}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -421,6 +511,67 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>B7A08AA9-96A0-4448-BA9C-0718F5885C65</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>rerun</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:req3}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>password</string>
+						<key>outputlabel</key>
+						<string>pss</string>
+						<key>uid</key>
+						<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:req3}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>otp</string>
+						<key>outputlabel</key>
+						<string>otp</string>
+						<key>uid</key>
+						<string>F7B7A8C0-DEC7-41C9-9B62-20FE77BB761C</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>368005EB-8198-47F3-A531-14D7F2E21DD2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -502,6 +653,25 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
+				<string>Input your 6 digits OTP code from your 2FA app or your mail</string>
+				<key>text</key>
+				<string>OTP Code</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7E73F4D6-419C-4149-B504-613946D57A23</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
 				<string>Input your Dashlane account master password</string>
 				<key>text</key>
 				<string>Master password</string>
@@ -519,25 +689,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>448025A5-DD1E-4138-AC92-051F92FAB526</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Input your 6 digits OTP code from your 2FA app or your mail</string>
-				<key>text</key>
-				<string>OTP Code</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7E73F4D6-419C-4149-B504-613946D57A23</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -692,11 +843,25 @@
 						<key>matchmode</key>
 						<integer>4</integer>
 						<key>matchstring</key>
-						<string>_otp|_password</string>
+						<string>_otp|_password|_device</string>
 						<key>outputlabel</key>
-						<string>elem</string>
+						<string>action</string>
 						<key>uid</key>
 						<string>6BB27A50-582A-431F-AE53-471388B8064E</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:req1}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>_rerun</string>
+						<key>outputlabel</key>
+						<string>rerun</string>
+						<key>uid</key>
+						<string>275C22D2-5DD1-467E-A93A-802026B4DCA2</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
@@ -708,6 +873,30 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Write 'yes' to confirm your choice.</string>
+				<key>text</key>
+				<string>Do you really want to delete these devices ?</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>usecustominputarg</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F4AAC157-359E-4CCA-BA24-F21D8857A66C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -740,7 +929,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>python3 elem.py</string>
+				<string>python3 action.py "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -754,6 +943,57 @@
 			<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:req1}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>_deviceconfirm</string>
+						<key>outputlabel</key>
+						<string>confirm</string>
+						<key>uid</key>
+						<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>F799E284-9A65-4B3C-882F-5C7EF3A3B7F0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>rerun</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>A0E91654-3C2C-4065-B98A-69F173E0A8CA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -828,131 +1068,166 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 		<key>1DB8C0D2-6DFF-4D17-AEFB-8EDC6BB6DBF6</key>
 		<dict>
 			<key>xpos</key>
-			<real>75</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>250</real>
 		</dict>
 		<key>23520073-8543-4032-95CE-527849242695</key>
 		<dict>
 			<key>xpos</key>
-			<real>770</real>
+			<real>930</real>
 			<key>ypos</key>
-			<real>775</real>
+			<real>905</real>
+		</dict>
+		<key>368005EB-8198-47F3-A531-14D7F2E21DD2</key>
+		<dict>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>215</real>
 		</dict>
 		<key>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</key>
 		<dict>
 			<key>xpos</key>
-			<real>950</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>445</real>
 		</dict>
 		<key>448025A5-DD1E-4138-AC92-051F92FAB526</key>
 		<dict>
 			<key>xpos</key>
-			<real>770</real>
+			<real>930</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>415</real>
 		</dict>
 		<key>625E1A1F-0491-49FD-844B-D2B068BF20A2</key>
 		<dict>
 			<key>xpos</key>
-			<real>650</real>
+			<real>810</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>495</real>
 		</dict>
 		<key>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</key>
 		<dict>
 			<key>xpos</key>
-			<real>75</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>125</real>
 		</dict>
 		<key>686D5E87-317D-429B-9D65-532AEAFD3816</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>770</real>
+			<real>1385</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>685</real>
 		</dict>
 		<key>7E73F4D6-419C-4149-B504-613946D57A23</key>
 		<dict>
 			<key>xpos</key>
-			<real>1025</real>
+			<real>1185</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>415</real>
 		</dict>
 		<key>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>770</real>
+			<real>930</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>295</real>
 		</dict>
 		<key>942C75AA-75A5-487E-99BF-CA1280B7F8DE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1225</real>
+			<real>1385</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>490</real>
+		</dict>
+		<key>A0E91654-3C2C-4065-B98A-69F173E0A8CA</key>
+		<dict>
+			<key>xpos</key>
+			<real>930</real>
+			<key>ypos</key>
+			<real>785</real>
 		</dict>
 		<key>A4DC7595-08A1-4983-97C5-2FAA33AFD9B7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>770</real>
+			<real>930</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>50</real>
 		</dict>
 		<key>B66F84E0-C203-43CE-A959-A8A0A992E7CD</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>770</real>
+			<real>930</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>175</real>
 		</dict>
 		<key>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</key>
 		<dict>
 			<key>xpos</key>
-			<real>515</real>
+			<real>675</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>565</real>
 		</dict>
 		<key>B7A08AA9-96A0-4448-BA9C-0718F5885C65</key>
 		<dict>
 			<key>xpos</key>
-			<real>335</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>180</real>
+		</dict>
+		<key>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>195</real>
 		</dict>
 		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
 		<dict>
 			<key>xpos</key>
-			<real>540</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>175</real>
 		</dict>
 		<key>EA9D3618-6654-4C2F-A482-BBDD3D3B45F1</key>
 		<dict>
 			<key>xpos</key>
-			<real>450</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>620</real>
+		</dict>
+		<key>F4AAC157-359E-4CCA-BA24-F21D8857A66C</key>
+		<dict>
+			<key>xpos</key>
+			<real>1185</real>
+			<key>ypos</key>
+			<real>610</real>
 		</dict>
 		<key>F783814E-D8C0-49CF-966F-B3A42F629853</key>
 		<dict>
 			<key>xpos</key>
-			<real>770</real>
+			<real>930</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>560</real>
+		</dict>
+		<key>F799E284-9A65-4B3C-882F-5C7EF3A3B7F0</key>
+		<dict>
+			<key>xpos</key>
+			<real>930</real>
+			<key>ypos</key>
+			<real>690</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1142,7 +1417,7 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.6</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenjaminOddou/alfred-dashlane</string>
 </dict>

@@ -1,7 +1,7 @@
 import os
 import json
 from urllib.parse import urlparse
-import ipaddress
+import datetime
 
 # Env variables
 user_mail = os.environ['user_mail']
@@ -24,7 +24,13 @@ def extract_domain(url):
     else:
         return parsed_url.netloc
 
-
+def parse_time(unix_timestamp: int):
+    try:
+        date = datetime.datetime.fromtimestamp(unix_timestamp).strftime('%d-%m-%Y %H:%M:%S')
+        return date
+    except:
+        return None
+    
 def get_error(ouput: str):
     e = ouput.split('ERROR: ')[1].strip()
     try:

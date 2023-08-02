@@ -5,6 +5,7 @@ import logging
 import os
 import re
 import socket
+import sys
 import typing
 import warnings
 from http.client import HTTPConnection as _HTTPConnection
@@ -75,6 +76,8 @@ port_by_scheme = {"http": 80, "https": 443}
 RECENT_DATE = datetime.date(2022, 1, 1)
 
 _CONTAINS_CONTROL_CHAR_RE = re.compile(r"[^-!#$%&'*+.^_`|~0-9a-zA-Z]")
+
+_HAS_SYS_AUDIT = hasattr(sys, "audit")
 
 
 class HTTPConnection(_HTTPConnection):
@@ -215,6 +218,10 @@ class HTTPConnection(_HTTPConnection):
             raise NewConnectionError(
                 self, f"Failed to establish a new connection: {e}"
             ) from e
+
+        # Audit hooks are only available in Python 3.8+
+        if _HAS_SYS_AUDIT:
+            sys.audit("http.client.connect", self, self.host, self.port)
 
         return sock
 
@@ -741,6 +748,8 @@ def _ssl_wrap_socket_and_match_hostname(
         # `ssl` can't verify fingerprints or alternate hostnames
         assert_fingerprint
         or assert_hostname
+        # assert_hostname can be set to False to disable hostname checking
+        or assert_hostname is False
         # We still support OpenSSL 1.0.2, which prevents us from verifying
         # hostnames easily: https://github.com/pyca/pyopenssl/pull/933
         or ssl_.IS_PYOPENSSL
