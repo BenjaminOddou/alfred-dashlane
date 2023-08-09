@@ -17,7 +17,7 @@ special = os.getenv('req4')
 
 # Function that build json items displayed in alfred search bar
 def build_vault(item):
-    v_title, v_url, v_email, v_login, v_id = item.get('title'), item.get('url', ''), item.get('email'), item.get('login'), item.get('id')
+    v_title, v_url, v_email, v_login, v_id = item.get('title'), item.get('url', ''), item.get('email'), item.get('login'), item.get('id')[1:-1]
     c_login = v_email if v_email else (v_login if v_login else 'No login')
     if incognito_mode:
         login = v_email[:2] + '•' * 4 + v_email[v_email.index('@')-1:] if v_email else (v_login[:2] + '•' * 4 + v_login[-1] if v_login else 'No login')
