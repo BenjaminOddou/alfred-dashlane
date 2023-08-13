@@ -1,5 +1,4 @@
 import os
-import re
 import sys
 sys.path.insert(0, './lib')
 from lib import pexpect
@@ -11,23 +10,20 @@ confirm_value = sys.argv[1]
 request, elem, extra = os.getenv('req1'), os.getenv('req2'), os.getenv('req3')
 
 if request in ['_password', '_otp']:
-    process = pexpect.spawn(f'dcli {request.split("_")[1]} id={elem}')
+    convert = {'_password': {'query' : 'password', 'name': 'Password'}, '_otp': {'query': 'otpSecret?otp', 'name': 'OTP'}}
+    process = pexpect.spawn(f'dcli read "dl://{elem}/{convert[request]["query"]}"')
     try:
         process.expect(pexpect.EOF, timeout=10)
         output = process.before.decode().strip()
-        f_output = re.sub(r'\x1b\[\d+m', '', output.replace('🔓 ', '').replace('🔢 ', '').strip())
-        if request == '_otp':
-            display_notification('📋 Copied !', f_output)
-        elif request == '_password':
-            display_notification('📋 Copied !', f_output)
+        print(output, end='')
+        display_notification('📋 Copied !', f'{convert[request]["name"]} for "{extra}" copied to clipboard')
     except Exception as e:
         display_notification('🚨 Error !', f'{e}')
 elif '_device' in request:
     if request == '_deviceconfirm' and confirm_value.lower() != 'yes':
-        display_notification('⚠️ Warning !', 'Action canceled by the user.')
+        display_notification('⚠️ Warning !', 'Action canceled by the user')
         exit()
     process = pexpect.spawn(f'dcli devices remove {elem}')
-    print(f'dcli devices remove {elem}')
     try:
         if elem == '--all':
             index = process.expect(['Do you really want to logout and delete all local data from this app?'])

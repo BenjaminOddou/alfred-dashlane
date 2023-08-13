@@ -37,7 +37,7 @@ def build_vault(item):
     json_obj = {
         'title': title,
         'subtitle': f'{login} ǀ Press ⏎ to copy {request}',
-        'arg': f'_{request}\t{v_id}',
+        'arg': f'_{request}\t{v_id}\t{title}',
         'icon': {
             'path': iconPath,
         },

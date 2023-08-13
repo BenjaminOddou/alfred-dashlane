@@ -18,7 +18,7 @@ Welcome to the Alfred Dashlane repository: **An Alfred Workflow** ✨
 
 This workflow uses the [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) provided by the [Dashlane team](https://github.com/Dashlane).
 
-This workflow doesn't hold or register any private data. No sensible data (password, OTP) are exposed directly to Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/crypto/README.md).
+This workflow doesn't hold or register any private data. No sensible data (password, OTP) are exposed directly to Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/modules/crypto/README.md).
 
 This workflow doesn't allow to update or upload items to the Dashlane vault. You can't connect multiple accounts neither. This is a limitation of the Dashlane CLI for now.
 
@@ -126,8 +126,6 @@ Search a password by typing its title (custom name or website link to the creden
 2. Press <kbd>⌘</kbd><kbd>↩︎</kbd> to copy the login (No Login means that you only register a password for this element).
 3. Press <kbd>⌥</kbd><kbd>↩︎</kbd> to open the url (No URL means that no website is link to this credentials).
 
-![copy_pss_notif](public/copy_pss_notif.webp)
-
 #### OTP flow
 
 > Use `odash` keyword to launch this flow.
@@ -137,8 +135,6 @@ Search an OTP by typing its title (custom name or website link to the credential
 1. Press <kbd>↩︎</kbd> to copy the OTP. You should see the below notification popping.
 2. Press <kbd>⌘</kbd><kbd>↩︎</kbd> to copy the login (No Login means that you only register a password for this element).
 3. Press <kbd>⌥</kbd><kbd>↩︎</kbd>  to open the url (No URL means that no website is link to this credentials).
-
-![copy_otp_notif](public/copy_otp_notif.webp)
 
 ## ⚖️ License
 

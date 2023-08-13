@@ -113,7 +113,18 @@
 			</dict>
 		</array>
 		<key>686D5E87-317D-429B-9D65-532AEAFD3816</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7E73F4D6-419C-4149-B504-613946D57A23</key>
 		<array>
 			<dict>
@@ -947,6 +958,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -1031,7 +1061,7 @@
 
 This workflow uses the [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) provided by the [Dashlane team](https://github.com/Dashlane). However, note that the **Dashlane, Inc. does not provide customer support on this project**.
 
-This workflow doesn't hold or register any private data. However, by design it exposes Dashlane data to the Alfred app which allows to manipulate it. It's a different approach compare to the offical [1Password integration](https://www.alfredapp.com/help/features/1password/) from Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/crypto/README.md).
+This workflow doesn't hold or register any private data. However, by design it exposes Dashlane data to the Alfred app which allows to manipulate it. It's a different approach compare to the offical [1Password integration](https://www.alfredapp.com/help/features/1password/) from Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/modules/crypto/README.md).
 
 This workflow doesn't allow to update or upload items to the Dashlane vault. You can't connect multiple accounts neither. This is a limitation of the Dashlane CLI for now.
 
@@ -1186,6 +1216,13 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 			<real>480</real>
 			<key>ypos</key>
 			<real>180</real>
+		</dict>
+		<key>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</key>
+		<dict>
+			<key>xpos</key>
+			<real>1570</real>
+			<key>ypos</key>
+			<real>685</real>
 		</dict>
 		<key>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</key>
 		<dict>
@@ -1416,8 +1453,10 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 			<string>sound</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.4.1</string>
+	<string>1.4.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenjaminOddou/alfred-dashlane</string>
 </dict>
