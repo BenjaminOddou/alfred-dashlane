@@ -116,25 +116,14 @@ Remove access to devices connected to your vault. Press <kbd>⌘</kbd><kbd>↩�
 
 ### Get passwords and OTPs
 
-#### Password flow
+> Use `pdash` / `odash` keyword to launch these flows.
 
-> Use `pdash` keyword to launch this flow.
-
-Search a password by typing its title (custom name or website link to the credentials). Don't forget to include a space between `pdash` and your `{query}`.
+Search a password / OTP by typing its title (custom name or website link to the credentials).
 
 1. Press <kbd>↩︎</kbd> to copy the password. You should see the below notification popping.
 2. Press <kbd>⌘</kbd><kbd>↩︎</kbd> to copy the login (No Login means that you only register a password for this element).
 3. Press <kbd>⌥</kbd><kbd>↩︎</kbd> to open the url (No URL means that no website is link to this credentials).
-
-#### OTP flow
-
-> Use `odash` keyword to launch this flow.
-
-Search an OTP by typing its title (custom name or website link to the credentials). Don't forget to include a space between `odash` and your `{query}`.
-
-1. Press <kbd>↩︎</kbd> to copy the OTP. You should see the below notification popping.
-2. Press <kbd>⌘</kbd><kbd>↩︎</kbd> to copy the login (No Login means that you only register a password for this element).
-3. Press <kbd>⌥</kbd><kbd>↩︎</kbd>  to open the url (No URL means that no website is link to this credentials).
+4. Press <kbd>⇧</kbd><kbd>↩︎</kbd> to inject credentials to frontmost application (it will print login + password separated by a <kbd>⇥</kbd>)
 
 ## ⚖️ License
 
