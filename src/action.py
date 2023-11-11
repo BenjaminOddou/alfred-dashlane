@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 sys.path.insert(0, './lib')
 from lib import pexpect
 from utils import display_notification, cache_folder
@@ -9,14 +10,27 @@ confirm_value = sys.argv[1]
 # Get the request from the user choice
 request, elem, extra = os.getenv('req1'), os.getenv('req2'), os.getenv('req3')
 
-if request in ['_password', '_otp']:
-    convert = {'_password': {'query' : 'password', 'name': 'Password'}, '_otp': {'query': 'otpSecret?otp', 'name': 'OTP'}}
+if request in ['_credentials', '_password', '_otp']:
+    convert = {'_credentials': {'query' : 'password'}, '_password': {'query' : 'password', 'name': 'Password'}, '_otp': {'query': 'otpSecret?otp+expiry', 'name': 'OTP'}}
     process = pexpect.spawn(f'dcli read "dl://{elem}/{convert[request]["query"]}"')
     try:
         process.expect(pexpect.EOF, timeout=10)
         output = process.before.decode().strip()
-        print(output, end='')
-        display_notification('📋 Copied !', f'{convert[request]["name"]} for "{extra}" copied to clipboard')
+        if request == '_credentials':
+            script = f'''
+                tell application "System Events"
+                    keystroke "{extra}"
+                    key code 48 -- Tab key
+                    keystroke "{output}"
+                end tell
+            '''
+            subprocess.run(['osascript', '-e', script])
+        else:
+            more = ''
+            if request == '_otp':
+                more = f' (expires in {output.split(" ")[1]} seconds)'
+            print(output.split(' ')[0], end='')
+            display_notification('📋 Copied !', f'{convert[request]["name"]} for "{extra}" copied to clipboard{more}')
     except Exception as e:
         display_notification('🚨 Error !', f'{e}')
 elif '_device' in request:

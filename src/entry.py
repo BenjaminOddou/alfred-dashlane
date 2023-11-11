@@ -50,6 +50,10 @@ def build_vault(item):
                 'subtitle': f'{domain} ǀ Press ⏎ to open url',
                 'arg': f'_url\t{v_url}' if v_url != '' and domain != 'No URL' else '',
             },
+            'shift': {
+                'subtitle': f'{login} ǀ Press ⏎ to inject credentials to frontmost app',
+                'arg': f'_credentials\t{v_id}\t{c_login}',
+            },
         }
     }
     return json_obj
