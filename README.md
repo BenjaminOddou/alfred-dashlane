@@ -29,21 +29,13 @@ This workflow doesn't allow to update or upload items to the Dashlane vault. You
 
 ## 🧰 Setup the workflow
 
-Install Python 3 or above. Check your version with :
+1. Install Python 3 or above. Check your version with :
 
 ```shell
 python --version
 ```
 
-Install the Dashlane CLI binary using one of the two methods below.
-
-1. Using the following command in your Terminal :
-
-```shell
-curl -sSL https://raw.githubusercontent.com/BenjaminOddou/alfred-dashlane/main/install.sh | bash
-```
-
-2. Manual installation instructions are available [here](https://github.com/Dashlane/dashlane-cli#how-to-install-manually)
+2. Install the Dashlane CLI binary using [this guide](https://dashlane.github.io/dashlane-cli/install).
 
 ## 🧙‍♂️ Invoke the workflow
 

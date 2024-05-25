@@ -125,67 +125,68 @@ devices = {
 }
 
 if level == 0:
-    output = ''
-    if not os.path.exists(f'{cache_folder}'):
-        os.mkdir(f'{cache_folder}')
-    cache_data = os.path.join(cache_folder, f'{request}_{user_mail}.json')
-    if cache_bool and os.path.isfile(cache_data) and os.path.getsize(cache_data) != 0:
-        with open(cache_data, 'r') as file:
-            output = json.load(file)
-        if output['info']['incognito_mode'] != incognito_mode:
-            output = ''
-    if output == '':
-        try:
-            process = pexpect.spawn('dcli password -o json')
-            try:
-                index = process.expect(['Please enter your email address:', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
-                output = process.before.decode().strip()
-                if index == 0:
-                    items[0]['arg'] = '_sync\tlogin'
-                    items += [reset, get_otp]
-                    output = {'items': items}
-                else:
-                    items[0]['arg'] = '_sync\trefresh'
-                    items += [reset, download_favicons, devices]
-                    process2 = pexpect.spawn('dcli password -o json')
-                    process2.expect(pexpect.EOF, timeout=10)
-                    resp = process2.before.decode().strip()
-                    items.extend([build_vault(vault_credential) for vault_credential in json.loads(resp) if not (request == 'otp' and not vault_credential.get('otpSecret'))])
-                    output = { 'info': { 'incognito_mode': incognito_mode }, 'items': items }
-                    if os.path.isfile(cache_data):                    
-                        os.remove(cache_data)
-                    if cache_bool:
-                        with open(cache_data, 'w') as file:
-                            json.dump(output, file, indent=4)
-            except Exception as e:
-                output = {
-                    'items': [
-                        {
-                            'title': 'Something went wrong !',
-                            'subtitle': f'{e} ǀ Press ⏎ to create an issue in GitHub',
-                            'arg': '_url\thttps://github.com/BenjaminOddou/alfred-dashlane/issues/new',
-                            'quicklookurl': 'https://github.com/BenjaminOddou/alfred-dashlane/issues/new',
-                            'icon': {
-                                'path': 'icons/info-ics.webp'
+    try:
+        dcli_version = pexpect.spawn('dcli --version')
+        output = ''
+        if not os.path.exists(f'{cache_folder}'):
+            os.mkdir(f'{cache_folder}')
+        cache_data = os.path.join(cache_folder, f'{request}_{user_mail}.json')
+        if cache_bool and os.path.isfile(cache_data) and os.path.getsize(cache_data) != 0:
+            with open(cache_data, 'r') as file:
+                output = json.load(file)
+            if output['info']['incognito_mode'] != incognito_mode:
+                output = ''
+        if output == '':
+                process = pexpect.spawn('dcli password -o json')
+                try:
+                    index = process.expect(['Please enter your email address:', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
+                    output = process.before.decode().strip()
+                    if index == 0:
+                        items[0]['arg'] = '_sync\tlogin'
+                        items += [reset, get_otp]
+                        output = {'items': items}
+                    else:
+                        items[0]['arg'] = '_sync\trefresh'
+                        items += [reset, download_favicons, devices]
+                        process2 = pexpect.spawn('dcli password -o json')
+                        process2.expect(pexpect.EOF, timeout=10)
+                        resp = process2.before.decode().strip()
+                        items.extend([build_vault(vault_credential) for vault_credential in json.loads(resp) if not (request == 'otp' and not vault_credential.get('otpSecret'))])
+                        output = { 'info': { 'incognito_mode': incognito_mode }, 'items': items }
+                        if os.path.isfile(cache_data):                    
+                            os.remove(cache_data)
+                        if cache_bool:
+                            with open(cache_data, 'w') as file:
+                                json.dump(output, file, indent=4)
+                except Exception as e:
+                    output = {
+                        'items': [
+                            {
+                                'title': 'Something went wrong !',
+                                'subtitle': f'{e} ǀ Press ⏎ to create an issue in GitHub',
+                                'arg': '_url\thttps://github.com/BenjaminOddou/alfred-dashlane/issues/new',
+                                'quicklookurl': 'https://github.com/BenjaminOddou/alfred-dashlane/issues/new',
+                                'icon': {
+                                    'path': 'icons/info-ics.webp'
+                                },
                             },
-                        },
-                        reset
-                    ]
-                }
-        except Exception as e:
-            output = {
-                'items': [
-                    {
-                        'title': 'Dashlane CLI is not detected',
-                        'subtitle': 'Press ⏎ to check the documentation on GitHub',
-                        'arg': '_url\thttps://github.com/BenjaminOddou/alfred-dashlane',
-                        'quicklookurl': 'https://github.com/BenjaminOddou/alfred-dashlane',
-                        'icon': {
-                            'path': 'icons/info-ics.webp'
-                        },
+                            reset
+                        ]
                     }
-                ]
-            }
+    except Exception as e:
+        output = {
+            'items': [
+                {
+                    'title': 'Dashlane CLI is not detected',
+                    'subtitle': 'Press ⏎ to check the documentation on GitHub',
+                    'arg': '_url\thttps://github.com/BenjaminOddou/alfred-dashlane',
+                    'quicklookurl': 'https://github.com/BenjaminOddou/alfred-dashlane',
+                    'icon': {
+                        'path': 'icons/info-ics.webp'
+                    },
+                }
+            ]
+        }
 else:
     items = [
         {
