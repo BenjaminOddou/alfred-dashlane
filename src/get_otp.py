@@ -10,9 +10,9 @@ process.sendline(user_mail)
 
 # Wait for the output message
 try:
-    index = process.expect(['Please enter the code you received by email:', 'Please enter your OTP code:'], timeout=10)
+    index = process.expect(['Please enter the code you received by email:', 'Please enter your OTP code:'], timeout=5)
     if index == 0:
-        display_notification('✅ Success !', f'A mail has been sent to {user_mail}.')
+        print('ok', end='')
     elif index == 1:
         display_notification('⚠️ Warning !', 'Your account is already linked to a 2FA app.')
 except pexpect.EOF:

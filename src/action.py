@@ -14,7 +14,7 @@ if request in ['_credentials', '_password', '_otp']:
     convert = {'_credentials': {'query' : 'password'}, '_password': {'query' : 'password', 'name': 'Password'}, '_otp': {'query': 'otpSecret?otp+expiry', 'name': 'OTP'}}
     process = pexpect.spawn(f'dcli read "dl://{elem}/{convert[request]["query"]}"')
     try:
-        process.expect(pexpect.EOF, timeout=10)
+        process.expect(pexpect.EOF, timeout=5)
         output = process.before.decode().strip()
         if request == '_credentials':
             script = f'''
@@ -43,17 +43,17 @@ elif '_device' in request:
             index = process.expect(['Do you really want to logout and delete all local data from this app?'])
             if index == 0:
                 process.sendline('Yes')
-                process.expect(pexpect.EOF, timeout=10)
+                process.expect(pexpect.EOF, timeout=5)
                 for filename in os.listdir(cache_folder):
                     file_path = os.path.join(cache_folder, filename)
                     if os.path.isfile(file_path) and os.path.splitext(filename)[1] == '.json':
                         os.remove(file_path)
                 display_notification('✅ Success !', 'All devices were removed')
         elif elem == '--others':
-            process.expect(pexpect.EOF, timeout=10)
+            process.expect(pexpect.EOF, timeout=5)
             display_notification('✅ Success !', 'All devices except the current one were removed')
         else:
-            process.expect(pexpect.EOF, timeout=10)
+            process.expect(pexpect.EOF, timeout=5)
             display_notification('✅ Success !', f'The device {extra} was removed')
     except Exception as e:
         display_notification('🚨 Error !', f'{e}')

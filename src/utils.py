@@ -9,6 +9,7 @@ sound = os.environ['sound']
 incognito_mode =  True if os.environ['incognito_mode'] == '1' else False
 cache_bool =  True if os.environ['cache_bool'] == '1' else False
 cache_folder = os.environ['alfred_workflow_cache'] #  ~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane
+workflow_version = os.environ['alfred_workflow_version']
 
 # Notification builder
 def display_notification(title, message):

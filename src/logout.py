@@ -12,10 +12,10 @@ if confirm_value.lower() != 'yes':
 else:
     process = pexpect.spawn('dcli logout')
     try:
-        index = process.expect(['Do you really want to logout and delete all local data from this app?', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
+        index = process.expect(['Do you really want to logout and delete all local data from this app?', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
         if index == 0:
             process.sendline('Yes')
-            process.expect(pexpect.EOF, timeout=10)
+            process.expect(pexpect.EOF, timeout=5)
             for filename in os.listdir(cache_folder):
                 file_path = os.path.join(cache_folder, filename)
                 try:

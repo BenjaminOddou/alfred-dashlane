@@ -14,18 +14,18 @@ request = os.environ['req2']
 # start CLI process
 process = pexpect.spawn('dcli sync')
 if request == 'refresh':
-    process.expect(pexpect.EOF, timeout=10)
+    for filename in os.listdir(cache_folder):
+        file_path = os.path.join(cache_folder, filename)
+        try:
+            if os.path.isfile(file_path) and os.path.splitext(filename)[1] == '.json':
+                os.remove(file_path)
+        except Exception as e:
+            display_notification('🚨 Error !', f'{e}')
+    process.expect([pexpect.EOF, pexpect.TIMEOUT], timeout=5)
     if 'Successfully synced' in process.before.decode():
-        for filename in os.listdir(cache_folder):
-            file_path = os.path.join(cache_folder, filename)
-            try:
-                if os.path.isfile(file_path) and os.path.splitext(filename)[1] == '.json':
-                    os.remove(file_path)
-            except Exception as e:
-                display_notification('🚨 Error !', f'{e}')
         display_notification('✅ Sucess !', f'Local data has been refreshed for your account {user_mail}.')
     else:
-        get_error(process.before.decode())
+        get_error(f'ERROR: {process.before.decode()}')
 
 elif request == 'login':
     # Get the user password from the user
@@ -38,6 +38,7 @@ elif request == 'login':
     # List all prompts
     expect_prompts = [
         'Please enter your email address:', 
+        'What second factor method would you like to use?',
         ['Please enter the code you received by email:', 'Please enter your OTP code:'], 
         'Please enter your master password:'
         ]
@@ -45,19 +46,39 @@ elif request == 'login':
     for prompt in expect_prompts:
         try:
             process.expect(prompt)
-        except pexpect.EOF:
-            get_error(process.before.decode())
-            break
+        except:
+            if '?' in prompt:
+                continue
+            else:
+                get_error(f'ERROR: {process.before.decode()}')
+                break
 
         # enter the appropriate input for each prompt
         if prompt == 'Please enter your email address:':
             process.sendline(user_mail)
+        elif prompt == 'What second factor method would you like to use?':
+            process.expect('Totp', timeout=5)
+            options = process.before.decode().splitlines()
+            totp_index = len(options)
+            arrow_index = None
+            for i, option in enumerate(options, start=1):
+                if "❯" in option:
+                    arrow_index = i
+                    break
+            arrow_down = totp_index - arrow_index
+            if arrow_down >= 0:
+                for _ in range(arrow_down):
+                    process.sendline('\x1b[B')  # Send down arrow key
+                process.sendline('\r')
+            else:
+                display_notification('🚨 Error !', 'Totp option is not found.')
+                exit()
         elif prompt == ['Please enter the code you received by email:', 'Please enter your OTP code:']:
             process.sendline(otp_code)
         elif prompt == 'Please enter your master password:':
             process.sendline(user_password)
             try:
-                index = process.expect(['The master password you provided is incorrect, would you like to retry?', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
+                index = process.expect(['The master password you provided is incorrect, would you like to retry?', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
                 if index == 0:
                     process.sendline('No')
                     display_notification('⚠️ Warning !', 'The master password you provided is incorrect, please retry.')

@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, './lib')
 import json
 from lib import pexpect
-from utils import cache_folder, incognito_mode, extract_domain, cache_bool, user_mail, parse_time
+from utils import cache_folder, incognito_mode, extract_domain, cache_bool, user_mail, parse_time, workflow_version
 
 # Get the query from the command line arguments
 query = sys.argv[1]
@@ -83,7 +83,7 @@ def build_devices(item):
 # Define common objects
 items = [
     {
-        'title': 'Sync your Dashlane account',
+        'title': 'Sync',
         'subtitle': 'Manually sync your account',
         'arg': '',
         'icon': {
@@ -97,6 +97,22 @@ download_favicons = {
     'arg': 'icons',
     'icon': {
         'path': 'icons/download-ics.webp'
+    },
+}
+lock = {
+    'title': 'Lock',
+    'subtitle': 'Lock your account',
+    'arg': f'_lock\tlock',
+    'icon': {
+        'path': 'icons/lock-ics.webp'
+    },
+}
+unlock = {
+    'title': 'Your account is locked',
+    'subtitle': 'Press ⏎ to unlock your account',
+    'arg': f'_lock\tunlock\t{request}',
+    'icon': {
+        'path': 'icons/lock-ics.webp'
     },
 }
 reset = {
@@ -126,7 +142,7 @@ devices = {
 
 if level == 0:
     try:
-        dcli_version = pexpect.spawn('dcli --version')
+        pexpect.spawn('dcli --version')
         output = ''
         if not os.path.exists(f'{cache_folder}'):
             os.mkdir(f'{cache_folder}')
@@ -134,30 +150,32 @@ if level == 0:
         if cache_bool and os.path.isfile(cache_data) and os.path.getsize(cache_data) != 0:
             with open(cache_data, 'r') as file:
                 output = json.load(file)
-            if output['info']['incognito_mode'] != incognito_mode:
+            if output.get('info').get('incognito_mode') != incognito_mode or output.get('info').get('workflow_version') != workflow_version or output.get('info').get('lock') == True:
                 output = ''
         if output == '':
                 process = pexpect.spawn('dcli password -o json')
                 try:
-                    index = process.expect(['Please enter your email address:', pexpect.EOF, pexpect.TIMEOUT], timeout=10)
+                    index = process.expect(['Please enter your email address:', 'Please enter your master password:', pexpect.EOF, pexpect.TIMEOUT], timeout=5)
                     output = process.before.decode().strip()
                     if index == 0:
                         items[0]['arg'] = '_sync\tlogin'
                         items += [reset, get_otp]
                         output = {'items': items}
+                    elif index == 1:
+                        output = {'items': [unlock]}
                     else:
                         items[0]['arg'] = '_sync\trefresh'
-                        items += [reset, download_favicons, devices]
+                        items += [lock, reset, download_favicons, devices]
                         process2 = pexpect.spawn('dcli password -o json')
-                        process2.expect(pexpect.EOF, timeout=10)
+                        process2.expect(pexpect.EOF, timeout=5)
                         resp = process2.before.decode().strip()
                         items.extend([build_vault(vault_credential) for vault_credential in json.loads(resp) if not (request == 'otp' and not vault_credential.get('otpSecret'))])
-                        output = { 'info': { 'incognito_mode': incognito_mode }, 'items': items }
+                        output = { 'info': { 'incognito_mode': incognito_mode, 'workflow_version': workflow_version, 'lock': False }, 'items': items }
                         if os.path.isfile(cache_data):                    
                             os.remove(cache_data)
                         if cache_bool:
                             with open(cache_data, 'w') as file:
-                                json.dump(output, file, indent=4)
+                                json.dump(output, file, ensure_ascii=False, indent=4)
                 except Exception as e:
                     output = {
                         'items': [
@@ -218,7 +236,7 @@ else:
             }
         ]
         devices = pexpect.spawn('dcli devices list --json')
-        devices.expect(pexpect.EOF, timeout=10)
+        devices.expect(pexpect.EOF, timeout=5)
         resp = devices.before.decode().strip()
         items.extend([build_devices(device) for device in json.loads(resp)])
     output = {'items': items}
