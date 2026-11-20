@@ -19,19 +19,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>24749D95-7709-4505-BEA2-D471CCBD3B14</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5D04F731-8631-46BB-A418-8CBDCE1E7303</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>368005EB-8198-47F3-A531-14D7F2E21DD2</key>
 		<array>
 			<dict>
@@ -59,101 +46,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E59F2351-36DF-454E-B793-26C82926F717</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>448025A5-DD1E-4138-AC92-051F92FAB526</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>59634A8D-9E51-4587-A2E6-823656699E1A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>24749D95-7709-4505-BEA2-D471CCBD3B14</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>A77C652C-69A6-4DB4-BB4B-725617E94E7E</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>448025A5-DD1E-4138-AC92-051F92FAB526</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>6E4EF1C3-5AD4-4DEA-9358-F84D0ED6F45C</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5D04F731-8631-46BB-A418-8CBDCE1E7303</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F51246CE-B885-4BC0-B0B7-AF4040FEAD0E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>6E4EF1C3-5AD4-4DEA-9358-F84D0ED6F45C</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>625E1A1F-0491-49FD-844B-D2B068BF20A2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>448025A5-DD1E-4138-AC92-051F92FAB526</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>A77C652C-69A6-4DB4-BB4B-725617E94E7E</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>6E4EF1C3-5AD4-4DEA-9358-F84D0ED6F45C</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</key>
 		<array>
 			<dict>
@@ -171,7 +63,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</string>
+				<string>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -180,82 +72,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7E73F4D6-419C-4149-B504-613946D57A23</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>98BE7B3A-4EAE-4796-A21B-9356723F796D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>942C75AA-75A5-487E-99BF-CA1280B7F8DE</key>
-		<array/>
-		<key>98BE7B3A-4EAE-4796-A21B-9356723F796D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D782E2E9-BDDD-4762-8931-A50EAC1914BB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A4DC7595-08A1-4983-97C5-2FAA33AFD9B7</key>
-		<array/>
-		<key>B66F84E0-C203-43CE-A959-A8A0A992E7CD</key>
-		<array/>
 		<key>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>59634A8D-9E51-4587-A2E6-823656699E1A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>1C287F1A-31CA-4DDF-90FE-0545AF859BDA</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>625E1A1F-0491-49FD-844B-D2B068BF20A2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>D09EB5A2-904B-49CB-9F9D-5D8F330FDB8A</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>F783814E-D8C0-49CF-966F-B3A42F629853</string>
+				<string>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -267,19 +88,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F799E284-9A65-4B3C-882F-5C7EF3A3B7F0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>6BB27A50-582A-431F-AE53-471388B8064E</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>A0E91654-3C2C-4065-B98A-69F173E0A8CA</string>
+				<string>A186397B-2EC8-49B8-A085-8A14EB08F9CB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -289,31 +98,9 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>23520073-8543-4032-95CE-527849242695</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>B7A08AA9-96A0-4448-BA9C-0718F5885C65</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A4DC7595-08A1-4983-97C5-2FAA33AFD9B7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>23D84C21-08CC-4C30-8279-B1010C978854</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</string>
@@ -328,19 +115,19 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</string>
+				<string>F4AAC157-359E-4CCA-BA24-F21D8857A66C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
-				<string>3791EF51-120B-4C00-92F3-253418407B81</string>
+				<string>6BB27A50-582A-431F-AE53-471388B8064E</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>EA9D3618-6654-4C2F-A482-BBDD3D3B45F1</string>
+				<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -362,58 +149,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E59F2351-36DF-454E-B793-26C82926F717</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>24749D95-7709-4505-BEA2-D471CCBD3B14</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>7E73F4D6-419C-4149-B504-613946D57A23</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B66F84E0-C203-43CE-A959-A8A0A992E7CD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EA9D3618-6654-4C2F-A482-BBDD3D3B45F1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F4AAC157-359E-4CCA-BA24-F21D8857A66C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -426,33 +162,8 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F51246CE-B885-4BC0-B0B7-AF4040FEAD0E</key>
+		<key>F4AAC157-359E-4CCA-BA24-F21D8857A66C</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A186397B-2EC8-49B8-A085-8A14EB08F9CB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F799E284-9A65-4B3C-882F-5C7EF3A3B7F0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F4AAC157-359E-4CCA-BA24-F21D8857A66C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
@@ -478,187 +189,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python3 get_icons.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A4DC7595-08A1-4983-97C5-2FAA33AFD9B7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>{var:trigger1}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Connecting...</string>
-				<key>script</key>
-				<string>python3 entry.py "$1" "password"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>🔓 Search and copy your dashlane passwords</string>
-				<key>title</key>
-				<string>Dashlane Passwords</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>python3 logout.py "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B66F84E0-C203-43CE-A959-A8A0A992E7CD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Write 'yes' to confirm your choice. You'll have to reconnect to your account after.</string>
-				<key>text</key>
-				<string>Do you really want to logout and delete all local data from this app?</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>{query}</string>
-				<key>usecustominputarg</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>icons</string>
-						<key>outputlabel</key>
-						<string>icons</string>
-						<key>uid</key>
-						<string>23D84C21-08CC-4C30-8279-B1010C978854</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>logout</string>
-						<key>outputlabel</key>
-						<string>logout</string>
-						<key>uid</key>
-						<string>C12913A5-CC9B-4DC4-BB6B-BAB9262E5C3C</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>get_otp</string>
-						<key>outputlabel</key>
-						<string>get_otp</string>
-						<key>uid</key>
-						<string>3791EF51-120B-4C00-92F3-253418407B81</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>B7A08AA9-96A0-4448-BA9C-0718F5885C65</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -678,7 +208,7 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:req3}</string>
+						<string>{var:kind}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -686,13 +216,13 @@
 						<key>matchstring</key>
 						<string>password</string>
 						<key>outputlabel</key>
-						<string>pss</string>
+						<string>password</string>
 						<key>uid</key>
 						<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:req3}</string>
+						<string>{var:kind}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -733,6 +263,55 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
+				<string>{var:trigger1}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Decrypting…</string>
+				<key>script</key>
+				<string>python3 dl.py filter password "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>🔓 Search and copy your Dashlane passwords</string>
+				<key>title</key>
+				<string>Dashlane Passwords</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
 				<string>{var:trigger2}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -743,15 +322,15 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Connecting...</string>
+				<string>Decrypting…</string>
 				<key>script</key>
-				<string>python3 entry.py "$1" "otp"</string>
+				<string>python3 dl.py filter otp "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>🔢 Search and copy your dashlane OTPs</string>
+				<string>🔢 Search and copy your Dashlane OTPs</string>
 				<key>title</key>
 				<string>Dashlane OTPs</string>
 				<key>type</key>
@@ -769,513 +348,46 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.dashlane.com/cli-device-registration?login={var:user_mail}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>D782E2E9-BDDD-4762-8931-A50EAC1914BB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python3 get_otp.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<true/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>ok</string>
-						<key>outputlabel</key>
-						<string></string>
-						<key>uid</key>
-						<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>98BE7B3A-4EAE-4796-A21B-9356723F796D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python3 lock.py</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>24749D95-7709-4505-BEA2-D471CCBD3B14</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>rerun</string>
-				<key>passinputasargument</key>
-				<false/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>A186397B-2EC8-49B8-A085-8A14EB08F9CB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req2}</string>
+						<string>{var:action}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>unlock</string>
+						<string>logout</string>
 						<key>outputlabel</key>
-						<string>unlock</string>
+						<string>logout</string>
 						<key>uid</key>
-						<string>6E4EF1C3-5AD4-4DEA-9358-F84D0ED6F45C</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>5D04F731-8631-46BB-A418-8CBDCE1E7303</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>delimiter</key>
-				<string>	</string>
-				<key>discardemptyarguments</key>
-				<false/>
-				<key>outputas</key>
-				<integer>0</integer>
-				<key>trimarguments</key>
-				<true/>
-				<key>variableprefix</key>
-				<string>req</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.split</string>
-			<key>uid</key>
-			<string>F51246CE-B885-4BC0-B0B7-AF4040FEAD0E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req2}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>lock</string>
-						<key>outputlabel</key>
-						<string>lock</string>
-						<key>uid</key>
-						<string>A77C652C-69A6-4DB4-BB4B-725617E94E7E</string>
+						<string>C12913A5-CC9B-4DC4-BB6B-BAB9262E5C3C</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:req2}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>unlock</string>
-						<key>outputlabel</key>
-						<string>unlock</string>
-						<key>uid</key>
-						<string>6E4EF1C3-5AD4-4DEA-9358-F84D0ED6F45C</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>59634A8D-9E51-4587-A2E6-823656699E1A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req2}</string>
-						<key>matchcasesensitive</key>
-						<true/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>unlock</string>
-						<key>outputlabel</key>
-						<string>unlock</string>
-						<key>uid</key>
-						<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>E59F2351-36DF-454E-B793-26C82926F717</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Input your Dashlane account master password</string>
-				<key>text</key>
-				<string>Please enter your master password</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>{query}</string>
-				<key>usecustominputarg</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>448025A5-DD1E-4138-AC92-051F92FAB526</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Input your 6 digits OTP code from your 2FA app or your mail</string>
-				<key>text</key>
-				<string>Please enter your OTP code</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7E73F4D6-419C-4149-B504-613946D57A23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>user_password</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>python3 sync.py "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>942C75AA-75A5-487E-99BF-CA1280B7F8DE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req2}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>login</string>
-						<key>outputlabel</key>
-						<string>login</string>
-						<key>uid</key>
-						<string>A77C652C-69A6-4DB4-BB4B-725617E94E7E</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req2}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>refresh</string>
-						<key>outputlabel</key>
-						<string>refresh</string>
-						<key>uid</key>
-						<string>6E4EF1C3-5AD4-4DEA-9358-F84D0ED6F45C</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>625E1A1F-0491-49FD-844B-D2B068BF20A2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req1}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>_lock</string>
-						<key>outputlabel</key>
-						<string>lock</string>
-						<key>uid</key>
-						<string>1C287F1A-31CA-4DDF-90FE-0545AF859BDA</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req1}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>_sync</string>
-						<key>outputlabel</key>
-						<string>sync</string>
-						<key>uid</key>
-						<string>D09EB5A2-904B-49CB-9F9D-5D8F330FDB8A</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req1}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>_url</string>
-						<key>outputlabel</key>
-						<string>url</string>
-						<key>uid</key>
-						<string>B0B9619A-BD84-4E91-8E31-74743F5127C6</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req1}</string>
+						<string>{var:action}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>4</integer>
 						<key>matchstring</key>
-						<string>_credentials|_otp|_password|_device</string>
+						<string>^devices_remove_(all|others)$</string>
 						<key>outputlabel</key>
-						<string>action</string>
+						<string>devices</string>
 						<key>uid</key>
 						<string>6BB27A50-582A-431F-AE53-471388B8064E</string>
 					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:req1}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>_rerun</string>
-						<key>outputlabel</key>
-						<string>rerun</string>
-						<key>uid</key>
-						<string>275C22D2-5DD1-467E-A93A-802026B4DCA2</string>
-					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>else</string>
+				<string>run</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:req2}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>F783814E-D8C0-49CF-966F-B3A42F629853</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>delimiter</key>
-				<string>	</string>
-				<key>discardemptyarguments</key>
-				<false/>
-				<key>outputas</key>
-				<integer>0</integer>
-				<key>trimarguments</key>
-				<true/>
-				<key>variableprefix</key>
-				<string>req</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.split</string>
-			<key>uid</key>
-			<string>EA9D3618-6654-4C2F-A482-BBDD3D3B45F1</string>
+			<string>B7A08AA9-96A0-4448-BA9C-0718F5885C65</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1285,15 +397,29 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
-				<string>Write 'yes' to confirm your choice.</string>
+				<string>Type 'yes' to confirm. This Mac is removed from your Dashlane devices.</string>
 				<key>text</key>
-				<string>Do you really want to delete these devices ?</string>
+				<string>Logout and erase all local data?</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
-			<key>inboundconfig</key>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
 			<dict>
-				<key>usecustominputarg</key>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Type 'yes' to confirm.</string>
+				<key>text</key>
+				<string>Do you really want to remove these devices?</string>
+				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
@@ -1306,31 +432,12 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>python3 action.py "$1"</string>
+				<string>python3 dl.py run "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1352,30 +459,63 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:req1}</string>
+						<string>{var:next}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>_deviceconfirm</string>
+						<string>copy</string>
 						<key>outputlabel</key>
-						<string>confirm</string>
+						<string>copy</string>
 						<key>uid</key>
-						<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
+						<string>B0B9619A-BD84-4E91-8E31-74743F5127C6</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:next}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>rerun</string>
+						<key>outputlabel</key>
+						<string>rerun</string>
+						<key>uid</key>
+						<string>275C22D2-5DD1-467E-A93A-802026B4DCA2</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
 				<string>else</string>
 				<key>hideelse</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>F799E284-9A65-4B3C-882F-5C7EF3A3B7F0</string>
+			<string>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1392,308 +532,127 @@
 			<key>type</key>
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>A0E91654-3C2C-4065-B98A-69F173E0A8CA</string>
+			<string>A186397B-2EC8-49B8-A085-8A14EB08F9CB</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{var:req2}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>23520073-8543-4032-95CE-527849242695</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
 	<string># 🎩 Alfred Dashlane
 
-✨ *Manage your Dashlane vault* ✨
+✨ *Search your Dashlane vault from Alfred* ✨
 
 ## ✅ Prerequisites
 
-* MacOS.
-* Alfred 5. Note that the [Alfred Powerpack](https://www.alfredapp.com/powerpack/) is required to use workflows.
-* A [Dashlane](https://www.dashlane.com/fr) account.
-* Requires **python 3** or above.
+* macOS, Alfred 5 with the [Powerpack](https://www.alfredapp.com/powerpack/).
+* A [Dashlane](https://www.dashlane.com) account with a master password (SSO / passwordless accounts are not supported).
+* **Python 3.9** or above (`python3 --version`).
 
-## 🏎️ Dashlane CLI
+No Dashlane CLI needed: the workflow talks to Dashlane directly.
 
-This workflow uses the [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) provided by the [Dashlane team](https://github.com/Dashlane). However, note that the **Dashlane, Inc. does not provide customer support on this project**.
+## 🧰 Setup
 
-This workflow doesn't hold or register any private data. However, by design it exposes Dashlane data to the Alfred app which allows to manipulate it. It's a different approach compare to the offical [1Password integration](https://www.alfredapp.com/help/features/1password/) from Alfred. If you want to know more on how data is stored on the computer, check this [README](https://github.com/Dashlane/dashlane-cli/blob/master/src/modules/crypto/README.md).
+1. Fill `👤 Login` with your Dashlane email.
+2. Type `pdash`. The first time, press ⏎ on **Install the crypto engine**: it installs the hash-pinned `cryptography` package (Argon2 + AES) in the workflow data folder.
+3. Press ⏎ on **Login to Dashlane**: a Dashlane page opens in your browser. Paste the token it shows, then the 6-digit code (email or authenticator app), then your master password in the secure macOS dialog.
 
-This workflow doesn't allow to update or upload items to the Dashlane vault. You can't connect multiple accounts neither. This is a limitation of the Dashlane CLI for now.
+## 🧙‍♂️ Usage
 
-## 🧰 Setup the workflow
+* `pdash`: passwords. `odash`: OTP codes.
+* ⏎ copy password (or OTP) · ⌘⏎ copy login · ⌥⏎ open URL · ⇧⏎ type login ⇥ password in the frontmost app · ⌃⏎ copy OTP.
+* Copied secrets are marked transient (kept out of clipboard history) and erased after the delay you choose.
 
-Install Python 3 or above. Check your version with :
+## 🔐 Security
 
-`python --version`
+* Master password typed only in a native hidden dialog, never through Alfred's bar, argv or env variables.
+* Login verified with OPAQUE (the master password never leaves your Mac), pinned Dashlane server key.
+* Local vault encrypted with AES-256-GCM. Its key is wrapped with Argon2id(master password) and only sits in your login keychain while unlocked. Auto-lock after inactivity.
+* Nothing in clear on disk: no plaintext cache.
 
-Install the Dashlane CLI binary using one of the two methods below.
+Full documentation on [GitHub](https://github.com/BenjaminOddou/alfred-dashlane).
 
-1. Using the following command in your Terminal :
-
-`curl -sSL https://raw.githubusercontent.com/BenjaminOddou/alfred-dashlane/main/install.sh | bash`
-
-2. Manual installation are available [here](https://github.com/Dashlane/dashlane-cli#how-to-install-manually)
-
-## 🧙‍♂️ Invoke the workflow
-
-There is 2 flows in this workflow :
-
-1. The first one allows you to display all the credentials in your dashlane vault. It can be triggered by writing `pdash` keyword.
-2. The second one allows you to display your OTPs from you dashlane vault. It can be triggered by writing `odash` keyword.
-
-You can edit these triggers (flagged with a `🕹️` symbol) in the user configuration panel.
-
-## 🤖 Usage of the workflow
-
-Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-dashlane) page to check the documentation
-
-© Benjamin Oddou</string>
+© Benjamin Oddou
+</string>
 	<key>uidata</key>
 	<dict>
 		<key>1DB8C0D2-6DFF-4D17-AEFB-8EDC6BB6DBF6</key>
 		<dict>
 			<key>xpos</key>
-			<real>350</real>
+			<real>350.0</real>
 			<key>ypos</key>
-			<real>400</real>
-		</dict>
-		<key>23520073-8543-4032-95CE-527849242695</key>
-		<dict>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>1215</real>
-		</dict>
-		<key>24749D95-7709-4505-BEA2-D471CCBD3B14</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1365</real>
-			<key>ypos</key>
-			<real>585</real>
+			<real>420.0</real>
 		</dict>
 		<key>368005EB-8198-47F3-A531-14D7F2E21DD2</key>
 		<dict>
 			<key>xpos</key>
-			<real>260</real>
+			<real>240.0</real>
 			<key>ypos</key>
-			<real>365</real>
-		</dict>
-		<key>3E727EF8-4DF3-4994-BB2C-875BBF29B66C</key>
-		<dict>
-			<key>xpos</key>
-			<real>1160</real>
-			<key>ypos</key>
-			<real>730</real>
-		</dict>
-		<key>448025A5-DD1E-4138-AC92-051F92FAB526</key>
-		<dict>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>700</real>
-		</dict>
-		<key>59634A8D-9E51-4587-A2E6-823656699E1A</key>
-		<dict>
-			<key>xpos</key>
-			<real>875</real>
-			<key>ypos</key>
-			<real>620</real>
-		</dict>
-		<key>5D04F731-8631-46BB-A418-8CBDCE1E7303</key>
-		<dict>
-			<key>xpos</key>
-			<real>1510</real>
-			<key>ypos</key>
-			<real>615</real>
-		</dict>
-		<key>625E1A1F-0491-49FD-844B-D2B068BF20A2</key>
-		<dict>
-			<key>xpos</key>
-			<real>880</real>
-			<key>ypos</key>
-			<real>805</real>
+			<real>355.0</real>
 		</dict>
 		<key>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</key>
 		<dict>
 			<key>xpos</key>
-			<real>350</real>
+			<real>350.0</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>260.0</real>
 		</dict>
 		<key>686D5E87-317D-429B-9D65-532AEAFD3816</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1655</real>
+			<real>900.0</real>
 			<key>ypos</key>
-			<real>995</real>
-		</dict>
-		<key>7E73F4D6-419C-4149-B504-613946D57A23</key>
-		<dict>
-			<key>xpos</key>
-			<real>1365</real>
-			<key>ypos</key>
-			<real>715</real>
-		</dict>
-		<key>8C1B71D8-5AE3-403C-ACFB-A2A851CBA5E3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>440</real>
-		</dict>
-		<key>942C75AA-75A5-487E-99BF-CA1280B7F8DE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1655</real>
-			<key>ypos</key>
-			<real>800</real>
-		</dict>
-		<key>98BE7B3A-4EAE-4796-A21B-9356723F796D</key>
-		<dict>
-			<key>xpos</key>
-			<real>1160</real>
-			<key>ypos</key>
-			<real>470</real>
-		</dict>
-		<key>A0E91654-3C2C-4065-B98A-69F173E0A8CA</key>
-		<dict>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>1095</real>
+			<real>400.0</real>
 		</dict>
 		<key>A186397B-2EC8-49B8-A085-8A14EB08F9CB</key>
 		<dict>
 			<key>xpos</key>
-			<real>1655</real>
+			<real>1220.0</real>
 			<key>ypos</key>
-			<real>585</real>
-		</dict>
-		<key>A4DC7595-08A1-4983-97C5-2FAA33AFD9B7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>195</real>
-		</dict>
-		<key>B66F84E0-C203-43CE-A959-A8A0A992E7CD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>320</real>
+			<real>470.0</real>
 		</dict>
 		<key>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</key>
 		<dict>
 			<key>xpos</key>
-			<real>745</real>
+			<real>1080.0</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>425.0</real>
 		</dict>
 		<key>B7A08AA9-96A0-4448-BA9C-0718F5885C65</key>
 		<dict>
 			<key>xpos</key>
-			<real>550</real>
+			<real>560.0</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>345.0</real>
 		</dict>
 		<key>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</key>
 		<dict>
 			<key>xpos</key>
-			<real>1840</real>
+			<real>1220.0</real>
 			<key>ypos</key>
-			<real>995</real>
+			<real>320.0</real>
 		</dict>
 		<key>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</key>
 		<dict>
 			<key>xpos</key>
-			<real>100</real>
+			<real>60.0</real>
 			<key>ypos</key>
-			<real>345</real>
-		</dict>
-		<key>D782E2E9-BDDD-4762-8931-A50EAC1914BB</key>
-		<dict>
-			<key>xpos</key>
-			<real>1365</real>
-			<key>ypos</key>
-			<real>440</real>
-		</dict>
-		<key>E59F2351-36DF-454E-B793-26C82926F717</key>
-		<dict>
-			<key>xpos</key>
-			<real>1235</real>
-			<key>ypos</key>
-			<real>670</real>
+			<real>330.0</real>
 		</dict>
 		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
 		<dict>
 			<key>xpos</key>
-			<real>770</real>
+			<real>720.0</real>
 			<key>ypos</key>
-			<real>320</real>
-		</dict>
-		<key>EA9D3618-6654-4C2F-A482-BBDD3D3B45F1</key>
-		<dict>
-			<key>xpos</key>
-			<real>680</real>
-			<key>ypos</key>
-			<real>910</real>
+			<real>200.0</real>
 		</dict>
 		<key>F4AAC157-359E-4CCA-BA24-F21D8857A66C</key>
 		<dict>
 			<key>xpos</key>
-			<real>1365</real>
+			<real>720.0</real>
 			<key>ypos</key>
-			<real>920</real>
-		</dict>
-		<key>F51246CE-B885-4BC0-B0B7-AF4040FEAD0E</key>
-		<dict>
-			<key>xpos</key>
-			<real>1585</real>
-			<key>ypos</key>
-			<real>615</real>
-		</dict>
-		<key>F783814E-D8C0-49CF-966F-B3A42F629853</key>
-		<dict>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>870</real>
-		</dict>
-		<key>F799E284-9A65-4B3C-882F-5C7EF3A3B7F0</key>
-		<dict>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>1000</real>
+			<real>330.0</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1753,7 +712,7 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>mail of your dashlane account.</string>
+			<string>email address of your Dashlane account.</string>
 			<key>label</key>
 			<string>👤 Login</string>
 			<key>type</key>
@@ -1784,20 +743,123 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<true/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string></string>
+				<string>60</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>5 minutes</string>
+						<string>5</string>
+					</array>
+					<array>
+						<string>15 minutes</string>
+						<string>15</string>
+					</array>
+					<array>
+						<string>1 hour</string>
+						<string>60</string>
+					</array>
+					<array>
+						<string>4 hours</string>
+						<string>240</string>
+					</array>
+					<array>
+						<string>8 hours</string>
+						<string>480</string>
+					</array>
+					<array>
+						<string>24 hours</string>
+						<string>1440</string>
+					</array>
+					<array>
+						<string>Never (manual lock only)</string>
+						<string>0</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string>save the backbone of the dashlane vault in JSON files under the cache folder to speed up response time.</string>
+			<string>lock the vault after this much inactivity.</string>
 			<key>label</key>
-			<string>🔥 Allow cache</string>
+			<string>🔒 Auto-lock</string>
 			<key>type</key>
-			<string>checkbox</string>
+			<string>popupbutton</string>
 			<key>variable</key>
-			<string>cache_bool</string>
+			<string>autolock</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>30</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>15 seconds</string>
+						<string>15</string>
+					</array>
+					<array>
+						<string>30 seconds</string>
+						<string>30</string>
+					</array>
+					<array>
+						<string>1 minute</string>
+						<string>60</string>
+					</array>
+					<array>
+						<string>2 minutes</string>
+						<string>120</string>
+					</array>
+					<array>
+						<string>Never</string>
+						<string>0</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>erase a copied password / OTP after this delay.</string>
+			<key>label</key>
+			<string>🧹 Clear clipboard</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>clipboard_clear</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>60</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>15 minutes</string>
+						<string>15</string>
+					</array>
+					<array>
+						<string>1 hour</string>
+						<string>60</string>
+					</array>
+					<array>
+						<string>6 hours</string>
+						<string>360</string>
+					</array>
+					<array>
+						<string>1 day</string>
+						<string>1440</string>
+					</array>
+					<array>
+						<string>Manual only</string>
+						<string>0</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>refresh the vault in the background when older than this.</string>
+			<key>label</key>
+			<string>🔄 Background sync</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>autosync</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1885,7 +947,7 @@ Go to the dedicated [GitHub repository](https://github.com/BenjaminOddou/alfred-
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.6.0</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenjaminOddou/alfred-dashlane</string>
 </dict>
