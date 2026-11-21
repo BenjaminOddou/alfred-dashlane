@@ -72,7 +72,7 @@ Results come as native macOS notifications, posted by Alfred's *Post Notificatio
 
 With `🔔 Notifications` off, Alfred shows the list again after every action with the result on the first line.
 
-The menu (Sync, Lock, Devices, Download favicons, Clear cache, Logout) always stays at the top of the list, in this order, followed by your items sorted by title: Alfred doesn't reorder results by usage.
+The menu (Sync, Lock, Devices, Download favicons, Clear cache, Logout) always stays at the top of the list, in this order, followed by your items sorted by title. Items carry no Alfred `uid`, so Alfred can't move often-used items up, even with what it learned from older versions of the workflow.
 
 ### Login
 

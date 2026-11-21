@@ -206,7 +206,7 @@ def cmd_filter(kind):
             mods['ctrl'] = {'subtitle': '%s ǀ ⏎ copy OTP' % shown, 'arg': 'copy_otp', 'variables': v('copy_otp')}
         items.append(ui.item(
             r['title'], '%s ǀ ⏎ copy %s' % (shown, 'OTP' if is_otp else 'password'), icon=icon,
-            variables=v('copy_otp' if is_otp else 'copy_password'), mods=mods, uid=r['id'],
+            variables=v('copy_otp' if is_otp else 'copy_password'), mods=mods,
             match=' '.join([r['title'], r['key'], r['domain']] + ([] if cfg.incognito else [r['login']]))))
     ui.output_items(items)
 

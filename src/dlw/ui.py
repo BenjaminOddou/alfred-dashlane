@@ -53,8 +53,10 @@ def item(title, subtitle='', icon='info', valid=True, variables=None, mods=None,
 
 
 def output_items(items):
-    # skipknowledge: Alfred keeps this order instead of moving often-used items up,
-    # so the status line and the menu (Sync, Lock, ...) always stay on top.
+    # Keep the status line and the menu (Sync, Lock, ...) on top, in this order: items carry
+    # no `uid`, so Alfred has no knowledge to sort them with (skipknowledge alone only stops new
+    # learning, what Alfred already learned would still move items up), and skipknowledge
+    # stops any new learning.
     # Alfred 6 keys (ignored by Alfred 5): strictmods makes undefined modifier combinations do
     # nothing instead of the default action; iconresize keeps favicons' aspect ratio.
     sys.stdout.write(json.dumps({'items': items, 'skipknowledge': True, 'strictmods': True,
