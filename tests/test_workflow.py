@@ -56,7 +56,9 @@ class FakeSubprocess:
 
 
 class WorkflowTest(unittest.TestCase):
+    """Notifications off: every result shows on the first line of the list."""
     totp = False
+    notify = '0'
 
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
@@ -72,7 +74,7 @@ class WorkflowTest(unittest.TestCase):
         os.environ.update({
             'FAKE_DCLI_STATE': self.state_file, 'dcli_path': os.path.join(TESTS, 'fake_dcli.py'),
             'alfred_workflow_cache': os.path.join(self.tmp, 'cache'), 'user_mail': 'Octo@Example.com',
-            'incognito_mode': '1', 'cache_bool': '1', 'clipboard_clear': '30',
+            'incognito_mode': '1', 'cache_bool': '1', 'clipboard_clear': '30', 'notify': self.notify,
         })
         dl.cfg = ui.Config()
         self.answers = []
@@ -124,7 +126,7 @@ class WorkflowTest(unittest.TestCase):
     def login(self):
         self.answers = [(False, TOKEN), (False, '12345'), (False, '123456'), (True, self.state['mp'])]
         _, v = self.run_action(action='login')
-        self.assertEqual(v['dl_status'], '✅ Connected as octo@example.com · 3 items', v)
+        self.assertEqual(v['dl_status'], '✅ Connected · octo@example.com · 3 items', v)
         self.assertFalse(self.answers)
 
     def test_full_flow(self):
@@ -147,10 +149,12 @@ class WorkflowTest(unittest.TestCase):
             self.assertNotIn(secret, raw)
         self.assertEqual(self.titles(listing), ['Sync', 'Lock', 'Devices', 'Download favicons', 'Clear cache', 'Logout',
                                                 'Émile & Co', 'GitHub', 'google.com'])
-        self.assertIs(listing['skipknowledge'], True)  # Alfred must not move items above the menu
-        for view in (self.call('filter', 'otp'), self.call('filter', 'password', view='devices'),
+        # Alfred must not move items above the menu: no uid (knowledge already learned would
+        # still apply with skipknowledge alone) and no new learning.
+        for view in (listing, self.call('filter', 'otp'), self.call('filter', 'password', view='devices'),
                      self.call('filter', 'password', dl_status='✅ Synced')):
             self.assertIs(view['skipknowledge'], True)
+            self.assertEqual([i['title'] for i in view['items'] if 'uid' in i], [])
         github = listing['items'][7]
         self.assertEqual(github['subtitle'], 'oc••••o@example.com ǀ ⏎ copy password')
         self.assertTrue(github['icon']['path'].endswith('github.com.png'))
@@ -210,14 +214,14 @@ class WorkflowTest(unittest.TestCase):
         devices = self.call('filter', 'password', view='devices')
         self.assertEqual(self.titles(devices)[3:], ['iPhone', 'Mac (this Mac)'])
         _, v = self.run_action(action='device_remove', id='PHONE', name='iPhone')
-        self.assertEqual((v['dl_status'], v['view']), ('✅ Device "iPhone" removed', 'devices'))
+        self.assertEqual((v['dl_status'], v['view']), ('✅ Device removed · iPhone', 'devices'))
         self.assertEqual([d['deviceId'] for d in self.load()['devices']], ['ME'])
 
         # logout needs a typed "yes"
         _, v = self.run_action('no', action='logout')
         self.assertTrue(self.load()['logged_in'])
         _, v = self.run_action('yes', action='logout')
-        self.assertEqual(v['dl_status'], '✅ Logged out, local data erased')
+        self.assertEqual(v['dl_status'], '✅ Logged out · Local data erased')
         self.assertFalse(self.load()['logged_in'])
         self.assertEqual(os.listdir(cache), [])
 
@@ -245,7 +249,7 @@ class WorkflowTest(unittest.TestCase):
         with open(os.path.join(cache, 'github.com.png'), 'wb') as fh:
             fh.write(b'\x89PNG')
         _, v = self.run_action(action='clear_cache')
-        self.assertEqual(v['dl_status'], '🧹 Cache cleared (2 files)')
+        self.assertEqual(v['dl_status'], '🧹 Cache cleared · 2 files deleted')
         self.assertEqual(os.listdir(cache), [])
         self.assertIn('GitHub', self.titles(self.call('filter', 'password')))  # rebuilt from dcli
 
@@ -304,6 +308,85 @@ class WorkflowTest(unittest.TestCase):
 
 class TotpAtLoginTest(WorkflowTest):
     totp = True
+
+
+class NotificationTest(WorkflowTest):
+    """Notifications on (default): results go to Alfred's Post Notification object."""
+    notify = '1'
+
+    def test_full_flow(self):
+        self.answers = [(False, TOKEN), (False, '123456'), (True, self.state['mp'])]
+        _, v = self.run_action(action='login')
+        self.assertEqual((v['next'], v['dl_notify_title'], v['dl_notify_text'], v['dl_status']),
+                         ('rerun', '✅ Connected', 'octo@example.com · 3 items', ''))
+
+        listing = self.call('filter', 'password')
+        self.assertIs(listing['strictmods'], True)
+        self.assertEqual(listing['iconresize'], 'fit')
+        github = next(i for i in listing['items'] if i['title'] == 'GitHub')
+
+        # the notification names the item, never the secret
+        arg, v = self.run_action(**github['variables'])
+        self.assertEqual(arg, 'p@ss "quoted" \\ back ')
+        self.assertEqual((v['next'], v['dl_notify_title'], v['dl_notify_text']),
+                         ('copy', '📋 Password copied', 'GitHub · cleared in 30 s'))
+        arg, v = self.run_action(**github['mods']['ctrl']['variables'])
+        self.assertEqual((arg, v['dl_notify_title'], v['dl_notify_text']),
+                         ('123456', '📋 OTP copied', 'GitHub · expires in 17 s · cleared in 30 s'))
+        arg, v = self.run_action(**github['mods']['cmd']['variables'])
+        self.assertEqual((arg, v['dl_notify_text']), ('octo@example.com', 'GitHub'))
+        for value in v.values():
+            self.assertNotIn('p@ss', value)
+
+        # actions that end the flow vs. those that show the list again
+        self.assertEqual(self.run_action(action='sync')[1]['next'], 'rerun')
+        _, v = self.run_action(action='clear_cache')
+        self.assertEqual((v['next'], v['dl_notify_title']), ('none', '🧹 Cache cleared'))
+        _, v = self.run_action(action='lock')
+        self.assertEqual((v['next'], v['dl_notify_title']), ('none', '🔒 Locked'))
+        _, v = self.run_action(action='copy_password', id=GITHUB, title='GitHub')
+        self.assertEqual((v['next'], v['dl_notify_title']), ('rerun', '🔒 Your vault is locked'))
+
+        # navigation resets the notification
+        _, v = self.run_action(action='nav', target='devices')
+        self.assertEqual(v['dl_notify_title'], '')
+
+    test_wrong_inputs = test_background_refresh_and_no_cache = test_clear_cache = None
+    test_cli_missing = test_variables_survive_zsh = None
+
+
+class Plist(unittest.TestCase):
+    def setUp(self):
+        import plistlib
+        with open(os.path.join(ROOT, 'src', 'info.plist'), 'rb') as fh:
+            self.plist = plistlib.load(fh)
+        self.objects = {o['uid']: o for o in self.plist['objects']}
+
+    def test_graph_is_consistent(self):
+        for src, links in self.plist['connections'].items():
+            self.assertIn(src, self.objects)
+            for link in links:
+                self.assertIn(link['destinationuid'], self.objects)
+
+    def test_notification_never_shows_the_copied_secret(self):
+        notes = [o for o in self.objects.values() if o['type'] == 'alfred.workflow.output.notification']
+        self.assertEqual(len(notes), 1)
+        config = notes[0]['config']
+        self.assertEqual((config['title'], config['text']), ('{var:dl_notify_title}', '{var:dl_notify_text}'))
+        run = next(u for u, o in self.objects.items() if o['type'] == 'alfred.workflow.action.script')
+        reach, todo = set(), [run]
+        while todo:
+            for link in self.plist['connections'].get(todo.pop(), []):
+                if link['destinationuid'] not in reach:
+                    reach.add(link['destinationuid'])
+                    todo.append(link['destinationuid'])
+        self.assertIn(notes[0]['uid'], reach)
+
+    def test_settings(self):
+        variables = [c['variable'] for c in self.plist['userconfigurationconfig']]
+        self.assertIn('notify', variables)
+        self.assertNotIn('sound', variables)
+        self.assertEqual(self.plist['version'], '1.7.1')
 
 
 class Helpers(unittest.TestCase):

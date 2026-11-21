@@ -31,6 +31,7 @@ class Config:
         self.cache = env('cache_bool', '1') == '1'
         self.clipboard_clear = _int('clipboard_clear', 30)  # seconds, 0 = never
         self.dcli_path = env('dcli_path').strip()
+        self.notify = env('notify', '1') == '1'
         self.cache_dir = env('alfred_workflow_cache') or os.path.join(
             home, 'Library', 'Caches', 'com.runningwithcrayons.Alfred', 'Workflow Data', BUNDLE)
 
@@ -52,20 +53,26 @@ def item(title, subtitle='', icon='info', valid=True, variables=None, mods=None,
 
 
 def output_items(items):
-    # skipknowledge: Alfred keeps this order instead of moving often-used items up,
-    # so the status line and the menu (Sync, Lock, ...) always stay on top.
-    sys.stdout.write(json.dumps({'items': items, 'skipknowledge': True}))  # ASCII-safe whatever the locale
+    # Keep the status line and the menu (Sync, Lock, ...) on top, in this order: items carry
+    # no `uid`, so Alfred has no knowledge to sort them with (skipknowledge alone only stops new
+    # learning, what Alfred already learned would still move items up), and skipknowledge
+    # stops any new learning.
+    # Alfred 6 keys (ignored by Alfred 5): strictmods makes undefined modifier combinations do
+    # nothing instead of the default action; iconresize keeps favicons' aspect ratio.
+    sys.stdout.write(json.dumps({'items': items, 'skipknowledge': True, 'strictmods': True,
+                                 'iconresize': 'fit'}))  # ASCII-safe whatever the locale
 
 
-def output_next(next_step, arg='', status='', icon='', **variables):
+def output_next(next_step, arg='', status='', icon='', notify='', detail='', **variables):
     """End of the Run Script: tell the workflow what comes next (copy / rerun / none).
 
-    `status` is shown on the first line of the list when it is shown again. It is
-    always reset, because Alfred variables live for the whole flow. Names are
-    prefixed: Alfred runs scripts with zsh, where `status` is a special parameter
-    (it turned into "0").
+    notify / detail: title and text of the native notification (Post Notification object).
+    status: shown on the first line of the list when it is shown again.
+    All are always reset, because Alfred variables live for the whole flow. Names are
+    prefixed: Alfred runs scripts with zsh, where `status` is a special parameter.
     """
-    variables.update(next=next_step, dl_status=status, dl_status_icon=icon)
+    variables.update(next=next_step, dl_status=status, dl_status_icon=icon, dl_notify_title=notify,
+                     dl_notify_text=detail)
     sys.stdout.write(json.dumps({'alfredworkflow': {'arg': arg, 'variables': variables}}))
 
 
