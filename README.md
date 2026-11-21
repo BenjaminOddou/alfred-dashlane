@@ -59,8 +59,9 @@ if unticked:
 
 3. `🔥 Allow cache`: keep the list of your items (titles, URLs and logins, **never passwords or OTP secrets**) in the workflow cache folder while the CLI is unlocked. The list shows instantly and is refreshed in the background. It is deleted as soon as the vault is locked, even when you lock it from the terminal.
 4. `🧹 Clear clipboard`: erase a copied password / OTP from the clipboard after this delay (default 30 s).
-5. `🔔 Notifications`: show the result of an action in a native macOS notification (default on). Off: the result shows on the first line of the list.
-6. `🛠️ dcli path`: only needed if the CLI isn't found automatically.
+5. `🔔 Notifications`: show the result of an action in a native macOS notification (default on).
+6. `🎷 Notification sound`: sound played with the notifications: Mute or one of the macOS sounds (default Submarine), as in [Alfred Plex](https://github.com/BenjaminOddou/alfred-plex).
+7. `🛠️ dcli path`: only needed if the CLI isn't found automatically.
 
 ### Feedback
 
@@ -70,7 +71,7 @@ Results come as native macOS notifications, posted by Alfred's *Post Notificatio
 * after login, unlock, sync, device removal or an error, Alfred also shows the list again;
 * lock, logout, clear cache and favicon downloads just notify.
 
-With `🔔 Notifications` off, Alfred shows the list again after every action with the result on the first line.
+Results are never added as a line of the list. With `🔔 Notifications` off, actions are silent.
 
 The menu (Sync, Lock, Devices, Download favicons, Clear cache, Logout) always stays at the top of the list, in this order, followed by your items sorted by title. Items carry no Alfred `uid`, so Alfred can't move often-used items up, even with what it learned from older versions of the workflow.
 
