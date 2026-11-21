@@ -23,17 +23,20 @@ SCRIPT = os.path.abspath(__file__)
 LETTERS = set('abcdefghijklmnopqrstuvwxyz')
 REFRESH_AFTER = 60  # seconds before the cached list is refreshed in the background
 INSTALL_DOC = 'https://dashlane.github.io/dashlane-cli/install'
+SOUNDS_DIR = '/System/Library/Sounds'
+SOUNDS = ('Submarine', 'Pop', 'Ping', 'Purr', 'Hero', 'Funk', 'Basso', 'Sosumi', 'Glass', 'Blow', 'Bottle', 'Frog',
+          'Tink', 'Morse')  # same choice as alfred-plex; anything else (e.g. empty) is mute
 
 
 class Done(Exception):
-    """End an action with a result: a native notification (or the first line of the list).
+    """End an action with a result, shown in a native notification.
 
     rerun: show the list again afterwards (login, unlock, sync, errors...).
     """
 
-    def __init__(self, message, icon='info', view='main', detail='', rerun=True):
+    def __init__(self, message, view='main', detail='', rerun=True):
         Exception.__init__(self, message)
-        self.icon, self.view, self.detail, self.rerun = icon, view, detail, rerun
+        self.view, self.detail, self.rerun = view, detail, rerun
 
 
 # --------------------------------------------------------------------------- helpers
@@ -42,7 +45,7 @@ def cli():
     from dlw import dcli
     path = dcli.find(cfg.dcli_path)
     if not path:
-        raise Done('Dashlane CLI not found: install it first', 'info')
+        raise Done('Dashlane CLI not found: install it first')
     return dcli.Dcli(path)
 
 
@@ -124,17 +127,10 @@ def load_vault():
 
 # --------------------------------------------------------------------------- script filter
 
-def status_items(base):
-    message = ui.env('dl_status')
-    if not message:
-        return []
-    return [ui.item(message, icon=ui.env('dl_status_icon') or 'info', valid=False)]
-
-
 def cmd_filter(kind):
     from dlw import dcli as d
     base = {'kind': kind, 'view': 'main'}
-    items = status_items(base)
+    items = []
     logout = ui.item('Logout', 'Revoke this device and erase local data', icon='delete',
                      variables=dict(base, action='logout'))
     clear_cache = ui.item('Clear cache', 'Delete the cached list and the favicons', icon='delete',
@@ -276,31 +272,31 @@ def interactive(args, timeout=180):
     try:
         return cli().run(args, answers(), timeout)
     except d.Cancelled:
-        raise Done('Canceled', 'info', rerun=False)
+        raise Done('Canceled', rerun=False)
     except d.DcliError as exc:
         message = str(exc)
         if 'mismatching signatures' in message or 'wrong master password' in message.lower():
             message = 'Wrong master password'
-        raise Done(message, 'info')
+        raise Done(message)
 
 
-def refresh_after_change(message, icon, detail=''):
+def refresh_after_change(message, detail=''):
     try:
         count = '%d items' % len(fetch(cli()))
         detail = '%s · %s' % (detail, count) if detail else count
     except Exception:
         pass
-    raise Done(message, icon, detail=detail)
+    raise Done(message, detail=detail)
 
 
 def action_login(arg):
     interactive(['sync'], timeout=300)
-    refresh_after_change('✅ Connected', 'otp', cfg.login)
+    refresh_after_change('✅ Connected', cfg.login)
 
 
 def action_unlock(arg):
     interactive(['sync'])
-    refresh_after_change('🔓 Unlocked', 'lock')
+    refresh_after_change('🔓 Unlocked')
 
 
 def action_sync(arg):
@@ -308,16 +304,16 @@ def action_sync(arg):
     try:
         cli().run(['sync'], timeout=120)
     except d.Locked:
-        raise Done('🔒 Your vault is locked', 'lock')
+        raise Done('🔒 Your vault is locked')
     except d.DcliError as exc:
         raise Done('🚨 Sync failed', detail=str(exc))
-    refresh_after_change('✅ Synced', 'sync')
+    refresh_after_change('✅ Synced')
 
 
 def action_lock(arg):
     drop_cache()
     cli().run(['lock'])
-    raise Done('🔒 Locked', 'lock', rerun=False)
+    raise Done('🔒 Locked', rerun=False)
 
 
 def confirm(arg):
@@ -339,7 +335,7 @@ def wipe_local():
 
 def action_clear_cache(arg):
     removed = wipe_local()
-    raise Done('🧹 Cache cleared', 'delete', detail='%d file%s deleted' % (removed, '' if removed == 1 else 's'),
+    raise Done('🧹 Cache cleared', detail='%d file%s deleted' % (removed, '' if removed == 1 else 's'),
                rerun=False)
 
 
@@ -347,25 +343,25 @@ def action_logout(arg):
     confirm(arg)
     wipe_local()
     interactive(['logout'], timeout=120)
-    raise Done('✅ Logged out', 'delete', detail='Local data erased', rerun=False)
+    raise Done('✅ Logged out', detail='Local data erased', rerun=False)
 
 
 def action_device_remove(arg):
     cli().run(['devices', 'remove', ui.env('id')], timeout=60)
-    raise Done('✅ Device removed', 'devices', view='devices', detail=ui.env('name'))
+    raise Done('✅ Device removed', view='devices', detail=ui.env('name'))
 
 
 def action_devices_remove_all(arg):
     confirm(arg)
     wipe_local()
     interactive(['devices', 'remove', '--all'], timeout=120)
-    raise Done('✅ All devices removed', 'delete', detail='You are logged out', rerun=False)
+    raise Done('✅ All devices removed', detail='You are logged out', rerun=False)
 
 
 def action_devices_remove_others(arg):
     confirm(arg)
     cli().run(['devices', 'remove', '--others'], timeout=60)
-    raise Done('✅ Other devices removed', 'devices', view='devices')
+    raise Done('✅ Other devices removed', view='devices')
 
 
 def action_favicons(arg):
@@ -373,9 +369,9 @@ def action_favicons(arg):
     records = cached['items'] if cached else fetch(cli())
     missing = {r['domain'] for r in records if r['domain'] and not os.path.exists(favicon(r['domain']))}
     if not missing:
-        raise Done('👀 Favicons up to date', 'download', rerun=False)
+        raise Done('👀 Favicons up to date', rerun=False)
     spawn('favicons')
-    raise Done('⏳ Downloading favicons', 'download', detail='%d icons, in the background' % len(missing),
+    raise Done('⏳ Downloading favicons', detail='%d icons, in the background' % len(missing),
                rerun=False)
 
 
@@ -405,6 +401,8 @@ def copied(value, what, clears=True, expiry=''):
     if clears and cfg.clipboard_clear:
         detail.append('cleared in %d s' % cfg.clipboard_clear)
     note = '📋 %s copied' % what if cfg.notify else ''
+    if note:
+        play_sound()
     ui.output_next('copy', value, notify=note, detail=' · '.join(d for d in detail if d) if note else '')
 
 
@@ -481,21 +479,32 @@ def cmd_run(arg):
         finish(exc)
     except d.Locked:
         drop_cache()
-        finish(Done('🔒 Your vault is locked', 'lock'))
+        finish(Done('🔒 Your vault is locked'))
     except d.LoggedOut:
         drop_cache()
-        finish(Done('You are not logged in', 'otp'))
+        finish(Done('You are not logged in'))
     except d.DcliError as exc:
         finish(Done('🚨 Dashlane CLI error', detail=str(exc)))
 
 
 def finish(done):
-    """Native notification, or (notifications off) the result on the first line of the list."""
-    if cfg.notify:
-        ui.output_next('rerun' if done.rerun else 'none', view=done.view, notify=str(done), detail=done.detail)
-    else:
-        text = ' · '.join(t for t in (str(done), done.detail) if t)
-        ui.output_next('rerun', view=done.view, status=text, icon=done.icon)
+    """Result of an action: a native notification with the chosen sound, never a line in the list."""
+    note = str(done) if cfg.notify else ''
+    if note:
+        play_sound()
+    ui.output_next('rerun' if done.rerun else 'none', view=done.view, notify=note, detail=done.detail if note else '')
+
+
+def play_sound():
+    """Play the `sound` setting (a macOS system sound) without waiting for it. Empty = mute."""
+    path = os.path.join(SOUNDS_DIR, cfg.sound + '.aiff')
+    if cfg.sound not in SOUNDS or not os.path.isfile(path):
+        return
+    try:
+        subprocess.Popen(['/usr/bin/afplay', path], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+                         stderr=subprocess.DEVNULL, start_new_session=True)
+    except OSError:
+        pass
 
 
 # --------------------------------------------------------------------------- background jobs

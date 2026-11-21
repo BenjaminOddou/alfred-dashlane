@@ -56,9 +56,9 @@ class FakeSubprocess:
 
 
 class WorkflowTest(unittest.TestCase):
-    """Notifications off: every result shows on the first line of the list."""
+    """Notifications on (default): results go to Alfred's Post Notification object."""
     totp = False
-    notify = '0'
+    notify = '1'
 
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
@@ -80,6 +80,11 @@ class WorkflowTest(unittest.TestCase):
         self.answers = []
         self.saved = [(dcli, 'SECURITY', dcli.SECURITY), (ui, 'ask', ui.ask), (dl, 'subprocess', dl.subprocess)]
         dcli.SECURITY = os.path.join(TESTS, 'fake_security.py')
+        self.saved.append((dl, 'SOUNDS_DIR', dl.SOUNDS_DIR))
+        dl.SOUNDS_DIR = os.path.join(self.tmp, 'sounds')
+        os.makedirs(dl.SOUNDS_DIR)
+        for name in ('Submarine', 'Tink'):
+            open(os.path.join(dl.SOUNDS_DIR, name + '.aiff'), 'wb').close()
         ui.ask = self.fake_ask
         self.sub = dl.subprocess = FakeSubprocess()
 
@@ -123,10 +128,18 @@ class WorkflowTest(unittest.TestCase):
         out = self.call('run', arg, **variables)['alfredworkflow']
         return out['arg'], out['variables']
 
+    def note(self, v):
+        """(title, text) of the notification an action asked for."""
+        return v['dl_notify_title'], v['dl_notify_text']
+
+    def sounds(self):
+        return [cmd[1] for cmd in self.sub.spawned if cmd[0] == '/usr/bin/afplay']
+
     def login(self):
         self.answers = [(False, TOKEN), (False, '12345'), (False, '123456'), (True, self.state['mp'])]
         _, v = self.run_action(action='login')
-        self.assertEqual(v['dl_status'], '✅ Connected · octo@example.com · 3 items', v)
+        self.assertEqual(self.note(v), ('✅ Connected', 'octo@example.com · 3 items'), v)
+        self.assertEqual(v['next'], 'rerun')
         self.assertFalse(self.answers)
 
     def test_full_flow(self):
@@ -151,10 +164,11 @@ class WorkflowTest(unittest.TestCase):
                                                 'Émile & Co', 'GitHub', 'google.com'])
         # Alfred must not move items above the menu: no uid (knowledge already learned would
         # still apply with skipknowledge alone) and no new learning.
-        for view in (listing, self.call('filter', 'otp'), self.call('filter', 'password', view='devices'),
-                     self.call('filter', 'password', dl_status='✅ Synced')):
+        for view in (listing, self.call('filter', 'otp'), self.call('filter', 'password', view='devices')):
             self.assertIs(view['skipknowledge'], True)
             self.assertEqual([i['title'] for i in view['items'] if 'uid' in i], [])
+            self.assertIs(view['strictmods'], True)
+            self.assertEqual(view['iconresize'], 'fit')
         github = listing['items'][7]
         self.assertEqual(github['subtitle'], 'oc••••o@example.com ǀ ⏎ copy password')
         self.assertTrue(github['icon']['path'].endswith('github.com.png'))
@@ -171,10 +185,13 @@ class WorkflowTest(unittest.TestCase):
         self.assertEqual(len(self.load()['log']), calls)
 
         # secrets only travel through the pty
-        arg, v = self.run_action(action='copy_password', id=GITHUB)
+        github_vars = listing['items'][7]['variables']
+        arg, v = self.run_action(**github_vars)
         self.assertEqual((arg, v['next']), ('p@ss "quoted" \\ back ', 'copy'))
-        self.assertEqual(self.sub.spawned[-1][-1], 'clearclip')
-        self.assertEqual(self.run_action(action='copy_otp', id=GITHUB, otp='secret')[0], '123456')
+        self.assertEqual(self.note(v), ('📋 Password copied', 'GitHub · cleared in 30 s'))  # never the secret
+        self.assertIn('clearclip', [cmd[-1] for cmd in self.sub.spawned])
+        arg, v = self.run_action(action='copy_otp', id=GITHUB, otp='secret', title='GitHub')
+        self.assertEqual((arg, self.note(v)), ('123456', ('📋 OTP copied', 'GitHub · expires in 17 s · cleared in 30 s')))
         self.assertEqual(self.load()['log'][-1], ['read', 'dl://%s/otpSecret?otp+expiry' % GITHUB])
         self.run_action(action='copy_otp', id=MAIL, otp='uri')
         self.assertEqual(self.load()['log'][-1], ['read', 'dl://%s/otpUrl?otp_uri+expiry' % MAIL])
@@ -186,19 +203,21 @@ class WorkflowTest(unittest.TestCase):
         self.run_action(action='open_url', url='shop.example.co.uk')
         self.assertEqual(self.sub.runs[-1][0], ['open', 'https://shop.example.co.uk'])
         _, v = self.run_action(action='open_url', url='javascript:alert(1)')
-        self.assertIn('Only http(s)', v['dl_status'])
+        self.assertIn('Only http(s)', v['dl_notify_title'])
         _, v = self.run_action(action='copy_password', id='../../etc')
-        self.assertIn('Unknown item', v['dl_status'])
+        self.assertIn('Unknown item', v['dl_notify_title'])
 
         # sync, lock, unlock
-        self.assertEqual(self.run_action(action='sync')[1]['dl_status'], '✅ Synced · 3 items')
+        _, v = self.run_action(action='sync')
+        self.assertEqual((v['next'], self.note(v)), ('rerun', ('✅ Synced', '3 items')))
         _, v = self.run_action(action='lock')
-        self.assertEqual(v['dl_status'], '🔒 Locked')
+        self.assertEqual((v['next'], self.note(v)), ('none', ('🔒 Locked', '')))
         self.assertFalse(os.path.exists(os.path.join(cache, 'vault.json')))
-        locked = self.call('filter', 'password', dl_status=v['dl_status'], dl_status_icon=v['dl_status_icon'])
-        self.assertEqual(self.titles(locked), ['🔒 Locked', 'Your vault is locked', 'Clear cache', 'Logout'])
+        # the result is never shown as a line of the list (old 1.7.x variables are ignored)
+        locked = self.call('filter', 'password', dl_status='🔒 Locked', dl_status_icon='lock')
+        self.assertEqual(self.titles(locked), ['Your vault is locked', 'Clear cache', 'Logout'])
         _, v = self.run_action(action='copy_password', id=GITHUB)
-        self.assertEqual((v['next'], v['dl_status']), ('rerun', '🔒 Your vault is locked'))
+        self.assertEqual((v['next'], v['dl_notify_title']), ('rerun', '🔒 Your vault is locked'))
         self.unlock()
         self.assertIn('GitHub', self.titles(self.call('filter', 'password')))
 
@@ -214,34 +233,34 @@ class WorkflowTest(unittest.TestCase):
         devices = self.call('filter', 'password', view='devices')
         self.assertEqual(self.titles(devices)[3:], ['iPhone', 'Mac (this Mac)'])
         _, v = self.run_action(action='device_remove', id='PHONE', name='iPhone')
-        self.assertEqual((v['dl_status'], v['view']), ('✅ Device removed · iPhone', 'devices'))
+        self.assertEqual((self.note(v), v['view']), (('✅ Device removed', 'iPhone'), 'devices'))
         self.assertEqual([d['deviceId'] for d in self.load()['devices']], ['ME'])
 
         # logout needs a typed "yes"
         _, v = self.run_action('no', action='logout')
         self.assertTrue(self.load()['logged_in'])
         _, v = self.run_action('yes', action='logout')
-        self.assertEqual(v['dl_status'], '✅ Logged out · Local data erased')
+        self.assertEqual((v['next'], self.note(v)), ('none', ('✅ Logged out', 'Local data erased')))
         self.assertFalse(self.load()['logged_in'])
         self.assertEqual(os.listdir(cache), [])
 
     def unlock(self):
         self.answers = ([(False, '123456')] if self.totp else []) + [(True, self.state['mp'])]
         _, v = self.run_action(action='unlock')
-        self.assertEqual(v['dl_status'], '🔓 Unlocked · 3 items', v)
+        self.assertEqual(self.note(v), ('🔓 Unlocked', '3 items'), v)
 
     def test_wrong_inputs(self):
         self.answers = [(False, TOKEN), (False, '123456'), (True, 'wrong')]
         _, v = self.run_action(action='login')
-        self.assertEqual(v['dl_status'], 'Wrong master password')
+        self.assertEqual(v['dl_notify_title'], 'Wrong master password')
         self.answers = [(False, None)]
         _, v = self.run_action(action='login')
-        self.assertEqual(v['dl_status'], 'Canceled')
+        self.assertEqual(v['dl_notify_title'], 'Canceled')
         self.login()
         self.run_action(action='lock')
         self.answers = ([(False, '123456')] if self.totp else []) + [(True, 'nope')]
         _, v = self.run_action(action='unlock')
-        self.assertEqual(v['dl_status'], 'Wrong master password')
+        self.assertEqual(v['dl_notify_title'], 'Wrong master password')
 
     def test_clear_cache(self):
         self.login()
@@ -249,7 +268,7 @@ class WorkflowTest(unittest.TestCase):
         with open(os.path.join(cache, 'github.com.png'), 'wb') as fh:
             fh.write(b'\x89PNG')
         _, v = self.run_action(action='clear_cache')
-        self.assertEqual(v['dl_status'], '🧹 Cache cleared · 2 files deleted')
+        self.assertEqual((v['next'], self.note(v)), ('none', ('🧹 Cache cleared', '2 files deleted')))
         self.assertEqual(os.listdir(cache), [])
         self.assertIn('GitHub', self.titles(self.call('filter', 'password')))  # rebuilt from dcli
 
@@ -310,49 +329,46 @@ class TotpAtLoginTest(WorkflowTest):
     totp = True
 
 
-class NotificationTest(WorkflowTest):
-    """Notifications on (default): results go to Alfred's Post Notification object."""
-    notify = '1'
+class SoundTest(WorkflowTest):
+    """`sound` setting: a macOS system sound played (detached) with each notification."""
+
+    def test_default_is_submarine(self):
+        self.login()
+        self.assertEqual(self.sounds(), [os.path.join(dl.SOUNDS_DIR, 'Submarine.aiff')])
+
+    def test_chosen_sound_mute_and_unknown(self):
+        for value, expected in (('Tink', ['Tink.aiff']), ('', []), ('../../../etc/passwd', []),
+                                ('Glass', [])):  # Glass: allowed but file missing here
+            self.sub.spawned = []
+            os.environ['sound'] = value
+            dl.cfg = ui.Config()
+            self.run_action(action='clear_cache')
+            self.assertEqual([os.path.basename(p) for p in self.sounds()], expected, value)
+
+    test_full_flow = test_wrong_inputs = test_clear_cache = test_variables_survive_zsh = None
+    test_background_refresh_and_no_cache = test_cli_missing = None
+
+
+class SilentTest(WorkflowTest):
+    """Notifications off: no notification, no sound, and still no result line in the list."""
+    notify = '0'
 
     def test_full_flow(self):
+        self.login_silently()
+        for action in ('sync', 'clear_cache', 'lock'):
+            _, v = self.run_action(action=action)
+            self.assertEqual(self.note(v), ('', ''))
+        self.assertEqual(self.sounds(), [])
+        self.assertEqual(self.titles(self.call('filter', 'password')), ['Your vault is locked', 'Clear cache',
+                                                                         'Logout'])
+
+    def login_silently(self):
         self.answers = [(False, TOKEN), (False, '123456'), (True, self.state['mp'])]
         _, v = self.run_action(action='login')
-        self.assertEqual((v['next'], v['dl_notify_title'], v['dl_notify_text'], v['dl_status']),
-                         ('rerun', '✅ Connected', 'octo@example.com · 3 items', ''))
+        self.assertEqual((v['next'], self.note(v)), ('rerun', ('', '')))
 
-        listing = self.call('filter', 'password')
-        self.assertIs(listing['strictmods'], True)
-        self.assertEqual(listing['iconresize'], 'fit')
-        github = next(i for i in listing['items'] if i['title'] == 'GitHub')
-
-        # the notification names the item, never the secret
-        arg, v = self.run_action(**github['variables'])
-        self.assertEqual(arg, 'p@ss "quoted" \\ back ')
-        self.assertEqual((v['next'], v['dl_notify_title'], v['dl_notify_text']),
-                         ('copy', '📋 Password copied', 'GitHub · cleared in 30 s'))
-        arg, v = self.run_action(**github['mods']['ctrl']['variables'])
-        self.assertEqual((arg, v['dl_notify_title'], v['dl_notify_text']),
-                         ('123456', '📋 OTP copied', 'GitHub · expires in 17 s · cleared in 30 s'))
-        arg, v = self.run_action(**github['mods']['cmd']['variables'])
-        self.assertEqual((arg, v['dl_notify_text']), ('octo@example.com', 'GitHub'))
-        for value in v.values():
-            self.assertNotIn('p@ss', value)
-
-        # actions that end the flow vs. those that show the list again
-        self.assertEqual(self.run_action(action='sync')[1]['next'], 'rerun')
-        _, v = self.run_action(action='clear_cache')
-        self.assertEqual((v['next'], v['dl_notify_title']), ('none', '🧹 Cache cleared'))
-        _, v = self.run_action(action='lock')
-        self.assertEqual((v['next'], v['dl_notify_title']), ('none', '🔒 Locked'))
-        _, v = self.run_action(action='copy_password', id=GITHUB, title='GitHub')
-        self.assertEqual((v['next'], v['dl_notify_title']), ('rerun', '🔒 Your vault is locked'))
-
-        # navigation resets the notification
-        _, v = self.run_action(action='nav', target='devices')
-        self.assertEqual(v['dl_notify_title'], '')
-
-    test_wrong_inputs = test_background_refresh_and_no_cache = test_clear_cache = None
-    test_cli_missing = test_variables_survive_zsh = None
+    test_wrong_inputs = test_clear_cache = test_variables_survive_zsh = None
+    test_background_refresh_and_no_cache = test_cli_missing = None
 
 
 class Plist(unittest.TestCase):
@@ -385,8 +401,8 @@ class Plist(unittest.TestCase):
     def test_settings(self):
         variables = [c['variable'] for c in self.plist['userconfigurationconfig']]
         self.assertIn('notify', variables)
-        self.assertNotIn('sound', variables)
-        self.assertEqual(self.plist['version'], '1.7.1')
+        self.assertIn('sound', variables)
+        self.assertEqual(self.plist['version'], '1.7.2')
 
 
 class Helpers(unittest.TestCase):

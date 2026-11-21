@@ -32,6 +32,7 @@ class Config:
         self.clipboard_clear = _int('clipboard_clear', 30)  # seconds, 0 = never
         self.dcli_path = env('dcli_path').strip()
         self.notify = env('notify', '1') == '1'
+        self.sound = env('sound', 'Submarine')  # empty = mute: no fallback to the default
         self.cache_dir = env('alfred_workflow_cache') or os.path.join(
             home, 'Library', 'Caches', 'com.runningwithcrayons.Alfred', 'Workflow Data', BUNDLE)
 
@@ -63,16 +64,14 @@ def output_items(items):
                                  'iconresize': 'fit'}))  # ASCII-safe whatever the locale
 
 
-def output_next(next_step, arg='', status='', icon='', notify='', detail='', **variables):
+def output_next(next_step, arg='', notify='', detail='', **variables):
     """End of the Run Script: tell the workflow what comes next (copy / rerun / none).
 
     notify / detail: title and text of the native notification (Post Notification object).
-    status: shown on the first line of the list when it is shown again.
-    All are always reset, because Alfred variables live for the whole flow. Names are
-    prefixed: Alfred runs scripts with zsh, where `status` is a special parameter.
+    Always reset, because Alfred variables live for the whole flow. Names are prefixed:
+    Alfred runs scripts with zsh, which has special parameters such as `status`.
     """
-    variables.update(next=next_step, dl_status=status, dl_status_icon=icon, dl_notify_title=notify,
-                     dl_notify_text=detail)
+    variables.update(next=next_step, dl_notify_title=notify, dl_notify_text=detail)
     sys.stdout.write(json.dumps({'alfredworkflow': {'arg': arg, 'variables': variables}}))
 
 

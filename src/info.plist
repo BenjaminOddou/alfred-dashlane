@@ -658,7 +658,7 @@
 * `pdash`: passwords. `odash`: OTP codes.
 * ⏎ copy password (or OTP) · ⌘⏎ copy login · ⌥⏎ open URL · ⇧⏎ type login ⇥ password in the frontmost app · ⌃⏎ copy OTP.
 * Sync, Lock, Devices, Download favicons, Clear cache and Logout always stay at the top of the list, in this order.
-* Results come as native macOS notifications (`🔔 Notifications`), or on the first line of the list when notifications are off.
+* Results come as native macOS notifications (`🔔 Notifications`), with the sound of your choice (`🎷 Notification sound`). They are never added to the list.
 * Works with Alfred 5 and Alfred 6; with Alfred 6, unsupported modifier combinations do nothing (`strictmods`) and favicons keep their proportions.
 
 ## 🔐 Security
@@ -675,102 +675,102 @@ Full documentation on [GitHub](https://github.com/BenjaminOddou/alfred-dashlane)
 		<key>1DB8C0D2-6DFF-4D17-AEFB-8EDC6BB6DBF6</key>
 		<dict>
 			<key>xpos</key>
-			<real>340</real>
+			<real>340.0</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>295.0</real>
 		</dict>
 		<key>368005EB-8198-47F3-A531-14D7F2E21DD2</key>
 		<dict>
 			<key>xpos</key>
-			<real>210</real>
+			<real>210.0</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>300.0</real>
 		</dict>
 		<key>5E1F7C2A-3B8D-4F61-9A0E-7C2D4B6A8E10</key>
 		<dict>
 			<key>xpos</key>
-			<real>1180</real>
+			<real>1180.0</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>495.0</real>
 		</dict>
 		<key>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</key>
 		<dict>
 			<key>xpos</key>
-			<real>340</real>
+			<real>340.0</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>135.0</real>
 		</dict>
 		<key>686D5E87-317D-429B-9D65-532AEAFD3816</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1020</real>
+			<real>1020.0</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>320.0</real>
 		</dict>
 		<key>9C4A2E71-6D3B-4E8F-B1A5-2F7E9D0C3B48</key>
 		<dict>
 			<key>xpos</key>
-			<real>1320</real>
+			<real>1320.0</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>480.0</real>
 		</dict>
 		<key>A186397B-2EC8-49B8-A085-8A14EB08F9CB</key>
 		<dict>
 			<key>xpos</key>
-			<real>1320</real>
+			<real>1320.0</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>335.0</real>
 		</dict>
 		<key>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</key>
 		<dict>
 			<key>xpos</key>
-			<real>1180</real>
+			<real>1180.0</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>340.0</real>
 		</dict>
 		<key>B7A08AA9-96A0-4448-BA9C-0718F5885C65</key>
 		<dict>
 			<key>xpos</key>
-			<real>530</real>
+			<real>530.0</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>295.0</real>
 		</dict>
 		<key>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</key>
 		<dict>
 			<key>xpos</key>
-			<real>1310</real>
+			<real>1310.0</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>110.0</real>
 		</dict>
 		<key>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>30.0</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>280.0</real>
 		</dict>
 		<key>E4977331-EA69-47E5-84F6-5F3975D91A7A</key>
 		<dict>
 			<key>xpos</key>
-			<real>895</real>
+			<real>895.0</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>200.0</real>
 		</dict>
 		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
 		<dict>
 			<key>xpos</key>
-			<real>695</real>
+			<real>695.0</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>110.0</real>
 		</dict>
 		<key>F4AAC157-359E-4CCA-BA24-F21D8857A66C</key>
 		<dict>
 			<key>xpos</key>
-			<real>700</real>
+			<real>700.0</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>250.0</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -925,13 +925,91 @@ Full documentation on [GitHub](https://github.com/BenjaminOddou/alfred-dashlane)
 				<string></string>
 			</dict>
 			<key>description</key>
-			<string>show the result of an action in a native macOS notification. Off: the result shows on the first line of the list.</string>
+			<string>show the result of an action (copy, sync, lock...) in a native macOS notification.</string>
 			<key>label</key>
 			<string>🔔 Notifications</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>notify</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Submarine</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Mute 🔕</string>
+						<string></string>
+					</array>
+					<array>
+						<string>Submarine 🤿</string>
+						<string>Submarine</string>
+					</array>
+					<array>
+						<string>Pop 🎉</string>
+						<string>Pop</string>
+					</array>
+					<array>
+						<string>Ping ✨</string>
+						<string>Ping</string>
+					</array>
+					<array>
+						<string>Purr 🐯</string>
+						<string>Purr</string>
+					</array>
+					<array>
+						<string>Hero ⚔️</string>
+						<string>Hero</string>
+					</array>
+					<array>
+						<string>Funk 🕺</string>
+						<string>Funk</string>
+					</array>
+					<array>
+						<string>Basso 🎧</string>
+						<string>Basso</string>
+					</array>
+					<array>
+						<string>Sosumi 📻</string>
+						<string>Sosumi</string>
+					</array>
+					<array>
+						<string>Glass 🍸</string>
+						<string>Glass</string>
+					</array>
+					<array>
+						<string>Blow 💨</string>
+						<string>Blow</string>
+					</array>
+					<array>
+						<string>Bottle 🍼</string>
+						<string>Bottle</string>
+					</array>
+					<array>
+						<string>Frog 🐸</string>
+						<string>Frog</string>
+					</array>
+					<array>
+						<string>Tink 🛎️</string>
+						<string>Tink</string>
+					</array>
+					<array>
+						<string>Morse ♨️</string>
+						<string>Morse</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>sound played with the notifications.</string>
+			<key>label</key>
+			<string>🎷 Notification sound</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>sound</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -958,7 +1036,7 @@ Full documentation on [GitHub](https://github.com/BenjaminOddou/alfred-dashlane)
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.7.1</string>
+	<string>1.7.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenjaminOddou/alfred-dashlane</string>
 </dict>
