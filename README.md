@@ -65,6 +65,8 @@ if unticked:
 
 The workflow sends no notification. After an action (sync, lock, unlock, logout, device removal…), Alfred shows the list again with the result on the first line.
 
+The menu (Sync, Lock, Devices, Download favicons, Clear cache, Logout) always stays at the top of the list, in this order, followed by your items sorted by title: Alfred doesn't reorder results by usage.
+
 ### Login
 
 Press ⏎ on **Login to Dashlane**. A Dashlane page opens in your browser, then the workflow asks, in native macOS dialogs:
