@@ -149,7 +149,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
+		<key>E4977331-EA69-47E5-84F6-5F3975D91A7A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -162,11 +162,24 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E4977331-EA69-47E5-84F6-5F3975D91A7A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F4AAC157-359E-4CCA-BA24-F21D8857A66C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
+				<string>E4977331-EA69-47E5-84F6-5F3975D91A7A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -189,63 +202,40 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>rerun</string>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Type 'yes' to confirm. This Mac is removed from your Dashlane devices.</string>
+				<key>text</key>
+				<string>Logout and erase all local data?</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</string>
+			<string>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:kind}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>password</string>
-						<key>outputlabel</key>
-						<string>password</string>
-						<key>uid</key>
-						<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:kind}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>otp</string>
-						<key>outputlabel</key>
-						<string>otp</string>
-						<key>uid</key>
-						<string>F7B7A8C0-DEC7-41C9-9B62-20FE77BB761C</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>368005EB-8198-47F3-A531-14D7F2E21DD2</string>
+			<string>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -295,6 +285,48 @@
 			<string>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>E4977331-EA69-47E5-84F6-5F3975D91A7A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Type 'yes' to confirm.</string>
+				<key>text</key>
+				<string>Do you really want to remove these devices?</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F4AAC157-359E-4CCA-BA24-F21D8857A66C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>rerun</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -394,38 +426,46 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Type 'yes' to confirm. This Mac is removed from your Dashlane devices.</string>
-				<key>text</key>
-				<string>Logout and erase all local data?</string>
-				<key>withspace</key>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:kind}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>password</string>
+						<key>outputlabel</key>
+						<string>password</string>
+						<key>uid</key>
+						<string>916C8BD9-C780-4E78-8797-54426D1BC783</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:kind}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>otp</string>
+						<key>outputlabel</key>
+						<string>otp</string>
+						<key>uid</key>
+						<string>F7B7A8C0-DEC7-41C9-9B62-20FE77BB761C</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Type 'yes' to confirm.</string>
-				<key>text</key>
-				<string>Do you really want to remove these devices?</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>F4AAC157-359E-4CCA-BA24-F21D8857A66C</string>
+			<string>368005EB-8198-47F3-A531-14D7F2E21DD2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -451,6 +491,25 @@
 			<string>686D5E87-317D-429B-9D65-532AEAFD3816</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>rerun</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>A186397B-2EC8-49B8-A085-8A14EB08F9CB</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -498,44 +557,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<true/>
-				<key>transient</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>rerun</string>
-				<key>passinputasargument</key>
-				<false/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>A186397B-2EC8-49B8-A085-8A14EB08F9CB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string># 🎩 Alfred Dashlane
@@ -568,88 +589,94 @@
 
 Full documentation on [GitHub](https://github.com/BenjaminOddou/alfred-dashlane).
 
-© Benjamin Oddou
-</string>
+© Benjamin Oddou</string>
 	<key>uidata</key>
 	<dict>
 		<key>1DB8C0D2-6DFF-4D17-AEFB-8EDC6BB6DBF6</key>
 		<dict>
 			<key>xpos</key>
-			<real>350.0</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>420.0</real>
+			<real>295</real>
 		</dict>
 		<key>368005EB-8198-47F3-A531-14D7F2E21DD2</key>
 		<dict>
 			<key>xpos</key>
-			<real>240.0</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>355.0</real>
+			<real>300</real>
 		</dict>
 		<key>62FB2CDB-CD6B-4B7E-8568-72F4CCF0F8DC</key>
 		<dict>
 			<key>xpos</key>
-			<real>350.0</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>260.0</real>
+			<real>135</real>
 		</dict>
 		<key>686D5E87-317D-429B-9D65-532AEAFD3816</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>900.0</real>
+			<real>1020</real>
 			<key>ypos</key>
-			<real>400.0</real>
+			<real>320</real>
 		</dict>
 		<key>A186397B-2EC8-49B8-A085-8A14EB08F9CB</key>
 		<dict>
 			<key>xpos</key>
-			<real>1220.0</real>
+			<real>1320</real>
 			<key>ypos</key>
-			<real>470.0</real>
+			<real>335</real>
 		</dict>
 		<key>B6755A99-4E62-4473-AD8C-F2BBD25BDF16</key>
 		<dict>
 			<key>xpos</key>
-			<real>1080.0</real>
+			<real>1180</real>
 			<key>ypos</key>
-			<real>425.0</real>
+			<real>340</real>
 		</dict>
 		<key>B7A08AA9-96A0-4448-BA9C-0718F5885C65</key>
 		<dict>
 			<key>xpos</key>
-			<real>560.0</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>345.0</real>
+			<real>295</real>
 		</dict>
 		<key>BB7CBEE5-DB40-4C8A-A574-156C22F012D9</key>
 		<dict>
 			<key>xpos</key>
-			<real>1220.0</real>
+			<real>1310</real>
 			<key>ypos</key>
-			<real>320.0</real>
+			<real>110</real>
 		</dict>
 		<key>D0A33BC2-9FDA-4A13-821D-AF2FECED9DD9</key>
 		<dict>
 			<key>xpos</key>
-			<real>60.0</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>330.0</real>
+			<real>280</real>
+		</dict>
+		<key>E4977331-EA69-47E5-84F6-5F3975D91A7A</key>
+		<dict>
+			<key>xpos</key>
+			<real>895</real>
+			<key>ypos</key>
+			<real>200</real>
 		</dict>
 		<key>E73C6F8C-8691-4B3C-B33A-A1C21A2D5DB3</key>
 		<dict>
 			<key>xpos</key>
-			<real>720.0</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>200.0</real>
+			<real>110</real>
 		</dict>
 		<key>F4AAC157-359E-4CCA-BA24-F21D8857A66C</key>
 		<dict>
 			<key>xpos</key>
-			<real>720.0</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>330.0</real>
+			<real>250</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
