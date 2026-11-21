@@ -558,7 +558,7 @@
 
 * `pdash`: passwords. `odash`: OTP codes.
 * ⏎ copy password (or OTP) · ⌘⏎ copy login · ⌥⏎ open URL · ⇧⏎ type login ⇥ password in the frontmost app · ⌃⏎ copy OTP.
-* Sync, Lock, Devices, Download favicons and Logout are at the top of the list. Their result is shown there too: the workflow sends no notification.
+* Sync, Lock, Devices, Download favicons, Clear cache and Logout are at the top of the list. Their result is shown there too: the workflow sends no notification.
 
 ## 🔐 Security
 

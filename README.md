@@ -101,6 +101,10 @@ Press ⏎ on **Sync** to download the latest changes of your vault. The CLI also
 
 Downloads the missing icons of your websites in the background, 8 at a time, in the workflow cache folder (`~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.benjamino.dashlane`). ⚠️ The domains of your accounts are sent to Google's favicon service.
 
+### Clear cache
+
+Deletes the cached list and the downloaded favicons from the workflow cache folder. The list is rebuilt from the CLI the next time you open the workflow (if `🔥 Allow cache` is on).
+
 ### Manage connected devices
 
 Press <kbd>⌘</kbd><kbd>↩︎</kbd> on a device to remove it. You can also remove all devices (including this Mac, which logs you out) or the other devices. Bulk actions need a typed `yes`.

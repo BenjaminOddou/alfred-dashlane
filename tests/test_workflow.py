@@ -124,7 +124,7 @@ class WorkflowTest(unittest.TestCase):
     def login(self):
         self.answers = [(False, TOKEN), (False, '12345'), (False, '123456'), (True, self.state['mp'])]
         _, v = self.run_action(action='login')
-        self.assertEqual(v['status'], '✅ Connected as octo@example.com · 3 items', v)
+        self.assertEqual(v['dl_status'], '✅ Connected as octo@example.com · 3 items', v)
         self.assertFalse(self.answers)
 
     def test_full_flow(self):
@@ -145,12 +145,12 @@ class WorkflowTest(unittest.TestCase):
         raw = json.dumps(listing, ensure_ascii=False)
         for secret in ('p@ss', 'ünïcødé', 'JBSWY3', 'GEZDGNBV', 'octo@example.com'):
             self.assertNotIn(secret, raw)
-        self.assertEqual(self.titles(listing), ['Sync', 'Lock', 'Devices', 'Download favicons', 'Logout',
+        self.assertEqual(self.titles(listing), ['Sync', 'Lock', 'Devices', 'Download favicons', 'Clear cache', 'Logout',
                                                 'Émile & Co', 'GitHub', 'google.com'])
-        github = listing['items'][6]
+        github = listing['items'][7]
         self.assertEqual(github['subtitle'], 'oc••••o@example.com ǀ ⏎ copy password')
         self.assertTrue(github['icon']['path'].endswith('github.com.png'))
-        self.assertEqual(self.titles(self.call('filter', 'otp'))[5:], ['GitHub', 'google.com'])
+        self.assertEqual(self.titles(self.call('filter', 'otp'))[6:], ['GitHub', 'google.com'])
 
         # cache: no secret, private, served without calling dcli while unlocked
         with open(os.path.join(cache, 'vault.json'), 'rb') as fh:
@@ -178,19 +178,19 @@ class WorkflowTest(unittest.TestCase):
         self.run_action(action='open_url', url='shop.example.co.uk')
         self.assertEqual(self.sub.runs[-1][0], ['open', 'https://shop.example.co.uk'])
         _, v = self.run_action(action='open_url', url='javascript:alert(1)')
-        self.assertIn('Only http(s)', v['status'])
+        self.assertIn('Only http(s)', v['dl_status'])
         _, v = self.run_action(action='copy_password', id='../../etc')
-        self.assertIn('Unknown item', v['status'])
+        self.assertIn('Unknown item', v['dl_status'])
 
         # sync, lock, unlock
-        self.assertEqual(self.run_action(action='sync')[1]['status'], '✅ Synced · 3 items')
+        self.assertEqual(self.run_action(action='sync')[1]['dl_status'], '✅ Synced · 3 items')
         _, v = self.run_action(action='lock')
-        self.assertEqual(v['status'], '🔒 Locked')
+        self.assertEqual(v['dl_status'], '🔒 Locked')
         self.assertFalse(os.path.exists(os.path.join(cache, 'vault.json')))
-        locked = self.call('filter', 'password', status=v['status'], status_icon=v['status_icon'])
-        self.assertEqual(self.titles(locked), ['🔒 Locked', 'Your vault is locked', 'Logout'])
+        locked = self.call('filter', 'password', dl_status=v['dl_status'], dl_status_icon=v['dl_status_icon'])
+        self.assertEqual(self.titles(locked), ['🔒 Locked', 'Your vault is locked', 'Clear cache', 'Logout'])
         _, v = self.run_action(action='copy_password', id=GITHUB)
-        self.assertEqual((v['next'], v['status']), ('rerun', '🔒 Your vault is locked'))
+        self.assertEqual((v['next'], v['dl_status']), ('rerun', '🔒 Your vault is locked'))
         self.unlock()
         self.assertIn('GitHub', self.titles(self.call('filter', 'password')))
 
@@ -198,7 +198,7 @@ class WorkflowTest(unittest.TestCase):
         self.state = self.load()
         self.state['locked'] = True
         self.save()
-        self.assertEqual(self.titles(self.call('filter', 'password')), ['Your vault is locked', 'Logout'])
+        self.assertEqual(self.titles(self.call('filter', 'password')), ['Your vault is locked', 'Clear cache', 'Logout'])
         self.assertFalse(os.path.exists(os.path.join(cache, 'vault.json')))
         self.unlock()
 
@@ -206,34 +206,67 @@ class WorkflowTest(unittest.TestCase):
         devices = self.call('filter', 'password', view='devices')
         self.assertEqual(self.titles(devices)[3:], ['iPhone', 'Mac (this Mac)'])
         _, v = self.run_action(action='device_remove', id='PHONE', name='iPhone')
-        self.assertEqual((v['status'], v['view']), ('✅ Device "iPhone" removed', 'devices'))
+        self.assertEqual((v['dl_status'], v['view']), ('✅ Device "iPhone" removed', 'devices'))
         self.assertEqual([d['deviceId'] for d in self.load()['devices']], ['ME'])
 
         # logout needs a typed "yes"
         _, v = self.run_action('no', action='logout')
         self.assertTrue(self.load()['logged_in'])
         _, v = self.run_action('yes', action='logout')
-        self.assertEqual(v['status'], '✅ Logged out, local data erased')
+        self.assertEqual(v['dl_status'], '✅ Logged out, local data erased')
         self.assertFalse(self.load()['logged_in'])
         self.assertEqual(os.listdir(cache), [])
 
     def unlock(self):
         self.answers = ([(False, '123456')] if self.totp else []) + [(True, self.state['mp'])]
         _, v = self.run_action(action='unlock')
-        self.assertEqual(v['status'], '🔓 Unlocked · 3 items', v)
+        self.assertEqual(v['dl_status'], '🔓 Unlocked · 3 items', v)
 
     def test_wrong_inputs(self):
         self.answers = [(False, TOKEN), (False, '123456'), (True, 'wrong')]
         _, v = self.run_action(action='login')
-        self.assertEqual(v['status'], 'Wrong master password')
+        self.assertEqual(v['dl_status'], 'Wrong master password')
         self.answers = [(False, None)]
         _, v = self.run_action(action='login')
-        self.assertEqual(v['status'], 'Canceled')
+        self.assertEqual(v['dl_status'], 'Canceled')
         self.login()
         self.run_action(action='lock')
         self.answers = ([(False, '123456')] if self.totp else []) + [(True, 'nope')]
         _, v = self.run_action(action='unlock')
-        self.assertEqual(v['status'], 'Wrong master password')
+        self.assertEqual(v['dl_status'], 'Wrong master password')
+
+    def test_clear_cache(self):
+        self.login()
+        cache = os.path.join(self.tmp, 'cache')
+        with open(os.path.join(cache, 'github.com.png'), 'wb') as fh:
+            fh.write(b'\x89PNG')
+        _, v = self.run_action(action='clear_cache')
+        self.assertEqual(v['dl_status'], '🧹 Cache cleared (2 files)')
+        self.assertEqual(os.listdir(cache), [])
+        self.assertIn('GitHub', self.titles(self.call('filter', 'password')))  # rebuilt from dcli
+
+    @unittest.skipUnless(shutil.which('zsh'), 'zsh not installed')
+    def test_variables_survive_zsh(self):
+        """Alfred runs the scripts with zsh: a variable named like a zsh special parameter
+        (`status`, `path`...) comes out as something else, e.g. "0"."""
+        import subprocess
+        self.login()
+        names = set()
+        listing = self.call('filter', 'password')
+        for item in listing['items']:
+            names |= set(item.get('variables', {}))
+            for mod in item.get('mods', {}).values():
+                names |= set(mod.get('variables', {}))
+        names |= set(self.run_action(action='sync')[1])
+        names |= set(self.run_action(action='nav', target='devices')[1])
+        script = 'for n in %s; do export $n; done; %s -c "import os,json; print(json.dumps(dict(os.environ)))"' % (
+            ' '.join(sorted(names)), sys.executable)
+        for value in (None, '', 'x'):  # None: unset, then exported by the shell
+            env = {'PATH': os.environ['PATH']}
+            env.update({n: value for n in names if value is not None})
+            seen = json.loads(subprocess.run(['zsh', '-c', script], env=env, capture_output=True,
+                                             text=True).stdout)
+            self.assertEqual({n: seen.get(n) or '' for n in names}, {n: value or '' for n in names})
 
     def test_background_refresh_and_no_cache(self):
         self.login()

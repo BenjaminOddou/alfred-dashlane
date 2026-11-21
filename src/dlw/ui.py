@@ -55,9 +55,15 @@ def output_items(items):
     sys.stdout.write(json.dumps({'items': items}))  # ASCII-safe whatever the locale
 
 
-def output_next(next_step, arg='', **variables):
-    """End of the Run Script: tell the workflow what comes next (copy / rerun / none)."""
-    variables['next'] = next_step
+def output_next(next_step, arg='', status='', icon='', **variables):
+    """End of the Run Script: tell the workflow what comes next (copy / rerun / none).
+
+    `status` is shown on the first line of the list when it is shown again. It is
+    always reset, because Alfred variables live for the whole flow. Names are
+    prefixed: Alfred runs scripts with zsh, where `status` is a special parameter
+    (it turned into "0").
+    """
+    variables.update(next=next_step, dl_status=status, dl_status_icon=icon)
     sys.stdout.write(json.dumps({'alfredworkflow': {'arg': arg, 'variables': variables}}))
 
 

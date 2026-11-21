@@ -122,10 +122,10 @@ def load_vault():
 # --------------------------------------------------------------------------- script filter
 
 def status_items(base):
-    message = ui.env('status')
+    message = ui.env('dl_status')
     if not message:
         return []
-    return [ui.item(message, ui.env('status_detail'), icon=ui.env('status_icon') or 'info', valid=False)]
+    return [ui.item(message, icon=ui.env('dl_status_icon') or 'info', valid=False)]
 
 
 def cmd_filter(kind):
@@ -134,6 +134,8 @@ def cmd_filter(kind):
     items = status_items(base)
     logout = ui.item('Logout', 'Revoke this device and erase local data', icon='delete',
                      variables=dict(base, action='logout'))
+    clear_cache = ui.item('Clear cache', 'Delete the cached list and the favicons', icon='delete',
+                          variables=dict(base, action='clear_cache'))
     if not cfg.login:
         return ui.output_items(items + [ui.item('Set your Dashlane login', 'Open the workflow configuration',
                                                 valid=False)])
@@ -152,6 +154,7 @@ def cmd_filter(kind):
         return ui.output_items(items + [
             ui.item('Your vault is locked', '⏎ unlock it with your master password', icon='lock',
                     variables=dict(base, action='unlock')),
+            clear_cache,
             logout])
     except d.DcliError as exc:
         return ui.output_items(items + [
@@ -167,6 +170,7 @@ def cmd_filter(kind):
                 variables=dict(base, action='nav', target='devices')),
         ui.item('Download favicons', 'Fetch missing site icons (domains are sent to Google)', icon='download',
                 variables=dict(base, action='favicons')),
+        clear_cache,
         logout,
     ]
     try:
@@ -319,11 +323,20 @@ def confirm(arg):
 
 
 def wipe_local():
-    drop_cache()
+    """Delete the cached list and the favicons. Returns how many files were removed."""
+    removed = 0
     if os.path.isdir(cfg.cache_dir):
         for name in os.listdir(cfg.cache_dir):
-            if name.endswith('.png'):
-                os.unlink(os.path.join(cfg.cache_dir, name))
+            path = os.path.join(cfg.cache_dir, name)
+            if name.endswith(('.json', '.png')) and os.path.isfile(path):
+                os.unlink(path)
+                removed += 1
+    return removed
+
+
+def action_clear_cache(arg):
+    removed = wipe_local()
+    raise Done('🧹 Cache cleared (%d file%s)' % (removed, '' if removed == 1 else 's'), 'delete')
 
 
 def action_logout(arg):
@@ -357,7 +370,7 @@ def action_favicons(arg):
 
 
 def action_nav(arg):
-    ui.output_next('rerun', view=ui.env('target', 'main'), status='')
+    ui.output_next('rerun', view=ui.env('target', 'main'))
 
 
 def item_path(field=''):
@@ -391,12 +404,12 @@ def action_copy_password(arg):
     if not password:
         raise Done('⚠️ No password for this item')
     schedule_clipboard_clear(password)
-    ui.output_next('copy', password, status='')
+    ui.output_next('copy', password)
 
 
 def action_copy_login(arg):
     item = read_item()
-    ui.output_next('copy', item.get('email') or item.get('login') or '', status='')
+    ui.output_next('copy', item.get('email') or item.get('login') or '')
 
 
 def action_copy_otp(arg):
@@ -405,7 +418,7 @@ def action_copy_otp(arg):
     if not code.isdigit():
         raise Done('🚨 No OTP for this item')
     schedule_clipboard_clear(code)
-    ui.output_next('copy', code, status='')
+    ui.output_next('copy', code)
 
 
 def action_open_url(arg):
@@ -416,7 +429,7 @@ def action_open_url(arg):
     if not re.match(r'^https?://', url, re.I):
         raise Done('⚠️ Only http(s) links can be opened')
     subprocess.run(['open', url])
-    ui.output_next('none', status='')
+    ui.output_next('none')
 
 
 def action_inject(arg):
@@ -430,7 +443,7 @@ def action_inject(arg):
     proc = subprocess.run(['osascript'], input=script, capture_output=True, text=True, timeout=60)
     if proc.returncode != 0:
         raise Done('🚨 Typing failed: allow Alfred in Privacy & Security > Accessibility')
-    ui.output_next('none', status='')
+    ui.output_next('none')
 
 
 ACTIONS = {name[7:]: fn for name, fn in globals().items() if name.startswith('action_')}
@@ -440,19 +453,19 @@ def cmd_run(arg):
     from dlw import dcli as d
     action = ACTIONS.get(ui.env('action'))
     if action is None:
-        return ui.output_next('none', status='')
+        return ui.output_next('none')
     try:
         action(arg)
     except Done as exc:
-        ui.output_next('rerun', view=exc.view, status=str(exc), status_icon=exc.icon)
+        ui.output_next('rerun', view=exc.view, status=str(exc), icon=exc.icon)
     except d.Locked:
         drop_cache()
-        ui.output_next('rerun', view='main', status='🔒 Your vault is locked', status_icon='lock')
+        ui.output_next('rerun', view='main', status='🔒 Your vault is locked', icon='lock')
     except d.LoggedOut:
         drop_cache()
-        ui.output_next('rerun', view='main', status='You are not logged in', status_icon='otp')
+        ui.output_next('rerun', view='main', status='You are not logged in', icon='otp')
     except d.DcliError as exc:
-        ui.output_next('rerun', view='main', status='🚨 %s' % exc, status_icon='info')
+        ui.output_next('rerun', view='main', status='🚨 %s' % exc, icon='info')
 
 
 # --------------------------------------------------------------------------- background jobs
