@@ -28,7 +28,7 @@ class Abort(Exception):
 
 def boot():
     from dlw import deps
-    deps.activate(cfg.data_dir)
+    deps.activate()
     return deps.available()
 
 
@@ -107,14 +107,10 @@ def require_session(store):
 
 def cmd_filter(kind, query):
     base = {'kind': kind, 'view': 'main'}
-    if sys.version_info < (3, 9):
-        return ui.output_items([ui.item('Python 3.9+ is required', 'Found %s' % sys.version.split()[0],
-                                        valid=False)])
     if not boot():
-        return ui.output_items([ui.item(
-            'Install the crypto engine (one time)',
-            'Downloads the hash-pinned "cryptography" package from PyPI (~5 MB)', icon='download',
-            variables=dict(base, action='install'))])
+        from dlw import deps
+        return ui.output_items([ui.item(deps.problem(), '⏎ report an issue', icon='info',
+                                        variables=dict(base, action='issue'))])
     if not cfg.login:
         return ui.output_items([ui.item('Set your Dashlane login', 'Open the workflow configuration first',
                                         valid=False)])
@@ -244,16 +240,6 @@ def maybe_background_sync(store):
 
 
 # --------------------------------------------------------------------------- actions
-
-def action_install(arg):
-    from dlw import deps
-    notify('⏳ Please wait', 'Installing the crypto engine…')
-    ok, message = deps.install(cfg.data_dir)
-    if not ok:
-        raise Abort('🚨 Install failed', message)
-    notify('✅ Ready', 'Crypto engine installed')
-    ui.output_next('rerun', view='main')
-
 
 def action_login(arg):
     from urllib.parse import quote
@@ -530,7 +516,6 @@ def action_issue(arg):
 
 ACTIONS = {
     'issue': action_issue,
-    'install': action_install,
     'login': action_login,
     'unlock': action_unlock,
     'lock': action_lock,
@@ -553,8 +538,9 @@ def cmd_run(arg):
     action = ACTIONS.get(ui.env('action'))
     if action is None:
         return ui.output_next('none')
-    if action not in (action_install, action_issue) and not boot():
-        notify('🚨 Error', 'Crypto engine missing, reopen the workflow')
+    if action is not action_issue and not boot():
+        from dlw import deps
+        notify('🚨 Error', deps.problem())
         return ui.output_next('none')  # always reset `next`: variables live for the whole flow
     try:
         action(arg)

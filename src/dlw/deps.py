@@ -1,27 +1,27 @@
-"""Locate / install the `cryptography` package (Argon2 + AES, native code).
+"""Put the bundled third-party packages (src/lib) on sys.path.
 
-It is installed once with pip into the workflow data folder, from PyPI, with
-pinned versions and SHA-256 hashes (requirements.txt): pip refuses any file
-whose hash does not match.
+Nothing is downloaded at runtime: `cryptography` (universal2, stable ABI) and
+one `_cffi_backend` per Python version and CPU ship with the workflow, see
+vendor.py at the repository root.
 """
 
 import os
 import platform
-import shutil
-import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-REQUIREMENTS = os.path.join(HERE, 'requirements.txt')
+LIB = os.path.join(HERE, 'lib')
+SUPPORTED = ((3, 9), (3, 15))
 
 
-def lib_dir(data_dir):
-    tag = 'py%d%d-%s' % (sys.version_info[0], sys.version_info[1], platform.machine() or 'any')
-    return os.path.join(data_dir, 'lib', tag)
-
-
-def activate(data_dir):
-    for path in (os.path.join(HERE, 'lib'), lib_dir(data_dir)):
+def activate():
+    """Bundled packages first, so the pinned versions win over anything installed."""
+    paths = [LIB]
+    if sys.platform == 'darwin':  # the native files are macOS builds
+        paths.insert(0, os.path.join(LIB, '_cffi', platform.machine()))
+    else:  # dev / CI on Linux: certifi only, cryptography comes from the environment
+        paths = []
+    for path in reversed(paths):
         if os.path.isdir(path) and path not in sys.path:
             sys.path.insert(0, path)
 
@@ -35,24 +35,11 @@ def available():
         return False
 
 
-def install(data_dir):
-    """pip install the pinned, hash-checked requirements. Returns (ok, message)."""
-    if sys.version_info < (3, 9):
-        return False, 'Python 3.9 or newer is required'
-    target = lib_dir(data_dir)
-    tmp = target + '.tmp'
-    shutil.rmtree(tmp, ignore_errors=True)
-    os.makedirs(os.path.dirname(target), mode=0o700, exist_ok=True)
-    cmd = [sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check', '--no-input',
-           '--no-deps', '--only-binary', ':all:', '--require-hashes', '--target', tmp, '-r', REQUIREMENTS]
-    try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        return False, str(exc)
-    if proc.returncode != 0:
-        lines = [l for l in (proc.stderr or proc.stdout).splitlines() if l.strip()]
-        shutil.rmtree(tmp, ignore_errors=True)
-        return False, lines[-1] if lines else 'pip failed'
-    shutil.rmtree(target, ignore_errors=True)
-    os.replace(tmp, target)
-    return True, 'ok'
+def problem():
+    """Human readable reason why the crypto engine can't load."""
+    version = '%d.%d' % sys.version_info[:2]
+    if not SUPPORTED[0] <= sys.version_info[:2] <= SUPPORTED[1]:
+        return 'Python %s is not supported (3.9 to 3.15)' % version
+    if platform.machine() not in ('arm64', 'x86_64'):
+        return 'Unsupported CPU: %s' % platform.machine()
+    return 'Crypto engine failed to load with Python %s (%s)' % (version, sys.executable)

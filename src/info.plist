@@ -546,15 +546,14 @@
 
 * macOS, Alfred 5 with the [Powerpack](https://www.alfredapp.com/powerpack/).
 * A [Dashlane](https://www.dashlane.com) account with a master password (SSO / passwordless accounts are not supported).
-* **Python 3.9** or above (`python3 --version`).
+* **Python 3.9 to 3.15** (`python3 --version`), Apple Silicon or Intel.
 
-No Dashlane CLI needed: the workflow talks to Dashlane directly.
+No Dashlane CLI needed: the workflow talks to Dashlane directly. Everything ships inside the workflow, nothing is downloaded or installed at runtime.
 
 ## 🧰 Setup
 
 1. Fill `👤 Login` with your Dashlane email.
-2. Type `pdash`. The first time, press ⏎ on **Install the crypto engine**: it installs the hash-pinned `cryptography` package (Argon2 + AES) in the workflow data folder.
-3. Press ⏎ on **Login to Dashlane**: a Dashlane page opens in your browser. Paste the token it shows, then the 6-digit code (email or authenticator app), then your master password in the secure macOS dialog.
+2. Type `pdash` and press ⏎ on **Login to Dashlane**: a Dashlane page opens in your browser. Paste the token it shows, then the 6-digit code (email or authenticator app), then your master password in the secure macOS dialog.
 
 ## 🧙‍♂️ Usage
 
@@ -568,6 +567,7 @@ No Dashlane CLI needed: the workflow talks to Dashlane directly.
 * Login verified with OPAQUE (the master password never leaves your Mac), pinned Dashlane server key.
 * Local vault encrypted with AES-256-GCM. Its key is wrapped with Argon2id(master password) and only sits in your login keychain while unlocked. Auto-lock after inactivity.
 * Nothing in clear on disk: no plaintext cache.
+* Bundled `cryptography` comes from the official PyPI wheel, checked against a pinned SHA-256.
 
 Full documentation on [GitHub](https://github.com/BenjaminOddou/alfred-dashlane).
 

@@ -12,9 +12,9 @@ Welcome to the Alfred Dashlane repository: **An Alfred Workflow** ✨
 * macOS.
 * Alfred 5. Note that the [Alfred Powerpack](https://www.alfredapp.com/powerpack/) is required to use workflows.
 * A [Dashlane](https://www.dashlane.com/fr) account protected by a **master password** (SSO and passwordless accounts are not supported).
-* **Python 3.9** or above (`python3 --version`). The Apple one (Xcode Command Line Tools), python.org and Homebrew builds all work.
+* **Python 3.9 to 3.15** (`python3 --version`), Apple Silicon or Intel. The Apple one (Xcode Command Line Tools), python.org and Homebrew builds all work.
 
-Since v2.0.0 the workflow **no longer needs the Dashlane CLI**: it talks to the Dashlane API directly, in Python.
+Since v2.0.0 the workflow **no longer needs the Dashlane CLI**: it talks to the Dashlane API directly, in Python. Everything it needs ships inside the workflow, nothing is downloaded or installed at runtime.
 
 ## ⬇️ Installation
 
@@ -24,8 +24,7 @@ Since v2.0.0 the workflow **no longer needs the Dashlane CLI**: it talks to the 
 
 ## 🧰 First run
 
-1. Type `pdash`. Press ⏎ on **Install the crypto engine (one time)**. The workflow runs `pip` to install [`cryptography`](https://pypi.org/project/cryptography/) (Argon2 + AES, native code) in its data folder. Versions and SHA-256 hashes of every file are pinned in [`requirements.txt`](src/requirements.txt): pip refuses anything else.
-2. Press ⏎ on **Login to Dashlane**. A Dashlane page opens in your browser:
+1. Type `pdash`, then press ⏎ on **Login to Dashlane**. A Dashlane page opens in your browser:
    1. paste the token shown in the browser,
    2. enter the 6-digit code received by email (or from your authenticator app),
    3. enter your master password.
@@ -108,7 +107,7 @@ Revokes this Mac from your Dashlane devices and erases all local data. Confirm b
 | Vault key | Random 256-bit key, wrapped with Argon2id (64 MiB, 3 passes) of your master password. While unlocked it sits in the macOS login keychain; locking (manual or auto-lock) deletes it. |
 | Clipboard | Copies are marked transient (ignored by clipboard history managers) and erased after the chosen delay, only if the clipboard still holds the secret. |
 | Typing | ⇧⏎ sends the AppleScript through stdin, with escaped strings: the password is never in a process argument list. |
-| Dependencies | Pure Python, plus `cryptography` installed from PyPI with pinned versions and hashes. |
+| Dependencies | Pure Python, plus [`cryptography`](https://pypi.org/project/cryptography/) 48.0.1 (Argon2 + AES) and `certifi`, bundled in `src/lib`. They come from the official PyPI wheels, checked against pinned SHA-256 by [`vendor.py`](vendor.py). Nothing is downloaded at runtime. |
 
 Limits: anything running as your macOS user while the vault is unlocked can ask `security` for the vault key, like with the Dashlane CLI. Keep the auto-lock short if this matters to you.
 
@@ -121,7 +120,11 @@ python3 -m pip install cryptography
 python3 -m unittest discover -s tests
 ```
 
-`tests/test_workflow.py` runs the whole workflow against a fake Dashlane server. Set `DLW_NODE_MODULES` to a folder with `@serenity-kit/opaque@1.1.0` to also check the OPAQUE client against the library the Dashlane CLI uses. `update.sh` refreshes the bundled CA bundle and the pinned hashes.
+On macOS the tests use the bundled packages; elsewhere they use the `cryptography` of your environment. `tests/test_workflow.py` runs the whole workflow against a fake Dashlane server. Set `DLW_NODE_MODULES` to a folder with `@serenity-kit/opaque@1.1.0` to also check the OPAQUE client against the library the Dashlane CLI uses.
+
+### Bundled packages
+
+`src/lib` holds `certifi`, `cryptography` (universal2, stable ABI: one copy for every Python ≥ 3.9) and `_cffi/<arch>/_cffi_backend.cpython-3XY-darwin.so`, the only part of `cffi` that `cryptography` loads, for Python 3.9 to 3.15 on arm64 and x86_64 (about 27 MB). To upgrade, edit the wheel names and SHA-256 in [`vendor.py`](vendor.py) and run `./update.sh`: it downloads the wheels from PyPI, refuses any hash mismatch, re-extracts `src/lib` and runs the tests.
 
 ## ⚖️ License
 
