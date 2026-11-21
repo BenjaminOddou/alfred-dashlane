@@ -10,7 +10,7 @@ Welcome to the Alfred Dashlane repository: **An Alfred Workflow** ✨
 ## ✅ Prerequisites
 
 * macOS.
-* Alfred 5. Note that the [Alfred Powerpack](https://www.alfredapp.com/powerpack/) is required to use workflows.
+* Alfred 5 or Alfred 6. Note that the [Alfred Powerpack](https://www.alfredapp.com/powerpack/) is required to use workflows.
 * A [Dashlane](https://www.dashlane.com/fr) account protected by a master password.
 * **Python 3.9** or above (`python3 --version`).
 * The [Dashlane CLI](https://github.com/Dashlane/dashlane-cli) (`dcli`), see below.
@@ -59,11 +59,18 @@ if unticked:
 
 3. `🔥 Allow cache`: keep the list of your items (titles, URLs and logins, **never passwords or OTP secrets**) in the workflow cache folder while the CLI is unlocked. The list shows instantly and is refreshed in the background. It is deleted as soon as the vault is locked, even when you lock it from the terminal.
 4. `🧹 Clear clipboard`: erase a copied password / OTP from the clipboard after this delay (default 30 s).
-5. `🛠️ dcli path`: only needed if the CLI isn't found automatically.
+5. `🔔 Notifications`: show the result of an action in a native macOS notification (default on). Off: the result shows on the first line of the list.
+6. `🛠️ dcli path`: only needed if the CLI isn't found automatically.
 
 ### Feedback
 
-The workflow sends no notification. After an action (sync, lock, unlock, logout, device removal…), Alfred shows the list again with the result on the first line.
+Results come as native macOS notifications, posted by Alfred's *Post Notification* object (Alfred 6 uses Apple's UserNotifications API for them):
+
+* copies name the item and say when the clipboard will be cleared (`📋 Password copied · GitHub · cleared in 30 s`), never the copied value;
+* after login, unlock, sync, device removal or an error, Alfred also shows the list again;
+* lock, logout, clear cache and favicon downloads just notify.
+
+With `🔔 Notifications` off, Alfred shows the list again after every action with the result on the first line.
 
 The menu (Sync, Lock, Devices, Download favicons, Clear cache, Logout) always stays at the top of the list, in this order, followed by your items sorted by title: Alfred doesn't reorder results by usage.
 
@@ -118,6 +125,16 @@ Press <kbd>⌘</kbd><kbd>↩︎</kbd> on a device to remove it. You can also rem
 Logs the CLI out (this Mac is revoked from your devices) and erases the local data, favicons included. Confirm by typing `yes`.
 
 ![confirm_delete](public/confirm_delete.webp)
+
+## 🆕 Alfred 6
+
+The workflow runs unchanged on Alfred 5 and uses these Alfred 6 features when available:
+
+* `strictmods`: a modifier combination the workflow doesn't define (e.g. ⌘⇧↩︎) does nothing instead of running the default action, so an unexpected shortcut never copies a password.
+* `iconresize: fit`: favicons keep their proportions.
+* Notifications go through the UserNotifications API.
+
+The new Alfred UI toolkit isn't used for the master password on purpose: a `passwordfield` can only reach a script through its arguments or an environment variable, both readable by other programs running as you. The macOS dialog used here hands it over through a pipe.
 
 ## 🔐 Security
 

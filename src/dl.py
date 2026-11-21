@@ -26,11 +26,14 @@ INSTALL_DOC = 'https://dashlane.github.io/dashlane-cli/install'
 
 
 class Done(Exception):
-    """Stop an action and show `message` at the top of the list."""
+    """End an action with a result: a native notification (or the first line of the list).
 
-    def __init__(self, message, icon='info', view='main'):
+    rerun: show the list again afterwards (login, unlock, sync, errors...).
+    """
+
+    def __init__(self, message, icon='info', view='main', detail='', rerun=True):
         Exception.__init__(self, message)
-        self.icon, self.view = icon, view
+        self.icon, self.view, self.detail, self.rerun = icon, view, detail, rerun
 
 
 # --------------------------------------------------------------------------- helpers
@@ -189,7 +192,7 @@ def cmd_filter(kind):
             icon = 'icons/letter-%s.webp' % first if first else 'icons/question-ics.webp'
 
         def v(action, r=r):
-            return dict(base, action=action, id=r['id'], otp=r['otp'], url=r['url'])
+            return dict(base, action=action, id=r['id'], otp=r['otp'], url=r['url'], title=r['title'])
 
         mods = {
             'cmd': {'subtitle': '%s ǀ ⏎ copy login' % shown, 'arg': 'copy_login',
@@ -273,7 +276,7 @@ def interactive(args, timeout=180):
     try:
         return cli().run(args, answers(), timeout)
     except d.Cancelled:
-        raise Done('Canceled', 'info')
+        raise Done('Canceled', 'info', rerun=False)
     except d.DcliError as exc:
         message = str(exc)
         if 'mismatching signatures' in message or 'wrong master password' in message.lower():
@@ -281,18 +284,18 @@ def interactive(args, timeout=180):
         raise Done(message, 'info')
 
 
-def refresh_after_change(message, icon):
+def refresh_after_change(message, icon, detail=''):
     try:
-        records = fetch(cli())
-        message += ' · %d items' % len(records)
+        count = '%d items' % len(fetch(cli()))
+        detail = '%s · %s' % (detail, count) if detail else count
     except Exception:
         pass
-    raise Done(message, icon)
+    raise Done(message, icon, detail=detail)
 
 
 def action_login(arg):
     interactive(['sync'], timeout=300)
-    refresh_after_change('✅ Connected as %s' % cfg.login, 'otp')
+    refresh_after_change('✅ Connected', 'otp', cfg.login)
 
 
 def action_unlock(arg):
@@ -307,19 +310,19 @@ def action_sync(arg):
     except d.Locked:
         raise Done('🔒 Your vault is locked', 'lock')
     except d.DcliError as exc:
-        raise Done('🚨 Sync failed: %s' % exc)
+        raise Done('🚨 Sync failed', detail=str(exc))
     refresh_after_change('✅ Synced', 'sync')
 
 
 def action_lock(arg):
     drop_cache()
     cli().run(['lock'])
-    raise Done('🔒 Locked', 'lock')
+    raise Done('🔒 Locked', 'lock', rerun=False)
 
 
 def confirm(arg):
     if arg.strip().lower() != 'yes':
-        raise Done('Canceled: type yes to confirm')
+        raise Done('Canceled', detail='Type yes to confirm', rerun=False)
 
 
 def wipe_local():
@@ -336,26 +339,27 @@ def wipe_local():
 
 def action_clear_cache(arg):
     removed = wipe_local()
-    raise Done('🧹 Cache cleared (%d file%s)' % (removed, '' if removed == 1 else 's'), 'delete')
+    raise Done('🧹 Cache cleared', 'delete', detail='%d file%s deleted' % (removed, '' if removed == 1 else 's'),
+               rerun=False)
 
 
 def action_logout(arg):
     confirm(arg)
     wipe_local()
     interactive(['logout'], timeout=120)
-    raise Done('✅ Logged out, local data erased', 'delete')
+    raise Done('✅ Logged out', 'delete', detail='Local data erased', rerun=False)
 
 
 def action_device_remove(arg):
     cli().run(['devices', 'remove', ui.env('id')], timeout=60)
-    raise Done('✅ Device "%s" removed' % ui.env('name'), 'devices', view='devices')
+    raise Done('✅ Device removed', 'devices', view='devices', detail=ui.env('name'))
 
 
 def action_devices_remove_all(arg):
     confirm(arg)
     wipe_local()
     interactive(['devices', 'remove', '--all'], timeout=120)
-    raise Done('✅ All devices removed, you are logged out', 'delete')
+    raise Done('✅ All devices removed', 'delete', detail='You are logged out', rerun=False)
 
 
 def action_devices_remove_others(arg):
@@ -365,8 +369,14 @@ def action_devices_remove_others(arg):
 
 
 def action_favicons(arg):
+    cached = read_cache()
+    records = cached['items'] if cached else fetch(cli())
+    missing = {r['domain'] for r in records if r['domain'] and not os.path.exists(favicon(r['domain']))}
+    if not missing:
+        raise Done('👀 Favicons up to date', 'download', rerun=False)
     spawn('favicons')
-    raise Done('⏳ Downloading favicons in the background', 'download')
+    raise Done('⏳ Downloading favicons', 'download', detail='%d icons, in the background' % len(missing),
+               rerun=False)
 
 
 def action_nav(arg):
@@ -376,7 +386,7 @@ def action_nav(arg):
 def item_path(field=''):
     item_id = ui.env('id')
     if not re.match(r'^[0-9A-Fa-f-]{36}$', item_id):
-        raise Done('🚨 Unknown item')
+        raise Done('🚨 Unknown item', rerun=False)
     return 'dl://%s%s' % (item_id, '/' + field if field else '')
 
 
@@ -384,7 +394,18 @@ def read_item():
     try:
         return json.loads(cli().read(item_path()))
     except ValueError:
-        raise Done('🚨 Unreadable item')
+        raise Done('🚨 Unreadable item', rerun=False)
+
+
+def copied(value, what, clears=True, expiry=''):
+    """Hand `value` to Alfred's transient clipboard output. The notification never contains it."""
+    detail = [ui.env('title')]
+    if expiry.isdigit():
+        detail.append('expires in %s s' % expiry)
+    if clears and cfg.clipboard_clear:
+        detail.append('cleared in %d s' % cfg.clipboard_clear)
+    note = '📋 %s copied' % what if cfg.notify else ''
+    ui.output_next('copy', value, notify=note, detail=' · '.join(d for d in detail if d) if note else '')
 
 
 def schedule_clipboard_clear(text):
@@ -402,23 +423,23 @@ def schedule_clipboard_clear(text):
 def action_copy_password(arg):
     password = cli().read(item_path('password'))
     if not password:
-        raise Done('⚠️ No password for this item')
+        raise Done('⚠️ No password for this item', rerun=False)
     schedule_clipboard_clear(password)
-    ui.output_next('copy', password)
+    copied(password, 'Password')
 
 
 def action_copy_login(arg):
     item = read_item()
-    ui.output_next('copy', item.get('email') or item.get('login') or '')
+    copied(item.get('email') or item.get('login') or '', 'Login', clears=False)
 
 
 def action_copy_otp(arg):
     path = item_path('otpUrl?otp_uri+expiry' if ui.env('otp') == 'uri' else 'otpSecret?otp+expiry')
-    code = cli().read(path).split(' ')[0]
+    code, _, left = cli().read(path).partition(' ')
     if not code.isdigit():
-        raise Done('🚨 No OTP for this item')
+        raise Done('🚨 No OTP for this item', rerun=False)
     schedule_clipboard_clear(code)
-    ui.output_next('copy', code)
+    copied(code, 'OTP', expiry=left)
 
 
 def action_open_url(arg):
@@ -427,7 +448,7 @@ def action_open_url(arg):
     if url and not has_scheme:
         url = 'https://' + url
     if not re.match(r'^https?://', url, re.I):
-        raise Done('⚠️ Only http(s) links can be opened')
+        raise Done('⚠️ Only http(s) links can be opened', rerun=False)
     subprocess.run(['open', url])
     ui.output_next('none')
 
@@ -442,7 +463,7 @@ def action_inject(arg):
     # Script on stdin: the password never shows up in a process argument list.
     proc = subprocess.run(['osascript'], input=script, capture_output=True, text=True, timeout=60)
     if proc.returncode != 0:
-        raise Done('🚨 Typing failed: allow Alfred in Privacy & Security > Accessibility')
+        raise Done('🚨 Typing failed: allow Alfred in Privacy & Security > Accessibility', rerun=False)
     ui.output_next('none')
 
 
@@ -457,15 +478,24 @@ def cmd_run(arg):
     try:
         action(arg)
     except Done as exc:
-        ui.output_next('rerun', view=exc.view, status=str(exc), icon=exc.icon)
+        finish(exc)
     except d.Locked:
         drop_cache()
-        ui.output_next('rerun', view='main', status='🔒 Your vault is locked', icon='lock')
+        finish(Done('🔒 Your vault is locked', 'lock'))
     except d.LoggedOut:
         drop_cache()
-        ui.output_next('rerun', view='main', status='You are not logged in', icon='otp')
+        finish(Done('You are not logged in', 'otp'))
     except d.DcliError as exc:
-        ui.output_next('rerun', view='main', status='🚨 %s' % exc, icon='info')
+        finish(Done('🚨 Dashlane CLI error', detail=str(exc)))
+
+
+def finish(done):
+    """Native notification, or (notifications off) the result on the first line of the list."""
+    if cfg.notify:
+        ui.output_next('rerun' if done.rerun else 'none', view=done.view, notify=str(done), detail=done.detail)
+    else:
+        text = ' · '.join(t for t in (str(done), done.detail) if t)
+        ui.output_next('rerun', view=done.view, status=text, icon=done.icon)
 
 
 # --------------------------------------------------------------------------- background jobs
