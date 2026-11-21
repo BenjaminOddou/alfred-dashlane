@@ -52,7 +52,9 @@ def item(title, subtitle='', icon='info', valid=True, variables=None, mods=None,
 
 
 def output_items(items):
-    sys.stdout.write(json.dumps({'items': items}))  # ASCII-safe whatever the locale
+    # skipknowledge: Alfred keeps this order instead of moving often-used items up,
+    # so the status line and the menu (Sync, Lock, ...) always stay on top.
+    sys.stdout.write(json.dumps({'items': items, 'skipknowledge': True}))  # ASCII-safe whatever the locale
 
 
 def output_next(next_step, arg='', status='', icon='', **variables):

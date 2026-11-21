@@ -147,6 +147,10 @@ class WorkflowTest(unittest.TestCase):
             self.assertNotIn(secret, raw)
         self.assertEqual(self.titles(listing), ['Sync', 'Lock', 'Devices', 'Download favicons', 'Clear cache', 'Logout',
                                                 'Émile & Co', 'GitHub', 'google.com'])
+        self.assertIs(listing['skipknowledge'], True)  # Alfred must not move items above the menu
+        for view in (self.call('filter', 'otp'), self.call('filter', 'password', view='devices'),
+                     self.call('filter', 'password', dl_status='✅ Synced')):
+            self.assertIs(view['skipknowledge'], True)
         github = listing['items'][7]
         self.assertEqual(github['subtitle'], 'oc••••o@example.com ǀ ⏎ copy password')
         self.assertTrue(github['icon']['path'].endswith('github.com.png'))
